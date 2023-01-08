@@ -1,20 +1,20 @@
-import '../styles/taskbar.scss'
-import SmallClock from './SmallClock'
-import Start from './Start'
-import Task from './Task'
 import fileExplorer from '../assets/file-explorer.png'
 import taskView from '../assets/task-view.png'
 import search from '../assets/search.png'
+import SmallClock from './SmallClock'
 import { useState } from 'react'
+import '../styles/taskbar.scss'
+import Start from './Start'
+import Task from './Task'
 
 
 
 export default function TaskBar(){
 
    const [ tasks , setTask ] = useState([
-    {name: 'search', icon: search, hover: false},
-    {name: 'task-view', icon: taskView, hover: false},
-    {name: 'file-explorer', icon: fileExplorer, hover: false}
+    {name: 'Search', icon: search, hover: false},
+    {name: 'Task view', icon: taskView, hover: false},
+    {name: 'File Explorer', icon: fileExplorer, hover: false}
     ])
 
     return (
@@ -22,7 +22,7 @@ export default function TaskBar(){
             <Start/>
             {tasks.map((task)=>{
                 return (
-                    <Task name={task.name} icon={task.icon} key={task.name} />
+                    <Task task={task} tasks={tasks} key={task.name} setTask={setTask} />
                 )
             })}
             
