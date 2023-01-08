@@ -1,0 +1,27 @@
+$dgrey: rgb(82, 82, 82);
+
+#small-clock {
+
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    #clock-tooltip {
+        position: absolute;
+        top: -20px;
+        transform: translateX(-25%);
+        background-color: whitesmoke;
+        color: $dgrey;
+        border: 1px solid $dgrey;
+        box-shadow: 0 3px 8px $dgrey;
+        padding: 1px 5px;
+        font-size: 0.9rem;
+        display: block;
+    }
+
+    #clock-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
