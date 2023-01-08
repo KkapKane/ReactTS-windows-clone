@@ -9,8 +9,18 @@
   .task {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: .8rem;
     height: 100%;
     width: 3rem;
-    border: 1px solid black;
+    
+    img{
+      height: 50%;
+    }
+
+    &:hover {
+      background-color: lightgray;
+    }
   }
 }
