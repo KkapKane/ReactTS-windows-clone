@@ -8,19 +8,29 @@
 
   .task {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: .8rem;
+    font-size: 0.8rem;
     height: 100%;
     width: 3rem;
-    
-    img{
+
+    img {
       height: 50%;
     }
 
     &:hover {
       background-color: lightgray;
+    }
+    .task-toolTip {
+      display: none;
+      font-size: 0.8rem;
+      text-align: center;
+      position: absolute;
+      background-color: rgb(230, 227, 227);
+      top: -100%;
+      padding: 0.2rem;
     }
   }
 }
