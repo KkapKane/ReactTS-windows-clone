@@ -1,6 +1,13 @@
-body, html {
+
+
+* {
     margin: 0;
     padding: 0;
+}
+
+body {
     height: 100vh;
-    
+    background: url(../assets/background.jpg);
+    background-size: cover;
+    background-position: -25%;
 }

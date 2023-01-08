@@ -1,4 +1,5 @@
 import '../styles/taskbar.scss'
+import SmallClock from './SmallClock'
 import Start from './Start'
 import Task from './Task'
 import fileExplorer from '../assets/file-explorer.png'
@@ -25,6 +26,7 @@ export default function TaskBar(){
                 )
             })}
             
+            <SmallClock />
         </div>
 
     )
