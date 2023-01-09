@@ -7,7 +7,12 @@
 
 body {
     height: 100vh;
-    background: url(../assets/background.jpg);
+    background: url(../assets/background.jpg) fixed;
     background-size: cover;
-    background-position: -25%;
+    background-position: center;
+}
+
+#root, .App {
+    height: 100%;
+    width: 100%;
 }
