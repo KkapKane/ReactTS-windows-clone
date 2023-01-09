@@ -17,18 +17,15 @@ const programHandle = (programName: string, status: boolean) => {
       return { ...program, visible: false };
     }
   });
-  console.log(programs);
+
+  const index = tasks.findIndex((task:any) => task.name !== programName)
+  if(index > -1){
+    setTask(tasks.filter((i:any)=> (i.name !== programName)))
+  } 
   setPrograms(newProgram);
-};
-const taskHandle = (programName: string, icon: IconType ,status: boolean) => {
-  const newTask = tasks.map((task: any) => {
-    if (task.name === programName) {
-      return { ...task, visible: status };
-    } else {
-      return { ...task, visible: false };
-    }
-  });
-  setTask(newTask);
+
+
+
 };
 
 

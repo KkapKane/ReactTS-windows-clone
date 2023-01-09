@@ -1,10 +1,10 @@
 
-import {useContext} from 'react';
+import {useContext, ReactNode} from 'react';
 import { FcCalculator } from 'react-icons/fc';
 import paint from '../../assets/paint.png'
 import minesweeper from '../../assets/minesweeper.png'
 
-import {Programs} from '../context/Programs'
+import {Programs, Tasks} from '../context/Programs'
 
 
 interface Props{
@@ -14,22 +14,26 @@ interface Props{
 export default function StartPrograms({isHover}: Props){
 
     const {programs, setPrograms}: any = useContext(Programs)
+    const {tasks, setTask}: any = useContext(Tasks)
 
-    const programHandle = (programName: string, status: boolean) => {
+    const programHandle = (programName: string, icon:ReactNode, visible: boolean) => {
       const newProgram = programs.map((program:any) => {
         if (program.name === programName) {
-          return { ...program, visible: status };
+          return { ...program, visible: visible };
         } else {
           return { ...program, visible: false };
         }
       });
-      console.log(programs)
+      
       setPrograms(newProgram);
+      setTask([...tasks, {name: programName, icon: icon, isHover: false}])
+      console.log(tasks)
     };
+ 
 
     return (
         <div id="start-programs" >
-            <span  onClick={()=> programHandle('Calculator', true)}>
+            <span  onClick={()=> programHandle('Calculator', <FcCalculator size={30}/> ,true)}>
             <FcCalculator size={30}/> 
             Calculator
             </span>

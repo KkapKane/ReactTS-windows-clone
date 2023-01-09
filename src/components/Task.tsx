@@ -36,6 +36,7 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
 
   return (
     <>
+    
       <div
         className='task'
         onMouseOver={() => hoverHandle(task.name, true)}
@@ -48,7 +49,7 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
           {task.name}
         </div>
 
-        <img src={task.icon} alt='' />
+        {typeof task.icon === 'string' ? <img src={task.icon} alt='' /> : task.icon }
       </div>
     </>
   );
