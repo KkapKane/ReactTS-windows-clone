@@ -44,7 +44,7 @@ export default function SmallClock({ handleClock, clock }: Props) {
             onMouseOut={handleMouseOut}
             onClick={(e) => e.stopPropagation()}>
 
-            {hover ? <div id="clock-tooltip">{dayDate}</div> : null}
+            {hover === true ? clock === false ? <div id="clock-tooltip">{dayDate}</div> : null : null}
 
             <div id="clock-container" onClick={handleClock}>
                 <span>{time}</span>
