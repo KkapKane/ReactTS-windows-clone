@@ -1,9 +1,123 @@
-
+@import 'variables.scss';
 
 #big-clock {
     position: absolute;
-    top: -500px;
-    background-color: white;
+    top: -601px;
+    right: 0;
+    background-color: rgb(41, 41, 41);
+    border-left: 1px solid rgb(83, 83, 83);
+    border-top: 1px solid rgb(83, 83, 83);
     width: 380px;
-    height: 500px;
+    height: 600px;
+
+    #clock-time {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid rgb(83, 83, 83);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        #current-time {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+
+            .time {
+                font-size: 3.1rem;
+            }
+
+            .ampm {
+                font-size: 1.4rem;
+                padding-bottom: 5px;
+            }
+        }
+
+        #current-date {
+            color: $accent;
+        }
+    }
+
+    #clock-calendar {
+        @extend #clock-time;
+        border: none;
+
+        .react-calendar {
+            width: 100%;
+
+            .react-calendar__navigation {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                .react-calendar__navigation__prev2-button,
+                .react-calendar__navigation__next2-button {
+                    display: none;
+                }
+
+                button {
+                    font-size: 1.3rem;
+                    color: rgb(216, 216, 216);
+
+                    &:hover {
+                        color: white;
+                        outline: none;
+                    }
+                }
+
+                .react-calendar__navigation__prev-button,
+                .react-calendar__navigation__next-button {
+                    flex: 1 0 0;
+                }
+            }
+
+            .react-calendar__month-view {
+
+                .react-calendar__month-view__weekdays {
+
+                    abbr {
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-end;
+                        text-decoration: none;
+                        font-size: 0.9rem;
+                        margin: 1px;
+                        max-width: 45.28px;
+                        min-height: 45.28px;
+                    }
+                }
+
+                .react-calendar__month-view__days {
+                    display: flex;
+
+                    button {
+                        margin: 1px;
+                        font-size: 1rem;
+                        max-width: 45.28px;
+                        min-height: 45.28px;
+                    }
+
+                    .today {
+                        background-color: $accent;
+                        border: 2px solid black;
+                        outline: 2px solid $accent;
+
+                        &:hover {
+                            outline: 2px solid rgba(255, 255, 255, 0.75);
+                        }
+                    }
+                }
+            }
+
+            button {
+                font-family: 'Segoe UI', sans-serif;
+                color: white;
+                background: none;
+                border: none;
+
+                &:hover {
+                    outline: 2px solid rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+    }
 }

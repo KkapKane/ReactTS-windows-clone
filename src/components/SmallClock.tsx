@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import moment from "moment";
+import moment from 'moment';
 import '../styles/smallclock.scss'
 import BigClock from './BigClock';
 
@@ -13,11 +13,6 @@ export default function SmallClock({ handleClock, clock }: Props) {
     // get current time //
     const [current, setCurrent] = useState(new Date());
 
-    // get formatted dates and times //
-    const dayDate: String = moment(current).format("dddd, DD MMMM, YYYY");
-    const date: String = moment(current).format("DD/MM/YYYY");
-    const time: String = moment(current).format("hh:mm A");
-
     useEffect(() => {
         // updates time every second //
         const interval = setInterval(() => { setCurrent(new Date()) }, 1000);
@@ -25,7 +20,6 @@ export default function SmallClock({ handleClock, clock }: Props) {
             clearInterval(interval)
         }
     }, []);
-
 
     // state & functions for hover status for the tooltip visibility //
     const [hover, setHover] = useState(false);
@@ -44,18 +38,16 @@ export default function SmallClock({ handleClock, clock }: Props) {
             onMouseOut={handleMouseOut}
             onClick={(e) => e.stopPropagation()}>
 
-            {hover === true ? clock === false ? <div id="clock-tooltip">{dayDate}</div> : null : null}
+            {hover === true ? clock === false ? 
+                <div id="clock-tooltip">{moment(current).format("dddd, DD MMMM, YYYY")}</div> 
+                : null : null}
 
             <div id="clock-container" onClick={handleClock}>
-                <span>{time}</span>
-                <span>{date}</span>
+                <span>{moment(current).format("hh:mm A")}</span>
+                <span>{moment(current).format("DD/MM/YYYY")}</span>
             </div>
 
-            {clock ? <BigClock 
-                current={current}
-                setCurrent={setCurrent}
-                dayDate={dayDate}
-                /> : null}
+            {clock ? <BigClock current={current} /> : null}
         </div>
     )
 }
