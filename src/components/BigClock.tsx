@@ -1,16 +1,43 @@
-import '../styles/bigclock.scss'
+import '../styles/bigclock.scss';
+import moment from 'moment';
+import Calendar from 'react-calendar';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 interface Props {
     current: Date;
-    setCurrent: React.Dispatch<React.SetStateAction<Date>>;
-    dayDate: String;
 }
 
-export default function BigClock ({ current, setCurrent, dayDate } : Props) {
+export default function BigClock({ current }: Props) {
+
+    const day: number = parseInt(moment(current).format("DD"));
+    const month: number = parseInt(moment(current).format("MM")) - 1;
+    const year: number = parseInt(moment(current).format("YYYY"));
 
     return (
         <div id="big-clock" onClick={(e) => e.stopPropagation()}>
-            Big Clock
+            <div id="clock-time">
+                <div id="current-time">
+                    <span className="time">{moment(current).format("hh:mm:ss")}</span>
+                    <span className="ampm">{moment(current).format("A")}</span>
+                </div>
+                <div id="current-date">
+                    {moment(current).format("dddd, DD MMMM, YYYY")}
+                </div>
+            </div>
+            <div id="clock-calendar">
+                <Calendar 
+                    value={current} 
+                    calendarType="US"
+                    nextLabel={<IoIosArrowDown />}
+                    prevLabel={<IoIosArrowUp />}
+                    tileClassName={({date, view }) => 
+                        view === 'month' && 
+                        date.getDate() === day ?
+                        date.getMonth() === month ?
+                        date.getFullYear() === year ? 'today' 
+                        : null : null : null}
+                     />
+            </div>
         </div>
     )
 }
