@@ -7,9 +7,12 @@ import '../styles/taskbar.scss'
 import Start from './Start'
 import Task from './Task'
 
+interface Props {
+    clock: boolean;
+    handleClock: () => void;
+}
 
-
-export default function TaskBar(){
+export default function TaskBar({ handleClock, clock } : Props){
 
    const [ tasks , setTask ] = useState([
     {name: 'Search', icon: search, hover: false},
@@ -26,7 +29,7 @@ export default function TaskBar(){
                 )
             })}
             
-            <SmallClock />
+            <SmallClock handleClock={handleClock} clock={clock} />
         </div>
 
     )
