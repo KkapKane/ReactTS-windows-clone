@@ -15,7 +15,7 @@ export default function StartPrograms({isHover}: Props){
 
     const {programs, setPrograms}: any = useContext(Programs)
     const {tasks, setTask}: any = useContext(Tasks)
-
+// makes the program visible or not. (close or open program)
     const programHandle = (programName: string, icon:ReactNode, visible: boolean) => {
       const newProgram = programs.map((program:any) => {
         if (program.name === programName) {
@@ -26,6 +26,7 @@ export default function StartPrograms({isHover}: Props){
       });
       
       setPrograms(newProgram);
+      //this adds the program to the task list so it appears in the task bar
       setTask([...tasks, {name: programName, icon: icon, isHover: false}])
       console.log(tasks)
     };

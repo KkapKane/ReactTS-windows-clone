@@ -1,30 +1,20 @@
 import "../styles/taskbar.scss";
+import {taskType} from '../types/project_types'
 
-type taskObj = {
-  name: string;
-  icon: string;
-  hover: boolean;
-};
 
 interface Props {
-  task: taskObj;
-  tasks: taskObj[];
+  task: taskType;
+  tasks: taskType[];
   setTask: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        hover: boolean;
-      }[]
-    >
+    React.SetStateAction<taskType[]>
   >;
 }
 
 export default function Task({ task, tasks, setTask }: Props): JSX.Element {
 
-  //changes the hover property in task to the set parameter
+  //changes the hover property in task to the set parameter (status)
   const hoverHandle = (taskName: string, status: boolean) => {
-    const newTask = tasks.map((task) => {
+    const newTask = tasks.map((task: taskType) => {
       if (task.name === taskName) {
         return { ...task, hover: status };
       } else {
