@@ -7,6 +7,7 @@ import {Tasks} from './components/context/Programs'
 import fileExplorer from "./assets/file-explorer.png";
 import taskView from "./assets/task-view.png";
 import search from "./assets/search.png";
+import { taskType } from './types/project_types';
 
 
 function App() {
@@ -28,7 +29,7 @@ const [programs,setPrograms] = useState([
   {name:'Calculator', visible: false}
 ])
   //global useContext but for Tasks
-const [tasks, setTask] = useState([
+const [tasks, setTask]  = useState([
   { name: "Search", icon: search, hover: false },
   { name: "Task view", icon: taskView, hover: false },
   { name: "File Explorer", icon: fileExplorer, hover: false },

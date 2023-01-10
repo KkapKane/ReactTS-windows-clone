@@ -1,13 +1,12 @@
-import fileExplorer from "../assets/file-explorer.png";
-import taskView from "../assets/task-view.png";
-import search from "../assets/search.png";
+
 import SmallClock from "./SmallClock";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import "../styles/taskbar.scss";
 import Start from "./start/Start";
 import Task from "./Task";
 import { BiMessageAlt } from 'react-icons/bi';
 import { Tasks } from "./context/Programs";
+import { taskType } from "../types/project_types";
 
 
 interface Props {
@@ -23,7 +22,7 @@ export default function TaskBar({ handleClock, clock }: Props) {
         <div id='task-bar'>
             <div id="task-left">
                 <Start />
-                {tasks.map((taskd:any) => {
+                {tasks.map((taskd: taskType) => {
                     return (
                         <Task task={taskd} tasks={tasks} key={taskd.name} setTask={setTask} />
                     );
