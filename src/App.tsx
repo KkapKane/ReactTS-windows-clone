@@ -30,9 +30,9 @@ const [programs,setPrograms] = useState([
 ])
   //global useContext but for Tasks
 const [tasks, setTask]  = useState([
-  { name: "Search", icon: search, hover: false },
-  { name: "Task view", icon: taskView, hover: false },
-  { name: "File Explorer", icon: fileExplorer, hover: false },
+  { name: "Search", icon: search, hover: false, minimized: false },
+  { name: "Task view", icon: taskView, hover: false, minimized: false },
+  { name: "File Explorer", icon: fileExplorer, hover: false, minimized: false },
 ]);
 
   return (
