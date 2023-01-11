@@ -3,6 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiFileBlank } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
+import { useState } from 'react';
 
 interface Props {
   isHover: boolean;
@@ -11,11 +12,47 @@ interface Props {
 }
 
 export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
+
+   const [delayHandler, setDelayHandler] = useState<number | null | undefined>(null);
+
+
+  const handleMouseEnter = () => {
+    setDelayHandler(
+      setTimeout(() => {
+        setIsHover(true); // whatever your data is
+      }, 500)
+    );
+  };
+
+  const handleMouseLeave = () => {
+    if(typeof delayHandler == 'number'){
+    setIsHover(false)
+    clearTimeout(delayHandler);
+    }
+  };
+
+
+  const expandNav = (hoverState: boolean) => {
+    if(hoverState == true){
+  const delayHover = setTimeout(()=>{
+      setIsHover(hoverState)
+    },500)
+    
+    return ()=> {
+      clearTimeout(delayHover)
+    }
+    
+  }
+  else {
+    setIsHover(false)
+  }
+}
+  
   return (
     <div
       className='start-navBar'
-      onMouseOver={() => setIsHover(true)}
-      onMouseOut={() => setIsHover(false)}
+      onMouseOver={() => handleMouseEnter()}
+      onMouseOut={() => handleMouseLeave()}
       style={
         isHover
           ? { width: "50%", boxShadow: "3px 1px 8px #1a1a1a" }
