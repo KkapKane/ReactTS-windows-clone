@@ -12,10 +12,10 @@ export default function Calculator(){
     const [lastOp,setLastOp] = useState('')
     const [helperOp,setHelperOp] = useState(true)
     const [currentOp, setCurrentOp] = useState('')
-    
+    const [minimized, setMinimized] = useState(false)
 
 
-//makes the program visible or not
+//create program div or not
 const programHandle = (programName: string, status: boolean) => {
   const newProgram = programs.map((program: programType) => {
     if (program.name === programName) {
@@ -24,7 +24,7 @@ const programHandle = (programName: string, status: boolean) => {
       return { ...program, visible: false };
     }
   });
-
+// adds the program into task bar or remove it
   const index = tasks.findIndex((task:taskType) => task.name !== programName)
   if(index > -1){
     setTask(tasks.filter((task:taskType)=> (task.name !== programName)))
@@ -32,24 +32,56 @@ const programHandle = (programName: string, status: boolean) => {
   setPrograms(newProgram);
 };
 
-const displayHandler = (btn: string | number) => {
-  
-  if(typeof btn !== 'number' && btn !== '='){
-    setHelperOp(true)
+const minimizeProgram = (ProgramName: string) => {
+  setTask()
+}
 
+const displayHandler = (btn: string | number) => {
+  //btn pressed type not a number
+  if(typeof btn !== 'number'){
+ 
+  
+     if(currentOp !== ''){
+      
+      if(lastOp === '='){
+        setCurrentOp(btn)
+        setHelperOp(true)
+        setPrevDisplay(display)
+        setDisplay('')
+        setLastOp('')
+        return
+      }
+      setLastOp(currentOp)
+      setCurrentOp(btn)
+      let tempPrev = prevDisplay
+      let tempDisplay = display
+      let result = calculate(Number(tempPrev), currentOp, Number(tempDisplay));
+      setPrevDisplay(result)
+      setDisplay('')
+
+  
+      return
+    
+   
+    }
+    else {
+    setHelperOp(true)
     setCurrentOp(btn)
     setPrevDisplay(display)
     setDisplay('')
-
+    }
 
   }
   else{
-    if(lastOp){
-      setDisplay('')
-    }
+    //btn pressed type is a number
+    
     setDisplay(prev => prev + btn.toString())
   }
 }
+
+
+
+
 const calculate = (num1:number, op: string, num2:number ) => {
 
   switch(op){
@@ -71,6 +103,16 @@ const equal = () =>{
   let temp = prevDisplay
   setPrevDisplay(temp + ' ' + currentOp + ' ' + display +  ' ' + '=' )
   setDisplay(calculate(Number(prevDisplay), currentOp,Number(display)))
+  setLastOp('=')
+}
+
+const dotFinder = () => {
+  if(typeof display === 'string'){
+    if(display.includes('.')){
+      return
+    }
+  }
+  setDisplay(prev => prev + '.')
 }
 
 const clearAll = () =>{
@@ -80,13 +122,21 @@ const clearAll = () =>{
   setLastOp('')
 }
 
+const delBtn = () => {
+  if(typeof display == 'string'){
+   let displayArray = display.split('')
+   displayArray.pop()
+  setDisplay(displayArray.join(''))
+
+  }
+}
     return (
-      <div id='calculator'>
+      <div id='calculator' style={minimized ? { display: 'none'} : {}}>
         <div className='handle'>
           <FcCalculator size={30} />
           <span>Calculator</span>
           <div className='util-container'>
-            <button>-</button>
+            <button onClick={()=> setMinimized(true)}>-</button>
             <button onClick={() => programHandle("Calculator", false)}>
               X
             </button>
@@ -102,7 +152,7 @@ const clearAll = () =>{
         <div id='button-container'>
           <div id='clear-delete-container'>
             <button id='clear-button' onClick={()=> clearAll()}>clear</button>
-            <button id='delete-button'>Del</button>
+            <button id='delete-button' onClick={()=> delBtn()}>Del</button>
           </div>
           <div className='number-container'>
             <button
@@ -179,7 +229,7 @@ const clearAll = () =>{
             </button>
             <button
               className='calculator-button'
-              onClick={() => displayHandler('.')}
+              onClick={() => dotFinder()}
             >
               .
             </button>
