@@ -18,13 +18,13 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
       onMouseOut={() => setIsHover(false)}
       style={
         isHover
-          ? { width: "50%", boxShadow: "3px 0px 6px 0px gray " }
+          ? { width: "50%", boxShadow: "3px 1px 8px #1a1a1a" }
           : { width: "60px" }
       }
     >
       <div id='start-hamburger'>
         <RxHamburgerMenu size={22} />
-        {isHover ? <span>START</span> : null}
+        {isHover ? <span style={{fontWeight: '600'}}>START</span> : null}
       </div>
       <div className='start-bottomGroup'>
         <div className='start-utility'>

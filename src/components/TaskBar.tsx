@@ -7,6 +7,9 @@ import Task from "./Task";
 import { BiMessageAlt } from 'react-icons/bi';
 import { Tasks } from "./context/Programs";
 import { taskType } from "../types/project_types";
+import { IoVolumeHighOutline } from 'react-icons/io5';
+import { RiWifiLine } from 'react-icons/ri';
+import { BsChevronUp } from 'react-icons/bs';
 
 
 interface Props {
@@ -29,8 +32,14 @@ export default function TaskBar({ handleClock, clock }: Props) {
                 })}
             </div>
             <div id="task-right">
+                <span className="task-item">Weather</span>
+                <BsChevronUp size={16} style={{padding: '0 6px'}}/>
+                <RiWifiLine size={20} />
+                <IoVolumeHighOutline size={20}/>
+                <span className="task-item">ENG</span>
                 <SmallClock handleClock={handleClock} clock={clock} />
-                <BiMessageAlt size={23} />
+                <BiMessageAlt size={23} style={{padding: '0 10px'}} />
+                <span className="dismiss"> </span>
             </div>
         </div>
     );

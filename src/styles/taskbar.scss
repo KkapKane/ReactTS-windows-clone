@@ -21,7 +21,7 @@
       width: 3rem;
 
       img {
-        height: 50%;
+        height: 25px;
       }
 
       &:hover {
@@ -42,16 +42,35 @@
 
   #task-right {
     display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
 
+    .task-item,
+    .dismiss,
     svg {
-      align-self: center;
-      padding: 0 10px;
-      color: white;
       height: 100%;
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
       }
+    }
+
+    svg {
+      padding: 0 2px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      font-size: 0.85rem;
+    }
+
+    .dismiss {
+      margin-left: 5px;
+      border-left: 1px solid grey;
+      min-width: 5px;
     }
   }
 }
