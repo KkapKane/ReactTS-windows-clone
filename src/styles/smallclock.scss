@@ -1,6 +1,7 @@
 $dgrey: rgb(82, 82, 82);
 
 #small-clock {
+    cursor: default;
     height: 100%;
     padding: 0 8px;
     color: white;
@@ -28,5 +29,7 @@ $dgrey: rgb(82, 82, 82);
         flex-direction: column;
         height: 100%;
         justify-content: center;
+        align-items: center;
+        font-size: 0.85rem;
     }
 }

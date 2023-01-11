@@ -17,11 +17,11 @@ export default function BigClock({ current }: Props) {
         <div id="big-clock" onClick={(e) => e.stopPropagation()}>
             <div id="clock-time">
                 <div id="current-time">
-                    <span className="time">{moment(current).format("hh:mm:ss")}</span>
+                    <span className="time">{moment(current).format("h:mm:ss")}</span>
                     <span className="ampm">{moment(current).format("A")}</span>
                 </div>
                 <div id="current-date">
-                    {moment(current).format("dddd, DD MMMM, YYYY")}
+                    {moment(current).format("dddd, MMMM DD, YYYY")}
                 </div>
             </div>
             <div id="clock-calendar">
