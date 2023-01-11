@@ -11,20 +11,24 @@
     right:40%;
     width: 400px;
     height: 600px;
-    background-color: rgb(94, 86, 86);
+    background-color: rgb(43, 42, 42);
 
     .handle{
         display: flex;
         align-items: center;
         width: 100%;
         justify-content: space-between;
-       
+       background-color: rgb(54, 50, 50);
+        
+       gap: 1rem;
         .util-container{
             display: flex;
             width: 100%;
             height: 100%;
             justify-content: flex-end;
             button {
+                background-color: rgb(55, 52, 52);
+                color: white;
                 width: 20%;
                 height: 100%;
             }
@@ -37,7 +41,7 @@
         position: relative;
         margin-top:3rem;
         text-align: center;
-        border: 1px solid white;
+        overflow: hidden;
 
         #current-display{
             position: absolute;
@@ -61,8 +65,13 @@
         width: 96%;
         height: 20%;
         button{
+            color: white;
+            background-color: rgb(72, 70, 70);
             width: 100%;
             height: 100%;
+            &:hover {
+            filter: brightness(90%);
+        }
         }
     }
     #button-container{
@@ -73,10 +82,19 @@
        
         width: 100%;
     .calculator-button{
+        color: white;
+        background-color: rgb(64, 63, 63);
+       
         font-size: 2rem;       
         height: 5rem;
         width: 6rem;
         border-radius: 8px;
+        &:hover {
+            filter: brightness(90%);
+        }
+    }
+    #equal-btn{
+        background-color: rgb(230, 135, 40);
     }
 }
 }
