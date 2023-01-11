@@ -4,6 +4,7 @@ export type taskType = {
   name: string;
   icon: string | ReactNode;
   hover: boolean;
+  minimized: boolean;
 };
 
 export type programType = {

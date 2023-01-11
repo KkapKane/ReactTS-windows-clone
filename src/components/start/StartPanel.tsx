@@ -17,7 +17,7 @@ export default function StartPanel({isClicked, isHover, setIsHover} : Props) {
         isHover={isHover}
         setIsHover={setIsHover}
       />
-      <StartPrograms isHover={isHover} />
+      <StartPrograms  />
     </div>
   );
 }

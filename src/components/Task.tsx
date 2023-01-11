@@ -12,6 +12,8 @@ interface Props {
 
 export default function Task({ task, tasks, setTask }: Props): JSX.Element {
 
+
+
   //changes the hover property in task to the set parameter (status)
   const hoverHandle = (taskName: string, status: boolean) => {
     const newTask = tasks.map((task: taskType) => {
@@ -24,6 +26,18 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
     setTask(newTask);
   };
 
+  //goes into the tasks object and change just the minimized property
+  const toggleMinimize = (programName: string) => {
+    const taskList = tasks.map((task: taskType) => {
+      if (task.name === programName) {
+        return { ...task, minimized: !task.minimized };
+      } else {
+        return { ...task, minmized: false };
+      }
+    });
+    setTask(taskList);
+  };
+
   return (
     <>
     
@@ -31,6 +45,7 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
         className='task'
         onMouseOver={() => hoverHandle(task.name, true)}
         onMouseOut={() => hoverHandle(task.name, false)}
+        onClick={()=> toggleMinimize(task.name)}
       >
         <div
           className='task-toolTip'
