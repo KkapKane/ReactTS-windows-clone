@@ -40,14 +40,14 @@ export default function StartPrograms(){
 
     return (
         <div id="start-programs" >
-            <span  onClick={()=> programHandle('Calculator', <FcCalculator size={30}/> ,true)}>
+            <span onClick={()=> programHandle('Calculator', <FcCalculator size={30}/> ,true)}>
             <FcCalculator size={30}/> 
             Calculator
             </span>
             <span>
                 <img id='minesweeper-png' src={minesweeper} alt="" />
                 Mine Sweeper</span>
-            <span>
+            <span onClick={()=> programHandle('Paint', paint ,true)}>
             <img id='paint-png' src={paint} alt="" />    
             Paint
             </span>
