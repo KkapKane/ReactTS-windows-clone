@@ -11,7 +11,7 @@ import { IoHelpCircleSharp } from 'react-icons/io5'
 export default function PaintHandle() {
 
     return (
-        <div className="handle">
+        <div id="paint-handle">
             <div className="handle-left">
                 <div className="handle-top">
                     <img src={paintIcon} alt="icon" />
