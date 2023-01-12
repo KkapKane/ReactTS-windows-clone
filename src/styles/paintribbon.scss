@@ -1,0 +1,117 @@
+$ribbonbg: #e7ebee;
+
+#paint {
+
+    #paint-ribbon {
+        background-color: $ribbonbg;
+        padding: 5px;
+        padding-left: 0;
+        display: flex;
+
+        .paint-title {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgb(53, 53, 53);
+        }
+
+        #paint-tools {
+            border-right: 1px solid grey;
+            width: 60px;
+            padding: 5px 0 0;
+            
+            .tool-btns {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding-bottom: 8px;
+
+                button {
+                    background: none;
+                    border: 1px solid $ribbonbg;
+                    margin: 1px;
+                    padding: 3px;
+
+                    img {
+                        height: 17px;
+                        width: 17px;
+                    }
+
+                    &:hover {
+                        background: rgb(225, 242, 253);
+                        border: 1px solid rgb(146, 211, 255);
+                    }
+                }
+            }
+        }
+
+        #paint-brush {
+            align-self: center;
+            padding: 0 5px;
+
+            button {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #menu-panel {
+                background-color: rgba(104, 186, 241, 0.45);
+                border: 1px solid rgb(91, 189, 255);
+                gap: 4px;
+                padding: 2px 0;
+
+                img {
+                    background-color: rgba(255, 255, 255, 0.8);
+                    border: 1px solid grey;
+                    width: 32px;
+                }
+
+                span {
+                    border-top: 1px solid rgb(91, 189, 255);
+                    padding-top: 2px;
+                    font-size: 0.75rem;
+                    line-height: 12px;
+                    width: 50px;
+                    word-break: break-word;
+                }
+            }
+
+            .menu-container {
+                position: relative;
+
+                .menu {
+                    position: absolute;
+                    width: 100px;
+                    height: 150px;
+                    background-color: white;
+                    border: 1px solid grey;
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 2px;
+                    padding: 2px;
+
+                    li {
+                        height: calc(150px / 4 - 6px);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 1px solid white;
+
+                        span {
+                            background-color: navy;
+                            width: 80px;
+                        }
+
+                        &:hover {
+                            background: rgb(225, 242, 253);
+                            border: 1px solid rgb(146, 211, 255);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
