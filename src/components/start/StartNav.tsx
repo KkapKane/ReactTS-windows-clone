@@ -19,7 +19,7 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
   const handleMouseEnter = () => {
     setDelayHandler(
       setTimeout(() => {
-        setIsHover(true); // whatever your data is
+        setIsHover(true); 
       }, 500)
     );
   };
@@ -32,21 +32,7 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
   };
 
 
-  const expandNav = (hoverState: boolean) => {
-    if(hoverState == true){
-  const delayHover = setTimeout(()=>{
-      setIsHover(hoverState)
-    },500)
-    
-    return ()=> {
-      clearTimeout(delayHover)
-    }
-    
-  }
-  else {
-    setIsHover(false)
-  }
-}
+ 
   
   return (
     <div

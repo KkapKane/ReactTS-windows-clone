@@ -27,3 +27,21 @@ a {
     text-decoration: none;
     color: inherit;
 }
+#audition {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    #audition-window{
+        
+    }
+}
+
+#audition-handle {
+    height: 24px;
+    background-color: grey;
+    outline: 1px solid white;    
+    width: 62.7%;
+}

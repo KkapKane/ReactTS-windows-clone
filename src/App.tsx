@@ -9,6 +9,9 @@ import taskView from "./assets/task-view.png";
 import search from "./assets/search.png";
 import { taskType } from './types/project_types';
 import Paint from './components/programs/Paint/Paint';
+import Browser from './components/programs/Audition';
+import Audition from './components/programs/Audition';
+
 
 
 function App() {
@@ -28,7 +31,8 @@ function App() {
   //global useContext can be used anywhere.
 const [programs,setPrograms] = useState([
   { name:'Calculator', visible: false },
-  { name: 'Paint', visible: false }
+  { name: 'Paint', visible: false },
+  { name: 'Dance Game', visible: false}
 ])
   //global useContext but for Tasks
 const [tasks, setTask]  = useState([
@@ -45,6 +49,8 @@ const [tasks, setTask]  = useState([
       <div className='App' onClick={dismissClock}>
         {programs[0].visible === true ? <Calculator /> : null}
         {programs[1].visible === true ? <Paint /> : null}
+        {programs[2].visible === true ? <Audition /> : null }
+        
         <TaskBar handleClock={handleClock} clock={clock} />
       </div>
       </Tasks.Provider>
