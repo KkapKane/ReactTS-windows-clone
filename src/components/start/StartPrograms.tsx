@@ -5,7 +5,7 @@ import paint from '../../assets/paint.png'
 import minesweeper from '../../assets/minesweeper.png'
 import { taskType } from '../../types/project_types';
 import {Programs, Tasks} from '../context/Programs'
-
+import audition from '../../assets/audition.png'
 
 
 
@@ -52,7 +52,9 @@ export default function StartPrograms(){
             Paint
             </span>
 
-            <span>Calculator</span>
+            <span onClick={()=> programHandle('Dance Game', audition, true)}>
+              <img src={audition} alt="" />
+              Dance Game</span>
             <span>Calculator</span>
             <span>Calculator</span>
         </div>

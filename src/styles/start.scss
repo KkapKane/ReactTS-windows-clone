@@ -14,6 +14,10 @@ $bg:  rgb(41, 41, 41);
 
   .start-icon {
     height: 23px;
+  
+    &:hover {
+      background: none;
+    }
   }
 
   #start-panel {
