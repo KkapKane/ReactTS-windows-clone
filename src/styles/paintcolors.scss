@@ -1,0 +1,60 @@
+#paint {
+
+    #paint-ribbon {
+
+        #paint-colors {
+            border: none;
+            display: flex;
+            gap: 5px;
+            
+            #picker-btn {
+                width: 55px;
+                height: 85px;
+                padding: 2px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                background-color: rgba(104, 186, 241, 0.45);
+                border: 1px solid rgb(91, 189, 255);
+
+                #picker-color {
+                    width: 35px;
+                    height: 35px;
+                    border: 1px solid white;
+                    outline: 1px solid grey;
+                }
+
+                span {
+                    word-break: break-word;
+                    font-size: 0.75rem;
+                    line-height: 12px;
+                }
+            }
+
+            .photoshop-picker {
+                position: absolute;
+            }
+
+            #color-btns {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+
+                button {
+                    margin: 3px;
+                    background: none;
+                    border: none;
+                    display: flex;
+
+                    span {
+                        width: 20px;
+                        height: 20px;
+                        border: 1px solid white;
+                        outline: 1px solid grey;
+                    }
+                }
+            }
+        }
+    }
+}

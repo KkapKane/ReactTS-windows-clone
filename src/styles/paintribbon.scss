@@ -8,6 +8,12 @@ $ribbonbg: #e7ebee;
         padding-left: 0;
         display: flex;
 
+        > div {
+            border-right: 1px solid grey;
+            height: 90px;
+            padding: 5px 5px 0;
+        }
+
         .paint-title {
             text-align: center;
             font-size: 0.8rem;
@@ -15,9 +21,7 @@ $ribbonbg: #e7ebee;
         }
 
         #paint-tools {
-            border-right: 1px solid grey;
             width: 60px;
-            padding: 5px 0 0;
             
             .tool-btns {
                 display: flex;
@@ -46,7 +50,6 @@ $ribbonbg: #e7ebee;
 
         #paint-brush {
             align-self: center;
-            padding: 0 5px;
 
             button {
                 display: flex;
