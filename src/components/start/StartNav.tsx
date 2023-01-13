@@ -24,11 +24,17 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
     );
   };
 
-  const handleMouseLeave = () => {
-    if(typeof delayHandler == 'number'){
-    setIsHover(false)
-    clearTimeout(delayHandler);
+  const handleMouseLeave = (e: React.ChangeEvent<any>): void => {
+   
+    if(typeof delayHandler == 'number' ){
+     
+        setIsHover(false);
+
+        clearTimeout(delayHandler);
+      
     }
+  
+  
   };
 
 
@@ -38,7 +44,7 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
     <div
       className='start-navBar'
       onMouseOver={() => handleMouseEnter()}
-      onMouseOut={() => handleMouseLeave()}
+      onMouseOut={(e) => handleMouseLeave(e)}
       style={
         isHover
           ? { width: "50%", boxShadow: "3px 1px 8px #1a1a1a" }
@@ -47,9 +53,9 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
     >
       <div id='start-hamburger'>
         <RxHamburgerMenu size={22} />
-        {isHover ? <span style={{fontWeight: '600'}}>START</span> : null}
+        {isHover ? <span style={{ fontWeight: "600" }}>START</span> : null}
       </div>
-      <div className='start-bottomGroup'>
+      <div className='start-bottomGroup' >
         <div className='start-utility'>
           <CgProfile size={21} />
           {isHover ? <span>Profile</span> : null}

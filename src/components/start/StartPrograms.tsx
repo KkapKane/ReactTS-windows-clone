@@ -33,7 +33,7 @@ export default function StartPrograms(){
           return
         } 
         //this adds the program to the task list so it appears in the task bar
-      setTask([...tasks, {name: programName, icon: icon, isHover: false}])
+      setTask([...tasks, {name: programName, icon: icon, isHover: false, minimized: false}])
    
     };
  
@@ -44,6 +44,9 @@ export default function StartPrograms(){
             <FcCalculator size={30}/> 
             Calculator
             </span>
+            <span onClick={()=> programHandle('Dance Game', audition, true)}>
+              <img src={audition} alt="" />
+              Dance Game</span>
             <span>
                 <img id='minesweeper-png' src={minesweeper} alt="" />
                 Mine Sweeper</span>
@@ -52,9 +55,6 @@ export default function StartPrograms(){
             Paint
             </span>
 
-            <span onClick={()=> programHandle('Dance Game', audition, true)}>
-              <img src={audition} alt="" />
-              Dance Game</span>
             <span>Calculator</span>
             <span>Calculator</span>
         </div>
