@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useRef , useEffect } from 'react';
 import TaskBar from "./components/TaskBar"
 import "./styles/style.scss"
 import Calculator from './components/programs/Calculator';
@@ -7,10 +7,9 @@ import {Tasks} from './components/context/Programs'
 import fileExplorer from "./assets/file-explorer.png";
 import taskView from "./assets/task-view.png";
 import search from "./assets/search.png";
-import { taskType } from './types/project_types';
 import Paint from './components/programs/Paint/Paint';
-import Browser from './components/programs/Audition';
 import Audition from './components/programs/Audition';
+
 
 
 
@@ -41,18 +40,30 @@ const [tasks, setTask]  = useState([
   { name: "File Explorer", icon: fileExplorer, hover: false, minimized: false }
 ]);
 
+
+
+
+const audiRef = useRef<HTMLDivElement>(null);
+const containerRef = useRef<HTMLDivElement>(null);
+
+
   return (
     //can retrieve programs data anywhere if it's wrapped inside programs.provider
-    <Programs.Provider value={{programs, setPrograms}}>
-      <Tasks.Provider value={{tasks, setTask}}>
+    <Programs.Provider value={{ programs, setPrograms }}>
+      <Tasks.Provider value={{ tasks, setTask }}>
+        <div className='App' onClick={dismissClock} ref={containerRef}>
+          
+            {programs[0].visible === true ? <Calculator /> : null}
 
-      <div className='App' onClick={dismissClock}>
-        {programs[0].visible === true ? <Calculator /> : null}
-        {programs[1].visible === true ? <Paint /> : null}
-        {programs[2].visible === true ? <Audition /> : null }
-        
-        <TaskBar handleClock={handleClock} clock={clock} />
-      </div>
+            {programs[1].visible === true ? <Paint /> : null}
+            {programs[2].visible === true ? (
+          
+              <Audition audiRef={audiRef} containerRef={containerRef} />
+                
+            ) : null}
+
+            <TaskBar handleClock={handleClock} clock={clock} />
+        </div>
       </Tasks.Provider>
     </Programs.Provider>
   );

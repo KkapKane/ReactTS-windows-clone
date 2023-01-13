@@ -34,14 +34,20 @@ a {
     align-items: center;
     height: 100%;
     width: 100%;
-    #audition-window{
-        
-    }
+   
 }
 
 #audition-handle {
+    display: flex;
+    justify-content: space-between;
     height: 24px;
     background-color: grey;
-    outline: 1px solid white;    
-    width: 62.7%;
+    width: 62.7% ;
+    .button-container{
+        gap: 1px;
+        display: flex;
+        button {
+            width: 50px;
+        }
+    }
 }
