@@ -25,8 +25,7 @@ export default function PaintHandle() {
                 </div>
                 <div className="handle-bottom">
                     <button className="file">File</button>
-                    <button>Home</button>
-                    <button>View</button>
+                    <button className="home-btn">Home</button>
                 </div>
             </div>
             <div className="handle-right">
