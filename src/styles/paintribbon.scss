@@ -4,8 +4,7 @@ $ribbonbg: #e7ebee;
 
     #paint-ribbon {
         background-color: $ribbonbg;
-        padding: 5px;
-        padding-left: 0;
+        padding: 5px 0;
         display: flex;
 
         > div {
@@ -21,7 +20,7 @@ $ribbonbg: #e7ebee;
         }
 
         #paint-tools {
-            width: 60px;
+            width: 55px;
             
             .tool-btns {
                 display: flex;

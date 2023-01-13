@@ -27,11 +27,25 @@ export default function PaintColors({ chosenColor, setChosenColor }: Props) {
     // add to array whenver a new color is chosen //
     useEffect(() => {
         if (chosenColor !== undefined) {
+            // do not allow two of the same colors to be in the array //
             if (!(colorList.filter(e => e === chosenColor).length > 0)) {
-            setColorList(prev => [...prev, chosenColor]);
+                // sets a max limit of 30, then deletes the first color to add the latest //
+                if (colorList.length === 30) {
+                    let temp = colorList.slice();
+                    temp.shift();
+    
+                    if (temp !== undefined) {
+                        temp.push(chosenColor);
+                        setColorList(temp);
+                        console.log(colorList)
+                    }
+                }
+
+                else {
+                    setColorList(prev => [...prev, chosenColor]);
+                }
             }
         }
-
     }, [chosenColor]);
 
     const getColor = (color: string) => {
@@ -51,7 +65,7 @@ export default function PaintColors({ chosenColor, setChosenColor }: Props) {
                 {colorList.map(cl => {
                     return (
                         <button key={cl} onClick={() => getColor(cl)}>
-                            <span style={{backgroundColor: cl}}> </span>
+                            <span style={{ backgroundColor: cl }}> </span>
                         </button>
                     )
                 })}
