@@ -5,28 +5,27 @@ interface Props {
     brushMenu: boolean;
     setBrushMenu: React.Dispatch<React.SetStateAction<boolean>>
     closeBrushMenu: () => void;
+    handleBrushSize: (size: number) => void;
 }
 
-export default function PaintBrush ({ brushMenu, setBrushMenu, closeBrushMenu }: Props) {
+export default function PaintBrush ({ brushMenu, setBrushMenu, closeBrushMenu, handleBrushSize }: Props) {
 
-    const openBrushMenu = () => {
-        setBrushMenu(true);
+    const toggleBrushMenu = () => {
+        setBrushMenu(!brushMenu);
     }
 
     return (
         <div id="paint-brush" onClick={(e) => e.stopPropagation()}>
-            <button id="menu-panel" onClick={() => openBrushMenu()}>
+            <button id="menu-panel" onClick={toggleBrushMenu}>
                 <img src={paintingIcon} alt="brush size" />
                 <span>Brush Sizes</span>
                 <GoTriangleDown size={10}/>
             </button>
             {brushMenu ? 
-                <div className="menu-container">
+                <div className="menu-container" onClick={closeBrushMenu}>
                     <ul className="menu">
-                        <li><span style={{height: '1px'}}></span></li>
-                        <li><span style={{height: '3px'}}></span></li>
-                        <li><span style={{height: '5px'}}></span></li>
-                        <li><span style={{height: '8px'}}></span></li>
+                        <li onClick={() => handleBrushSize(10)}><span style={{height: '10px'}}></span></li>
+                        <li onClick={() => handleBrushSize(20)}><span style={{height: '20px'}}></span></li>
                     </ul>
                 </div> 
                 : null }

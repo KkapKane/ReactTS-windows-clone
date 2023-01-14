@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import PaintHandle from "./PaintHandle";
 import PaintRibbon from "./PaintRibbon";
+import PaintCanvas from "./PaintCanvas";
 
 
 interface Props {
@@ -16,6 +17,14 @@ export default function Paint ({paintRef,containerRef} : Props) {
   const closeBrushMenu = () => {
     setBrushMenu(false);
   };
+
+  // state for current brush size //
+  const [brushSize, setBrushSize] = useState<number | "">(10);
+
+  // function for switching brush sizes //
+  const handleBrushSize = (size: number) => {
+    setBrushSize(size);
+  }
 
   // state for the color saved that will be used if mouse clicks canvas now //
   const [chosenColor, setChosenColor] = useState<string | undefined>("#000000");
@@ -89,7 +98,12 @@ export default function Paint ({paintRef,containerRef} : Props) {
         closeBrushMenu={closeBrushMenu}
         chosenColor={chosenColor}
         setChosenColor={setChosenColor}
+        handleBrushSize={handleBrushSize}
       />
+      <PaintCanvas 
+        brushSize={brushSize}
+        chosenColor={chosenColor}
+        />
     </div>
   );
 }

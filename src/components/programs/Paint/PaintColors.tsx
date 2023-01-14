@@ -1,4 +1,4 @@
-import '../../../styles/paintcolors.scss'
+import '../../../styles/paint/colors.scss'
 import { useEffect, useState } from 'react';
 import { PhotoshopPicker } from 'react-color';
 

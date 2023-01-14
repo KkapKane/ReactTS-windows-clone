@@ -6,6 +6,8 @@ $ribbonbg: #e7ebee;
         background-color: $ribbonbg;
         padding: 5px 0;
         display: flex;
+        border-bottom: 1px solid rgb(216, 216, 216);
+        box-shadow: 0 2px 4px rgb(209, 209, 209);
 
         > div {
             border-right: 1px solid grey;
@@ -85,7 +87,7 @@ $ribbonbg: #e7ebee;
                 .menu {
                     position: absolute;
                     width: 100px;
-                    height: 150px;
+                    height: 70px;
                     background-color: white;
                     border: 1px solid grey;
                     list-style: none;
