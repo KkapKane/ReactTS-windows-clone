@@ -166,9 +166,16 @@ export default function Calculator({calcRef, containerRef} : Props) {
     const container = containerRef.current;
 
     const onMouseDown = (e: MouseEvent) => {
+      
+      const target = e.target as HTMLDivElement
+      //makes sure if the selected div is the handle before enabling this drag and drop feature
+      if(target.className === 'handle'){
+        console.log(target.className)
       isClicked.current = true;
       coords.current.startX = e.clientX;
       coords.current.startY = e.clientY;
+      }
+      
     };
     const onMouseUp = (e: MouseEvent) => {
       isClicked.current = false;
@@ -209,125 +216,126 @@ export default function Calculator({calcRef, containerRef} : Props) {
     >
       <div className='handle' draggable={false}>
         <FcCalculator size={30} />
-        <span>Calculator</span>
-        <div className='util-container'>
+        <span draggable={false}>Calculator</span>
+        <div className='util-container' draggable={false}>
           <button onClick={() => minimizeProgram("Calculator")}>-</button>
           <button onClick={() => programHandle("Calculator", false)}>X</button>
         </div>
       </div>
-      <div id='display'>
-        <div id='previous-display'>
-          {prevDisplay} {helperOp ? currentOp : null}{" "}
+      
+        <div id='display'>
+          <div id='previous-display'>
+            {prevDisplay} {helperOp ? currentOp : null}{" "}
+          </div>
+          <div id='current-display'>{display}</div>
         </div>
-        <div id='current-display'>{display}</div>
-      </div>
-      <div id='button-container'>
-        <div id='clear-delete-container'>
-          <button id='clear-button' onClick={() => clearAll()}>
-            clear
-          </button>
-          <button id='delete-button' onClick={() => delBtn()}>
-            Del
-          </button>
+        <div id='button-container'>
+          <div id='clear-delete-container'>
+            <button id='clear-button' onClick={() => clearAll()}>
+              clear
+            </button>
+            <button id='delete-button' onClick={() => delBtn()}>
+              Del
+            </button>
+          </div>
+          <div className='number-container'>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(7)}
+            >
+              7
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(8)}
+            >
+              8
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(9)}
+            >
+              9
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler("/")}
+            >
+              /
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(4)}
+            >
+              4
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(5)}
+            >
+              5
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(6)}
+            >
+              6
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler("*")}
+            >
+              *
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(1)}
+            >
+              1
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(2)}
+            >
+              2
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(3)}
+            >
+              3
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler("-")}
+            >
+              -
+            </button>
+            <button className='calculator-button' onClick={() => dotFinder()}>
+              .
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler(0)}
+            >
+              0
+            </button>
+            <button
+              className='calculator-button'
+              id='equal-btn'
+              onClick={() => equal()}
+            >
+              =
+            </button>
+            <button
+              className='calculator-button'
+              onClick={() => displayHandler("+")}
+            >
+              +
+            </button>
+          </div>
         </div>
-        <div className='number-container'>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(7)}
-          >
-            7
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(8)}
-          >
-            8
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(9)}
-          >
-            9
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler("/")}
-          >
-            /
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(4)}
-          >
-            4
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(5)}
-          >
-            5
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(6)}
-          >
-            6
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler("*")}
-          >
-            *
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(1)}
-          >
-            1
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(2)}
-          >
-            2
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(3)}
-          >
-            3
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler("-")}
-          >
-            -
-          </button>
-          <button className='calculator-button' onClick={() => dotFinder()}>
-            .
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler(0)}
-          >
-            0
-          </button>
-          <button
-            className='calculator-button'
-            id='equal-btn'
-            onClick={() => equal()}
-          >
-            =
-          </button>
-          <button
-            className='calculator-button'
-            onClick={() => displayHandler("+")}
-          >
-            +
-          </button>
-        </div>
-      </div>
-
+    
     </div>
   );
 }

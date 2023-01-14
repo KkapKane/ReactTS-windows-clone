@@ -20,60 +20,65 @@ export default function Paint ({paintRef,containerRef} : Props) {
   // state for the color saved that will be used if mouse clicks canvas now //
   const [chosenColor, setChosenColor] = useState<string | undefined>("#000000");
 
-  // const isClicked = useRef<boolean>(false);
-  // const coords = useRef<{
-  //   startX: number;
-  //   startY: number;
-  //   lastX: number;
-  //   lastY: number;
-  // }>({
-  //   startX: 0,
-  //   startY: 0,
-  //   lastX: 0,
-  //   lastY: 0,
-  // });
+  const isClicked = useRef<boolean>(false);
+  const coords = useRef<{
+    startX: number;
+    startY: number;
+    lastX: number;
+    lastY: number;
+  }>({
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastY: 0,
+  });
 
-  // //anything pertaining to the draggable feature
-  // useEffect(() => {
-  //   if (!paintRef.current || !containerRef.current) return;
+  //anything pertaining to the draggable feature
+  useEffect(() => {
+    if (!paintRef.current || !containerRef.current) return;
 
-  //   const box = paintRef.current;
-  //   const container = containerRef.current;
+    const box = paintRef.current;
+    const container = containerRef.current;
 
-  //   const onMouseDown = (e: MouseEvent) => {
-  //     isClicked.current = true;
-  //     coords.current.startX = e.clientX;
-  //     coords.current.startY = e.clientY;
-  //   };
-  //   const onMouseUp = (e: MouseEvent) => {
-  //     isClicked.current = false;
-  //     coords.current.lastX = box.offsetLeft;
-  //     coords.current.lastY = box.offsetTop;
-  //   };
-  //   const onMouseMove = (e: MouseEvent) => {
-  //     if (!isClicked.current) return;
+    const onMouseDown = (e: MouseEvent) => {
 
-  //     const nextX = e.clientX - coords.current.startX + coords.current.lastX;
-  //     const nextY = e.clientY - coords.current.startY + coords.current.lastY;
+      const target = e.target as HTMLDivElement;
+      //makes sure if the div is the handle before enabling the drag and drop feature.      
+       if(target.id === 'paint-handle'){
+      isClicked.current = true;
+      coords.current.startX = e.clientX;
+      coords.current.startY = e.clientY;
+       }
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      isClicked.current = false;
+      coords.current.lastX = box.offsetLeft;
+      coords.current.lastY = box.offsetTop;
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isClicked.current) return;
 
-  //     box.style.top = `${nextY}px`;
-  //     box.style.left = `${nextX}px`;
-  //   };
+      const nextX = e.clientX - coords.current.startX + coords.current.lastX;
+      const nextY = e.clientY - coords.current.startY + coords.current.lastY;
 
-  //   box.addEventListener("mousedown", onMouseDown);
-  //   box.addEventListener("mouseup", onMouseUp);
-  //   container.addEventListener("mousemove", onMouseMove);
-  //   container.addEventListener("mouseleave", onMouseUp);
+      box.style.top = `${nextY}px`;
+      box.style.left = `${nextX}px`;
+    };
 
-  //   const cleanup = () => {
-  //     box.removeEventListener("mousedown", onMouseDown);
-  //     box.removeEventListener("mouseup", onMouseUp);
-  //     box.removeEventListener("mousemove", onMouseMove);
-  //     box.removeEventListener("mouseleave", onMouseUp);
-  //   };
+    box.addEventListener("mousedown", onMouseDown);
+    box.addEventListener("mouseup", onMouseUp);
+    container.addEventListener("mousemove", onMouseMove);
+    container.addEventListener("mouseleave", onMouseUp);
 
-  //   return cleanup;
-  // }, []);
+    const cleanup = () => {
+      box.removeEventListener("mousedown", onMouseDown);
+      box.removeEventListener("mouseup", onMouseUp);
+      box.removeEventListener("mousemove", onMouseMove);
+      box.removeEventListener("mouseleave", onMouseUp);
+    };
+
+    return cleanup;
+  }, []);
 
   return (
     <div id='paint' onClick={closeBrushMenu} ref={paintRef}>
