@@ -1,32 +1,90 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PaintHandle from "./PaintHandle";
 import PaintRibbon from "./PaintRibbon";
 
 
-export default function Paint () {
+interface Props {
+  paintRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement>;
+}
 
-    // state for brush menu display //
-    const [brushMenu, setBrushMenu] = useState(false);
+export default function Paint ({paintRef,containerRef} : Props) {
+  // state for brush menu display //
+  const [brushMenu, setBrushMenu] = useState(false);
 
-    // function for closing brush menu //
-    const closeBrushMenu = () => {
-        setBrushMenu(false);
-    }
+  // function for closing brush menu //
+  const closeBrushMenu = () => {
+    setBrushMenu(false);
+  };
 
-    // state for the color saved that will be used if mouse clicks canvas now //
-    const [chosenColor, setChosenColor] = useState<string | undefined>("#000000");
+  // state for the color saved that will be used if mouse clicks canvas now //
+  const [chosenColor, setChosenColor] = useState<string | undefined>("#000000");
 
+  const isClicked = useRef<boolean>(false);
+  const coords = useRef<{
+    startX: number;
+    startY: number;
+    lastX: number;
+    lastY: number;
+  }>({
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastY: 0,
+  });
 
+  //anything pertaining to the draggable feature
+  useEffect(() => {
+    if (!paintRef.current || !containerRef.current) return;
 
-    return (
-        <div id="paint" onClick={closeBrushMenu}>
-            <PaintHandle />
-            <PaintRibbon 
-                brushMenu={brushMenu}
-                setBrushMenu={setBrushMenu}
-                closeBrushMenu={closeBrushMenu} 
-                chosenColor={chosenColor}
-                setChosenColor={setChosenColor} />
-        </div>
-    )
+    const box = paintRef.current;
+    const container = containerRef.current;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isClicked.current = true;
+      coords.current.startX = e.clientX;
+      coords.current.startY = e.clientY;
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      isClicked.current = false;
+      coords.current.lastX = box.offsetLeft;
+      coords.current.lastY = box.offsetTop;
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isClicked.current) return;
+
+      const nextX = e.clientX - coords.current.startX + coords.current.lastX;
+      const nextY = e.clientY - coords.current.startY + coords.current.lastY;
+
+      box.style.top = `${nextY}px`;
+      box.style.left = `${nextX}px`;
+    };
+
+    box.addEventListener("mousedown", onMouseDown);
+    box.addEventListener("mouseup", onMouseUp);
+    container.addEventListener("mousemove", onMouseMove);
+    container.addEventListener("mouseleave", onMouseUp);
+
+    const cleanup = () => {
+      box.removeEventListener("mousedown", onMouseDown);
+      box.removeEventListener("mouseup", onMouseUp);
+      box.removeEventListener("mousemove", onMouseMove);
+      box.removeEventListener("mouseleave", onMouseUp);
+    };
+
+    return cleanup;
+  }, []);
+
+  return (
+    <div id='paint' onClick={closeBrushMenu} ref={paintRef}>
+      <PaintHandle />
+      <PaintRibbon
+        brushMenu={brushMenu}
+        setBrushMenu={setBrushMenu}
+        closeBrushMenu={closeBrushMenu}
+        chosenColor={chosenColor}
+        setChosenColor={setChosenColor}
+      />
+    </div>
+  );
 }

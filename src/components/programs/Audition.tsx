@@ -12,10 +12,61 @@ interface Props {
 }
 
 export default function Audition({audiRef, containerRef}:Props){
+
 const { programs, setPrograms }: any = useContext(Programs);
 const { tasks, setTask }: any = useContext(Tasks);
+const isClicked = useRef<boolean>(false);
+const coords = useRef<{startX: number, startY: number , lastX: number, lastY: number}>({
+  startX: 0, 
+  startY: 0,
+  lastX: 0,
+  lastY: 0
+})
 
-const isClicked = useRef<boolean>(false)
+
+//anything pertaining to the draggable feature
+useEffect(() => {
+  if (!audiRef.current || !containerRef.current) return;
+
+  const box = audiRef.current;
+  const container = containerRef.current;
+
+
+  const onMouseDown = (e: MouseEvent) => {
+    isClicked.current = true;
+    coords.current.startX = e.clientX
+    coords.current.startY = e.clientY
+  };
+  const onMouseUp = (e: MouseEvent) => {
+    isClicked.current = false;
+    coords.current.lastX = box.offsetLeft
+    coords.current.lastY = box.offsetTop
+  };
+  const onMouseMove = (e: MouseEvent) => {
+    if (!isClicked.current) return;
+    
+    const nextX = e.clientX - coords.current.startX + coords.current.lastX
+    const nextY = e.clientY - coords.current.startY + coords.current.lastY
+
+
+    box.style.top = `${nextY}px`;
+    box.style.left = `${nextX}px`;
+  };
+
+  box.addEventListener("mousedown", onMouseDown);
+  box.addEventListener("mouseup", onMouseUp);
+  container.addEventListener("mousemove", onMouseMove);
+  container.addEventListener("mouseleave", onMouseUp);
+
+  const cleanup = () => {
+    box.removeEventListener("mousedown", onMouseDown);
+    box.removeEventListener("mouseup", onMouseUp);
+    box.removeEventListener("mousemove", onMouseMove);
+    box.removeEventListener("mouseleave", onMouseUp);
+  };
+
+  return cleanup;
+}, []);
   
 
 //finds the index of the the task in the task object array
@@ -52,53 +103,19 @@ const minimizeProgram = (programName: string) => {
   setTask(taskList);
 };
 
-useEffect(()=> {
-if(!audiRef.current || !containerRef.current) return;
 
-const box = audiRef.current;
-const container = containerRef.current;
-
-const onMouseDown = (e: MouseEvent) => {
-  isClicked.current = true;
-  console.log('f')
-
-}
-const onMouseUp = (e: MouseEvent) => {
-  isClicked.current = false;
-}
-const onMouseMove = (e: MouseEvent) => {
-  if(!isClicked.current) return;
- 
-  box.style.top = `${e.clientY}px`;
-  box.style.left = `${e.clientX}px`;
-}
-
-box.addEventListener('mousedown', onMouseDown)
-box.addEventListener('mouseup', onMouseUp)
-container.addEventListener("mousemove", onMouseMove);
-
-const cleanup = () => {
-  box.removeEventListener('mousedown', onMouseDown)
-  box.removeEventListener('mouseup', onMouseUp)
-  box.removeEventListener('mousemove', onMouseMove)
-
-}
-
-return cleanup
-
-},[])
 
 
     return (
       <div
-      ref={audiRef}
+        ref={audiRef}
         id='audition'
         style={tasks[currentTaskIndex].minimized ? { display: "none" } : {}}
-        
+        draggable={false}
       >
-        <div id='audition-handle' >
+        <div id='audition-handle' draggable={false}>
           Dance
-          <div className='button-container' >
+          <div className='button-container'>
             <button onClick={() => minimizeProgram("Dance Game")}>
               <VscChromeMinimize size={20} />
             </button>
@@ -108,7 +125,7 @@ return cleanup
           </div>
         </div>
         <iframe
-        
+        draggable={false}
           id='audition-window'
           src='https://kkapkane.github.io/R3F-Game/'
           style={{ height: "800px", width: "1200px" }}
