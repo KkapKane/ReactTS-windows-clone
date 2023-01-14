@@ -9,6 +9,7 @@ import taskView from "./assets/task-view.png";
 import search from "./assets/search.png";
 import Paint from './components/programs/Paint/Paint';
 import Audition from './components/programs/Audition';
+import RCMenu from './components/RCMenu';
 
 
 
@@ -51,8 +52,35 @@ const paintRef = useRef<HTMLDivElement>(null);
 //app.tsx client dom node
 const containerRef = useRef<HTMLDivElement>(null);
 
+const rcMenuRef = useRef<HTMLDivElement>(null)
 
+const[rightClicked, setRightClicked] = useState(false)
 
+useEffect(()=>{
+  //prevents right click on webpage so implementing our own right click function is possible
+  document.addEventListener("contextmenu", (event) => {
+
+    
+    const x = event.clientX
+    const y = event.clientY
+    event.preventDefault()
+    
+    
+    setRightClicked(true)
+    if(!rcMenuRef.current) return;
+    rcMenuRef.current.style.display ='flex'
+    rcMenuRef.current.style.left = `${x}px`;
+    rcMenuRef.current.style.top = `${y}px`;
+    
+  });
+    
+  
+  const cleanUp = () => {
+     document.removeEventListener("contextmenu", (event) => event.preventDefault());
+
+  }
+  return cleanUp
+},[])
 
   return (
     //can retrieve programs data anywhere if it's wrapped inside programs.provider
@@ -60,8 +88,8 @@ const containerRef = useRef<HTMLDivElement>(null);
       <Tasks.Provider value={{ tasks, setTask }}>
         <div className='App' onClick={dismissClock} ref={containerRef}>
           
+            <RCMenu rcMenuRef={rcMenuRef}/> 
             {programs[0].visible === true ? <Calculator calcRef={calcRef} containerRef={containerRef}/> : null}
-
             {programs[1].visible === true ? <Paint paintRef={paintRef} containerRef={containerRef} /> : null}
             {programs[2].visible === true ? (
           
