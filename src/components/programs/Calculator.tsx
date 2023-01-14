@@ -1,10 +1,17 @@
 import "../../styles/calculator.scss";
 import { FcCalculator } from "react-icons/fc";
 import { Programs, Tasks } from "../context/Programs";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { taskType, programType } from "../../types/project_types";
 
-export default function Calculator() {
+
+interface Props {
+  calcRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement>;
+}
+
+
+export default function Calculator({calcRef, containerRef} : Props) {
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
   const [display, setDisplay] = useState<number | string | undefined>("");
@@ -14,6 +21,18 @@ export default function Calculator() {
   const [lastOp, setLastOp] = useState("");
   const [helperOp, setHelperOp] = useState(true);
   const [currentOp, setCurrentOp] = useState("");
+  const isClicked = useRef<boolean>(false);
+  const coords = useRef<{
+    startX: number;
+    startY: number;
+    lastX: number;
+    lastY: number;
+  }>({
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastY: 0,
+  });
 
   const currentTaskIndex = tasks.findIndex(
     (task: taskType) => task.name === "Calculator"
@@ -138,12 +157,57 @@ export default function Calculator() {
       setDisplay(displayArray.join(""));
     }
   };
+
+  //anything pertaining to the draggable feature
+  useEffect(() => {
+    if (!calcRef.current || !containerRef.current) return;
+
+    const box = calcRef.current;
+    const container = containerRef.current;
+
+    const onMouseDown = (e: MouseEvent) => {
+      isClicked.current = true;
+      coords.current.startX = e.clientX;
+      coords.current.startY = e.clientY;
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      isClicked.current = false;
+      coords.current.lastX = box.offsetLeft;
+      coords.current.lastY = box.offsetTop;
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isClicked.current) return;
+
+      const nextX = e.clientX - coords.current.startX + coords.current.lastX;
+      const nextY = e.clientY - coords.current.startY + coords.current.lastY;
+
+      box.style.top = `${nextY}px`;
+      box.style.left = `${nextX}px`;
+    };
+
+    box.addEventListener("mousedown", onMouseDown);
+    box.addEventListener("mouseup", onMouseUp);
+    container.addEventListener("mousemove", onMouseMove);
+    container.addEventListener("mouseleave", onMouseUp);
+
+    const cleanup = () => {
+      box.removeEventListener("mousedown", onMouseDown);
+      box.removeEventListener("mouseup", onMouseUp);
+      box.removeEventListener("mousemove", onMouseMove);
+      box.removeEventListener("mouseleave", onMouseUp);
+    };
+
+    return cleanup;
+  }, []);
+
   return (
     <div
+      ref={calcRef}
       id='calculator'
+      draggable={false}
       style={tasks[currentTaskIndex].minimized ? { display: "none" } : {}}
     >
-      <div className='handle'>
+      <div className='handle' draggable={false}>
         <FcCalculator size={30} />
         <span>Calculator</span>
         <div className='util-container'>
@@ -248,7 +312,11 @@ export default function Calculator() {
           >
             0
           </button>
-          <button className='calculator-button' id="equal-btn" onClick={() => equal()}>
+          <button
+            className='calculator-button'
+            id='equal-btn'
+            onClick={() => equal()}
+          >
             =
           </button>
           <button
@@ -259,6 +327,7 @@ export default function Calculator() {
           </button>
         </div>
       </div>
+
     </div>
   );
 }

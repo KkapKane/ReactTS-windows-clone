@@ -10,6 +10,10 @@ import { IoHelpCircleSharp } from 'react-icons/io5'
 
 export default function PaintHandle() {
 
+
+
+
+    
     return (
         <div id="paint-handle">
             <div className="handle-left">

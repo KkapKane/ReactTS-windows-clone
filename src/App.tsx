@@ -42,9 +42,16 @@ const [tasks, setTask]  = useState([
 
 
 
-
+//dance game client dom node
 const audiRef = useRef<HTMLDivElement>(null);
+//calculator client dom node
+const calcRef = useRef<HTMLDivElement>(null);
+//paint client dom node
+const paintRef = useRef<HTMLDivElement>(null);
+//app.tsx client dom node
 const containerRef = useRef<HTMLDivElement>(null);
+
+
 
 
   return (
@@ -53,9 +60,9 @@ const containerRef = useRef<HTMLDivElement>(null);
       <Tasks.Provider value={{ tasks, setTask }}>
         <div className='App' onClick={dismissClock} ref={containerRef}>
           
-            {programs[0].visible === true ? <Calculator /> : null}
+            {programs[0].visible === true ? <Calculator calcRef={calcRef} containerRef={containerRef}/> : null}
 
-            {programs[1].visible === true ? <Paint /> : null}
+            {programs[1].visible === true ? <Paint paintRef={paintRef} containerRef={containerRef} /> : null}
             {programs[2].visible === true ? (
           
               <Audition audiRef={audiRef} containerRef={containerRef} />

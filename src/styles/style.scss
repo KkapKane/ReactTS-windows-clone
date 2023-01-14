@@ -11,11 +11,13 @@ body {
     background: url(../assets/background.jpg) fixed;
     background-size: cover;
     background-position: center;
+    overflow: hidden;
 }
 
 #root, .App {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 button {
@@ -28,21 +30,22 @@ a {
     color: inherit;
 }
 #audition {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
    
+  
 }
 
 #audition-handle {
     display: flex;
+   
     justify-content: space-between;
     height: 24px;
     background-color: grey;
-    width: 62.7% ;
+    width: 100% ;
     .button-container{
         gap: 1px;
         display: flex;
@@ -51,3 +54,4 @@ a {
         }
     }
 }
+
