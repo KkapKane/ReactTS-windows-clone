@@ -4,33 +4,48 @@
     text-align: center;
     flex-direction: column;
     align-items: center;
-   
+    height: 600px;
+    width: 400px;
     position: absolute;
     color: white;
     
-    width: 400px;
-    height: 600px;
+    
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+   
     background-color: rgb(43, 42, 42);
 
     .handle{
         display: flex;
-  
         align-items: center;
         width: 100%;
-        justify-content: space-between;
+        z-index: 99;
        background-color: rgb(54, 50, 50);
-        
        gap: 1rem;
+        
+       
+
+       span {
+        pointer-events: none;
+       }
         .util-container{
+            position: absolute;
+            top: 0;
+            right: 0px;
             display: flex;
-            width: 100%;
-            height: 100%;
+            
+           
             justify-content: flex-end;
             button {
                 background-color: rgb(55, 52, 52);
                 color: white;
-                width: 20%;
-                height: 100%;
+                width: 50px;
+                height: 30px;
             }
         }
     }
@@ -99,3 +114,4 @@
 }
 
 }
+
