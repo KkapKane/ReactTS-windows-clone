@@ -1,4 +1,4 @@
-import '../../../styles/paintribbon.scss';
+import '../../../styles/paint/ribbon.scss';
 import PaintBrush from './PaintBrush';
 import PaintColors from './PaintColors';
 import PaintTools from './PaintTools';
@@ -9,9 +9,10 @@ interface Props {
     chosenColor: string | undefined;
     setChosenColor: React.Dispatch<React.SetStateAction<string | undefined>>;
     closeBrushMenu: () => void;
+    handleBrushSize: (size: number) => void;
 }
 
-export default function PaintRibbon ({ brushMenu, setBrushMenu, closeBrushMenu, chosenColor, setChosenColor }: Props) {
+export default function PaintRibbon ({ brushMenu, setBrushMenu, closeBrushMenu, chosenColor, setChosenColor, handleBrushSize }: Props) {
 
     return (
         <div id="paint-ribbon">
@@ -19,7 +20,9 @@ export default function PaintRibbon ({ brushMenu, setBrushMenu, closeBrushMenu, 
             <PaintBrush 
                 brushMenu={brushMenu}
                 setBrushMenu={setBrushMenu}
-                closeBrushMenu={closeBrushMenu} />
+                closeBrushMenu={closeBrushMenu}
+                handleBrushSize={handleBrushSize} 
+                />
             <PaintColors 
                 chosenColor={chosenColor}
                 setChosenColor={setChosenColor} />

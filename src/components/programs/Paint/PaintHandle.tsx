@@ -1,4 +1,4 @@
-import '../../../styles/painthandle.scss';
+import '../../../styles/paint/handle.scss';
 import paintIcon from '../../../assets/microsoft-paint.png';
 import saveIcon from '../../../assets/save-file.png';
 import { ImUndo2, ImRedo2 } from 'react-icons/im';
