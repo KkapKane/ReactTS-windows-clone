@@ -125,6 +125,7 @@ export default function Calculator({calcRef, containerRef} : Props) {
   };
   //this function only runs when we press the Equal sign
   const equal = () => {
+    if(lastOp == "=") return
     setHelperOp(false);
     let temp = prevDisplay;
     setPrevDisplay(temp + " " + currentOp + " " + display + " " + "=");
