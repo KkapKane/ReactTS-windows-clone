@@ -21,6 +21,9 @@
     }
     .new {
         padding-left: 10px;
+        &:hover {
+            background-color: rgb(198, 196, 196);
+        }
     }
     .display-settings {
         display: flex;
@@ -38,4 +41,7 @@
         }   
         }
     }
+
+ 
+  
 }

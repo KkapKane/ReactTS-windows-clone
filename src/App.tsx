@@ -54,9 +54,17 @@ const containerRef = useRef<HTMLDivElement>(null);
 
 const rcMenuRef = useRef<HTMLDivElement>(null)
 
-const[rightClicked, setRightClicked] = useState(false)
+
 
 useEffect(()=>{
+
+  document.body.addEventListener("click", ()=> {
+    if (!rcMenuRef.current) return;
+  
+    rcMenuRef.current.style.display ='none'
+   
+  })
+  
   //prevents right click on webpage so implementing our own right click function is possible
   document.addEventListener("contextmenu", (event) => {
 
@@ -66,7 +74,7 @@ useEffect(()=>{
     event.preventDefault()
     
     
-    setRightClicked(true)
+    
     if(!rcMenuRef.current) return;
     rcMenuRef.current.style.display ='flex'
     rcMenuRef.current.style.left = `${x}px`;
@@ -77,6 +85,11 @@ useEffect(()=>{
   
   const cleanUp = () => {
      document.removeEventListener("contextmenu", (event) => event.preventDefault());
+     document.body.removeEventListener("click", () => {
+       if (!rcMenuRef.current) return;
+      
+       rcMenuRef.current.style.display = "none";
+     });
 
   }
   return cleanUp

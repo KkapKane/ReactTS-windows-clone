@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useRef, createRef} from 'react';
 import '../../../styles/paint/canvas.scss'
 import PixelBox from './PixelBox';
 
@@ -25,19 +25,26 @@ export default function PaintCanvas({ chosenColor, brushSize }: Props) {
 
     // state for mouse hover //
     const [draw, setDraw] = useState(false);
-
+    // maps through array and set a ref on each one based on index
+    const elementsRef = useRef(array.map(() => createRef<HTMLDivElement>()));
     return (
         <div id="paint-canvas"
-            onMouseDown={() => setDraw(true)}
-            onMouseUp={() => setDraw(false)} >
+        onMouseDown={() => setDraw(true)}
+        onMouseUp={() => setDraw(false)} >
             {array.map((a, index) => {
                 return (
+                    // maps through array and set a ref on each one based on index
+                  <div className='helperDiv' ref={elementsRef.current[index]}>
+                    
                     <PixelBox
-                        index={index}
-                        chosenColor={chosenColor}
-                        draw={draw}
+                  
+                    elementsRef={elementsRef}
+                      index={index}
+                      chosenColor={chosenColor}
+                      draw={draw}
                     />
-                )
+                  </div>
+                );
             })
             }
         </div>
