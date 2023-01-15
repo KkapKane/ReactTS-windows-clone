@@ -21,7 +21,7 @@ export default function PaintColors({ chosenColor, setChosenColor }: Props) {
     const [currentColor, setCurrentColor] = useState<string | undefined>("#ffffff");
 
     // state for all previous chosen colors //
-    const [colorList, setColorList] = useState<any[]>(["rgb(0, 0, 0)"]);
+    const [colorList, setColorList] = useState<any[]>([]);
 
     // add to array whenver a new color is chosen //
     useEffect(() => {
