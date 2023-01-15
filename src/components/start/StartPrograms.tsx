@@ -6,6 +6,7 @@ import minesweeper from '../../assets/minesweeper.png'
 import { taskType } from '../../types/project_types';
 import {Programs, Tasks} from '../context/Programs'
 import audition from '../../assets/audition.png'
+import solitaire from '../../assets/solitaire.png'
 
 
 
@@ -55,7 +56,7 @@ export default function StartPrograms(){
             Paint
             </span>
 
-            <span>Calculator</span>
+           
             <span>Calculator</span>
         </div>
     )
