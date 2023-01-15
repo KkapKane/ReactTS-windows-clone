@@ -1,29 +1,22 @@
 import '../../../styles/paint/handle.scss';
 import paintIcon from '../../../assets/microsoft-paint.png';
-import saveIcon from '../../../assets/save-file.png';
-import { ImUndo2, ImRedo2 } from 'react-icons/im';
-import { RiEjectFill } from 'react-icons/ri';
-import { VscChromeMinimize, VscPrimitiveSquare } from 'react-icons/vsc';
+import { VscChromeMinimize } from 'react-icons/vsc';
 import { RxCross2 } from 'react-icons/rx';
 import { BsChevronUp } from 'react-icons/bs';
-import { IoHelpCircleSharp } from 'react-icons/io5'
+import { IoHelpCircleSharp } from 'react-icons/io5';
 
-export default function PaintHandle() {
+interface Props {
+    programHandle: (programName: string, status: boolean) => void;
+    minimizeProgram: (programName: string) => void;
+}
 
+export default function PaintHandle({ programHandle, minimizeProgram }: Props) {
 
-
-
-    
     return (
         <div id="paint-handle">
             <div className="handle-left">
                 <div className="handle-top">
                     <img src={paintIcon} alt="icon" />
-                    <span></span>
-                    <img src={saveIcon} alt="save" />
-                    <ImUndo2 size={15} />
-                    <ImRedo2 size={15} />
-                    <RiEjectFill size={10} className="quick-access" />
                     <span></span>
                     <p>Untitled - Paint</p>
                 </div>
@@ -34,9 +27,10 @@ export default function PaintHandle() {
             </div>
             <div className="handle-right">
                 <div className="handle-top">
-                    <VscChromeMinimize size={20} />
-                    <VscPrimitiveSquare size={20} />
-                    <RxCross2 size={20} className="exit" />
+                    <VscChromeMinimize size={20}
+                        onClick={() => minimizeProgram('Paint')} />
+                    <RxCross2 size={20} className="exit"
+                        onClick={() => programHandle('Paint', false)} />
                 </div>
                 <div className="handle-bottom">
                     <button><BsChevronUp size={12} color="grey" strokeWidth={1} /></button>

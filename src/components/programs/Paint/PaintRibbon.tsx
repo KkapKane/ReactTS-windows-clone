@@ -8,24 +8,33 @@ interface Props {
     setBrushMenu: React.Dispatch<React.SetStateAction<boolean>>
     chosenColor: string | undefined;
     setChosenColor: React.Dispatch<React.SetStateAction<string | undefined>>;
+    brushSize: number | "";
+    eye: boolean;
     closeBrushMenu: () => void;
     handleBrushSize: (size: number) => void;
+    activeEye: () => void;
 }
 
-export default function PaintRibbon ({ brushMenu, setBrushMenu, closeBrushMenu, chosenColor, setChosenColor, handleBrushSize }: Props) {
+export default function PaintRibbon({ brushMenu, setBrushMenu, brushSize, closeBrushMenu, chosenColor, setChosenColor, handleBrushSize, activeEye, eye }: Props) {
 
     return (
         <div id="paint-ribbon">
-            <PaintTools />
-            <PaintBrush 
+            <PaintTools
+                setChosenColor={setChosenColor}
+                activeEye={activeEye}
+                eye={eye}
+            />
+            <PaintBrush
                 brushMenu={brushMenu}
                 setBrushMenu={setBrushMenu}
                 closeBrushMenu={closeBrushMenu}
-                handleBrushSize={handleBrushSize} 
-                />
-            <PaintColors 
+                handleBrushSize={handleBrushSize}
+                brushSize={brushSize}
+            />
+            <PaintColors
                 chosenColor={chosenColor}
-                setChosenColor={setChosenColor} />
+                setChosenColor={setChosenColor}
+            />
         </div>
     )
 }

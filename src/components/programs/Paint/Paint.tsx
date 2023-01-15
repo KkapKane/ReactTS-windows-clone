@@ -1,15 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import PaintHandle from "./PaintHandle";
 import PaintRibbon from "./PaintRibbon";
 import PaintCanvas from "./PaintCanvas";
-
+import { Tasks, Programs } from "../../context/Programs";
+import { taskType, programType } from "../../../types/project_types";
 
 interface Props {
   paintRef: React.RefObject<HTMLDivElement>;
   containerRef: React.RefObject<HTMLDivElement>;
 }
 
-export default function Paint ({paintRef,containerRef} : Props) {
+export default function Paint({ paintRef, containerRef }: Props) {
   // state for brush menu display //
   const [brushMenu, setBrushMenu] = useState(false);
 
@@ -24,10 +25,26 @@ export default function Paint ({paintRef,containerRef} : Props) {
   // function for switching brush sizes //
   const handleBrushSize = (size: number) => {
     setBrushSize(size);
+    setEye(false);
   }
 
   // state for the color saved that will be used if mouse clicks canvas now //
   const [chosenColor, setChosenColor] = useState<string | undefined>("#000000");
+
+  // eyedropper tool //
+  const [eye, setEye] = useState(false);
+
+  const activeEye = () => {
+    setEye(true);
+    setBrushSize(0);
+  }
+
+  const getColor = (event: any) => {
+    let color = event.target.style.backgroundColor;
+    setChosenColor(color);
+  }
+
+  // above for eyedropper tool //
 
   const isClicked = useRef<boolean>(false);
   const coords = useRef<{
@@ -53,11 +70,11 @@ export default function Paint ({paintRef,containerRef} : Props) {
 
       const target = e.target as HTMLDivElement;
       //makes sure if the div is the handle before enabling the drag and drop feature.      
-       if(target.id === 'paint-handle'){
-      isClicked.current = true;
-      coords.current.startX = e.clientX;
-      coords.current.startY = e.clientY;
-       }
+      if (target.id === 'paint-handle') {
+        isClicked.current = true;
+        coords.current.startX = e.clientX;
+        coords.current.startY = e.clientY;
+      }
     };
     const onMouseUp = (e: MouseEvent) => {
       isClicked.current = false;
@@ -89,9 +106,52 @@ export default function Paint ({paintRef,containerRef} : Props) {
     return cleanup;
   }, []);
 
+  // here to end for minimizing and closing programs //
+  const { tasks, setTask }: any = useContext(Tasks);
+  const currentTaskIndex = tasks.findIndex(
+    (task: taskType) => task.name === "Paint"
+  );
+  const { programs, setPrograms }: any = useContext(Programs);
+
+
+  //create program div or not
+  const programHandle = (programName: string, status: boolean) => {
+    const newProgram = programs.map((program: programType) => {
+      if (program.name === programName) {
+        return { ...program, visible: status };
+      } else {
+        return { ...program, visible: false };
+      }
+    });
+
+    // adds the program into task bar or remove it
+    const index = tasks.findIndex(
+      (task: taskType) => task.name !== programName
+    );
+    if (index > -1) {
+      setTask(tasks.filter((task: taskType) => task.name !== programName));
+    }
+    setPrograms(newProgram);
+  };
+
+  //maps through the whole tasks object array and when finds a match changes only the minimized property of it to true
+  const minimizeProgram = (programName: string) => {
+    const taskList = tasks.map((task: taskType) => {
+      if (task.name === programName) {
+        return { ...task, minimized: true };
+      } else {
+        return { ...task, minmized: false };
+      }
+    });
+    setTask(taskList);
+  };
+
   return (
-    <div id='paint' onClick={closeBrushMenu} ref={paintRef}>
-      <PaintHandle />
+    <div id='paint' onClick={closeBrushMenu} ref={paintRef}
+      style={tasks[currentTaskIndex].minimized ? { display: "none" } : {}}>
+      <PaintHandle
+        programHandle={programHandle}
+        minimizeProgram={minimizeProgram} />
       <PaintRibbon
         brushMenu={brushMenu}
         setBrushMenu={setBrushMenu}
@@ -99,11 +159,16 @@ export default function Paint ({paintRef,containerRef} : Props) {
         chosenColor={chosenColor}
         setChosenColor={setChosenColor}
         handleBrushSize={handleBrushSize}
+        eye={eye}
+        activeEye={activeEye}
+        brushSize={brushSize}
       />
-      <PaintCanvas 
+      <PaintCanvas
         brushSize={brushSize}
         chosenColor={chosenColor}
-        />
+        eye={eye}
+        getColor={getColor}
+      />
     </div>
   );
 }
