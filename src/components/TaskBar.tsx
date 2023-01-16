@@ -1,5 +1,5 @@
 
-import SmallClock from "./SmallClock";
+import SmallClock from "./apps/SmallClock";
 import { useContext } from "react";
 import "../styles/taskbar.scss";
 import Start from "./start/Start";
@@ -10,6 +10,7 @@ import { taskType } from "../types/project_types";
 import { IoVolumeHighOutline } from 'react-icons/io5';
 import { RiWifiLine } from 'react-icons/ri';
 import { BsChevronUp } from 'react-icons/bs';
+import Weather from "./apps/Weather";
 
 
 interface Props {
@@ -32,7 +33,7 @@ export default function TaskBar({ handleClock, clock }: Props) {
                 })}
             </div>
             <div id="task-right">
-                <span className="task-item">Weather</span>
+                <Weather />
                 <BsChevronUp size={16} style={{padding: '0 6px'}}/>
                 <RiWifiLine size={20} />
                 <IoVolumeHighOutline size={20}/>

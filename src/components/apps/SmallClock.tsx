@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import '../styles/smallclock.scss'
+import '../../styles/smallclock.scss'
 import BigClock from './BigClock';
 
 interface Props {
