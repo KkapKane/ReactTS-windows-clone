@@ -4,13 +4,15 @@ import { VscChromeMinimize } from 'react-icons/vsc';
 import { RxCross2 } from 'react-icons/rx';
 import { BsChevronUp } from 'react-icons/bs';
 import { IoHelpCircleSharp } from 'react-icons/io5';
+import { minimizeProgram } from "../../../helper/Minimize";
 
 interface Props {
+    tasks: any;
+    setTask: any;
     programHandle: (programName: string, status: boolean) => void;
-    minimizeProgram: (programName: string) => void;
 }
 
-export default function PaintHandle({ programHandle, minimizeProgram }: Props) {
+export default function PaintHandle({ programHandle, tasks, setTask }: Props) {
 
     return (
         <div id="paint-handle">
@@ -28,7 +30,7 @@ export default function PaintHandle({ programHandle, minimizeProgram }: Props) {
             <div className="handle-right">
                 <div className="handle-top">
                     <VscChromeMinimize size={20}
-                        onClick={() => minimizeProgram('Paint')} />
+                        onClick={() => minimizeProgram('Paint', tasks, setTask)} />
                     <RxCross2 size={20} className="exit"
                         onClick={() => programHandle('Paint', false)} />
                 </div>
