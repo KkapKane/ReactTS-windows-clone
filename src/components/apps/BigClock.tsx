@@ -1,4 +1,4 @@
-import '../styles/bigclock.scss';
+import '../../styles/bigclock.scss';
 import moment from 'moment';
 import Calendar from 'react-calendar';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
