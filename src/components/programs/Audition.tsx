@@ -5,6 +5,8 @@ import { Programs, Tasks } from "../context/Programs";
 import { useContext , useRef , useEffect } from "react";
 import { VscChromeMinimize } from 'react-icons/vsc'
 import { RxCross2 } from 'react-icons/rx';
+import {dragDrop} from '../../helper/DragDrop'
+import { minimizeProgram } from '../../helper/Minimize';
 
 interface Props {
   audiRef: React.RefObject<HTMLDivElement>;
@@ -26,50 +28,7 @@ const coords = useRef<{startX: number , startY: number , lastX: number, lastY: n
 
 //anything pertaining to the draggable feature
 useEffect(() => {
-  if (!audiRef.current || !containerRef.current) return;
-
-  const box = audiRef.current;
-  const container = containerRef.current;
-
-
-  const onMouseDown = (e: MouseEvent) => {
-
-    const target = e.target as HTMLDivElement;
-    if(target.id === 'audition-handle'){
-    isClicked.current = true;
-    coords.current.startX = e.clientX
-    coords.current.startY = e.clientY 
-    }
-  };
-  const onMouseUp = (e: MouseEvent) => {
-    isClicked.current = false;
-    coords.current.lastX = box.offsetLeft
-    coords.current.lastY = box.offsetTop
-  };
-  const onMouseMove = (e: MouseEvent) => {
-    if (!isClicked.current) return;
-    
-    const nextX = e.clientX - coords.current.startX + coords.current.lastX
-    const nextY = e.clientY - coords.current.startY + coords.current.lastY
-
-
-    box.style.top = `${nextY}px`;
-    box.style.left = `${nextX}px`;
-  };
-
-  box.addEventListener("mousedown", onMouseDown);
-  box.addEventListener("mouseup", onMouseUp);
-  container.addEventListener("mousemove", onMouseMove);
-  container.addEventListener("mouseleave", onMouseUp);
-
-  const cleanup = () => {
-    box.removeEventListener("mousedown", onMouseDown);
-    box.removeEventListener("mouseup", onMouseUp);
-    box.removeEventListener("mousemove", onMouseMove);
-    box.removeEventListener("mouseleave", onMouseUp);
-  };
-
-  return cleanup;
+  dragDrop(audiRef,containerRef,'audition-handle',coords,isClicked)
 }, []);
   
 
@@ -97,17 +56,7 @@ const programHandle = (programName: string, status: boolean) => {
   setPrograms(newProgram);
 };
 
-//maps through the whole tasks object array and when finds a match changes only the minimized property of it to true
-const minimizeProgram = (programName: string) => {
-  const taskList = tasks.map((task: taskType) => {
-    if (task.name === programName) {
-      return { ...task, minimized: true };
-    } else {
-      return { ...task, minmized: false };
-    }
-  });
-  setTask(taskList);
-};
+
 
 
 
@@ -122,7 +71,7 @@ const minimizeProgram = (programName: string) => {
         <div id='audition-handle'>
           Dance
           <div className='button-container'>
-            <button onClick={() => minimizeProgram("Dance Game")}>
+            <button onClick={() => minimizeProgram("Dance Game",tasks,setTask)}>
               <VscChromeMinimize size={20} />
             </button>
             <button onClick={() => programHandle("Dance Game", false)}>
