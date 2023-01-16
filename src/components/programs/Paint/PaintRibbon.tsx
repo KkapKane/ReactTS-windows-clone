@@ -20,9 +20,11 @@ export default function PaintRibbon({ brushMenu, setBrushMenu, brushSize, closeB
     return (
         <div id="paint-ribbon">
             <PaintTools
+                chosenColor={chosenColor}
                 setChosenColor={setChosenColor}
                 activeEye={activeEye}
                 eye={eye}
+                handleBrushSize={handleBrushSize}
             />
             <PaintBrush
                 brushMenu={brushMenu}

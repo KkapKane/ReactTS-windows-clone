@@ -25,7 +25,7 @@ export default function PaintColors({ chosenColor, setChosenColor }: Props) {
 
     // add to array whenver a new color is chosen //
     useEffect(() => {
-        if (chosenColor !== undefined) {
+        if (chosenColor !== undefined && chosenColor !== '' && chosenColor !== 'white') {
             // do not allow two of the same colors to be in the array //
             if (!(colorList.filter(e => e === chosenColor).length > 0)) {
                 // sets a max limit of 30, then deletes the first color to add the latest //
