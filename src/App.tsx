@@ -1,9 +1,8 @@
-import Calculator from './components/programs/Calculator';
+
 import {Programs} from './components/context/Programs'
 import { useState , useRef , useEffect } from 'react';
 import fileExplorer from "./assets/file-explorer.png";
-import Paint from './components/programs/Paint/Paint';
-import Audition from './components/programs/Audition';
+
 import {Tasks} from './components/context/Programs'
 import taskView from "./assets/task-view.png";
 import TaskBar from "./components/TaskBar"
@@ -113,10 +112,8 @@ useEffect(()=>{
         <div className='App' onClick={dismissClock} ref={containerRef}>
       
             <RCMenu rcMenuRef={rcMenuRef} setDesktopIcon={setDesktopIcon} desktopIcon={desktopIcon} whichMenu={whichMenu}/>
-            <Desktop desktopIcon={desktopIcon}/> 
-            {programs[0].visible === true ? <Calculator calcRef={calcRef} containerRef={containerRef}/> : null}
-            {programs[1].visible === true ? <Paint paintRef={paintRef} containerRef={containerRef} /> : null}
-            {programs[2].visible === true ? <Audition audiRef={audiRef} containerRef={containerRef} />: null}
+            <Desktop desktopIcon={desktopIcon} paintRef={paintRef} audiRef={audiRef} calcRef={calcRef} programs={programs} containerRef={containerRef}/> 
+            
    
 
             <TaskBar handleClock={handleClock} clock={clock} />
