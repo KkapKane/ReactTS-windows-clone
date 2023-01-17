@@ -1,12 +1,13 @@
 
 import '../../styles/style.scss'
-import { taskType, programType } from "../../types/project_types";
+import { taskType } from "../../types/project_types";
 import { Programs, Tasks } from "../context/Programs";
 import { useContext , useRef , useEffect } from "react";
 import { VscChromeMinimize } from 'react-icons/vsc'
 import { RxCross2 } from 'react-icons/rx';
 import {dragDrop} from '../../helper/DragDrop'
 import { minimizeProgram } from '../../helper/Minimize';
+import { programHandle } from '../../helper/ProgramHandle';
 
 interface Props {
   audiRef: React.RefObject<HTMLDivElement>;
@@ -39,22 +40,7 @@ const currentTaskIndex = tasks.findIndex(
     (task: taskType) => task.name === "Dance Game"
   );
 
-const programHandle = (programName: string, status: boolean) => {
-  const newProgram = programs.map((program: programType) => {
-    if (program.name === programName) {
-      return { ...program, visible: status };
-    } else {
-      return { ...program, visible: false };
-    }
-  });
 
-  // adds the program into task bar or remove it
-  const index = tasks.findIndex((task: taskType) => task.name !== programName);
-  if (index > -1) {
-    setTask(tasks.filter((task: taskType) => task.name !== programName));
-  }
-  setPrograms(newProgram);
-};
 
 
 
@@ -66,7 +52,7 @@ const programHandle = (programName: string, status: boolean) => {
         ref={audiRef}
 
         id='audition'
-        style={tasks[currentTaskIndex].minimized ? { display: "none" } : {}}
+        style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
       >
         <div id='audition-handle'>
           Dance
@@ -74,7 +60,7 @@ const programHandle = (programName: string, status: boolean) => {
             <button onClick={() => minimizeProgram("Dance Game",tasks,setTask)}>
               <VscChromeMinimize size={20} />
             </button>
-            <button onClick={() => programHandle("Dance Game", false)}>
+            <button onClick={() => programHandle("Dance Game", false, programs, tasks, setTask, setPrograms)}>
               <RxCross2 size={20} />
             </button>
           </div>

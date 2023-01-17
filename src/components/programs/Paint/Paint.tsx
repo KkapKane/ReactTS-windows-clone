@@ -96,7 +96,7 @@ export default function Paint({ paintRef, containerRef }: Props) {
 
   return (
     <div id='paint' onClick={closeBrushMenu} ref={paintRef}
-      style={tasks[currentTaskIndex].minimized ? { display: "none" } : {}}>
+      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}>
       <PaintHandle
         programHandle={programHandle}
         tasks={tasks}
