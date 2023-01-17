@@ -1,0 +1,62 @@
+.task-item {
+
+    #weather {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding-right: 10px;
+    }
+
+    #news {
+        position: absolute;
+        background-color: rgba(41, 41, 41, 0.85);
+        backdrop-filter: blur(10px);
+        border-left: 1px solid rgb(83, 83, 83);
+        border-top: 1px solid rgb(83, 83, 83);
+        top: -611px;
+        right: 0;
+        height: 600px;
+        width: 680px;
+        padding-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        justify-content: space-evenly;
+
+        .article {
+            display: flex;
+            width: 42%;
+            margin: 7px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px black;
+            gap: 5px;
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                .header {
+                    font-size: 0.85rem;
+                }
+
+                .title {
+                    font-size: 1rem;
+                    font-weight: 500;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            img {
+                width: 90px;
+                height: 90px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+        }
+    }
+}
