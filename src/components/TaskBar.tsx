@@ -11,6 +11,7 @@ import { IoVolumeHighOutline } from 'react-icons/io5';
 import { RiWifiLine } from 'react-icons/ri';
 import { BsChevronUp } from 'react-icons/bs';
 import Weather from "./apps/Weather";
+import Search from "../Search";
 
 
 interface Props {
@@ -24,6 +25,7 @@ export default function TaskBar({ handleClock, clock }: Props) {
 
     return (
         <div id='task-bar'>
+            <Search />
             <div id="task-left">
                 <Start />
                 {tasks.map((taskd: taskType) => {
