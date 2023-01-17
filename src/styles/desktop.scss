@@ -12,13 +12,24 @@
     .desktop-icon {
         display: flex;
         flex-direction: column;
+        text-align: center;
         justify-content: center;
         align-items: center;
         margin-top: 10px;
-        width: 100px;
+        width: 120px;
         height: 100px;
-     
+        padding: .2rem;
+        scale: .9;
+        // border: 1px solid black;
 
+       
+     
+        input{
+            border: 0;
+            height: 20px;
+            padding: 3px;
+            background-color: white;
+        }
         img {
             height: 38%;
             

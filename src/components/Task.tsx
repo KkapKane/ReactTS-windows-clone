@@ -38,6 +38,10 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
     setTask(taskList);
   };
 
+  const expandSearch = () =>{
+    
+  }
+
   return (
     <>
     
@@ -45,7 +49,7 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
         className='task'
         onMouseOver={() => hoverHandle(task.name, true)}
         onMouseOut={() => hoverHandle(task.name, false)}
-        onClick={()=> toggleMinimize(task.name)}
+        onClick={()=> task.name !== 'Search' ? toggleMinimize(task.name) : console.log('hehe')}
       >
         <div
           className='task-toolTip'

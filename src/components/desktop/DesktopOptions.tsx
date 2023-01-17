@@ -1,5 +1,6 @@
 import personalize from "../../assets/personalize.png";
 import folder from "../../assets/folder.png";
+import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
 
 interface Props {
@@ -8,12 +9,14 @@ interface Props {
       {
         name: string;
         icon: string;
+        rename: boolean;
       }[]
     >
   >;
   desktopIcon: {
     name: string;
     icon: string;
+    rename: boolean;
   }[];
 }
 
@@ -57,10 +60,31 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
       ...desktopIcon,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
-        icon: folder,
+        icon: folder, rename: false
       },
     ]);
   };
+
+  const makeTextDoc = () => { 
+    let textDocCount = 0;
+    desktopIcon.forEach((element, index, array) => {
+      //if desktopIcon array already contains an object with the name New Folder then add to folder count
+      if (
+        element.name.match(/New Text Document/g) ||
+        element.name.match(/^New Text Document$/)
+      ) {
+        textDocCount++;
+      }
+    });
+    setDesktopIcon([
+      ...desktopIcon,
+      {
+        name: textDocCount == 0 ? `New Text Document.txt` : `New Text Document(${textDocCount}).txt`,
+        icon: textDoc,
+        rename: false,
+      },
+    ]);
+  }
   return (
     <div id='desktop-options'>
       <ul>
@@ -75,7 +99,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
       {showOption ? (
         <div id='extra-option' onMouseLeave={(e) => mouseLeave(e)}>
           <span onClick={() => makeFolder()}>New Folder</span>
-          <span>Text Document</span>
+          <span onClick={()=> makeTextDoc()}>Text Document</span>
         </div>
       ) : null}
       <hr />

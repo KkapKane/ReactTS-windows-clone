@@ -45,7 +45,7 @@ const [tasks, setTask]  = useState([
 
 
 const [desktopIcon,setDesktopIcon] = useState([
-  {name: 'Recycle Bin', icon: recycle}
+  {name: 'Recycle Bin', icon: recycle, rename: false}
 ])
 
 const [whichMenu , setWhichMenu] = useState('')
@@ -61,8 +61,11 @@ const paintRef = useRef<HTMLDivElement>(null);
 const containerRef = useRef<HTMLDivElement>(null);
 
 const rcMenuRef = useRef<HTMLDivElement>(null)
+ 
+const inputRef = useRef<HTMLInputElement>(null)
 
 
+const [currentFocus,setCurrentFocus] = useState('')
 
 useEffect(()=>{
 
@@ -77,7 +80,8 @@ useEffect(()=>{
   document.addEventListener("contextmenu", (event: MouseEvent) => {
     if(!event.target) return;
    const target = event.target as HTMLDivElement
-    console.log(target.className)
+
+    setCurrentFocus(target.id)
     const x = event.clientX
     const y = event.clientY
     event.preventDefault()
@@ -110,13 +114,27 @@ useEffect(()=>{
     <Programs.Provider value={{ programs, setPrograms }}>
       <Tasks.Provider value={{ tasks, setTask }}>
         <div className='App' onClick={dismissClock} ref={containerRef}>
-      
-            <RCMenu rcMenuRef={rcMenuRef} setDesktopIcon={setDesktopIcon} desktopIcon={desktopIcon} whichMenu={whichMenu}/>
-            <Desktop desktopIcon={desktopIcon} paintRef={paintRef} audiRef={audiRef} calcRef={calcRef} programs={programs} containerRef={containerRef}/> 
-            
-   
+          <RCMenu
+            rcMenuRef={rcMenuRef}
+            setDesktopIcon={setDesktopIcon}
+            desktopIcon={desktopIcon}
+            whichMenu={whichMenu}
+            currentFocus={currentFocus}
+            inputRef={inputRef}
+          />
+          <Desktop
+            desktopIcon={desktopIcon}
+            paintRef={paintRef}
+            audiRef={audiRef}
+            calcRef={calcRef}
+            programs={programs}
+            containerRef={containerRef}
+            currentFocus={currentFocus}
+            setDesktopIcon={setDesktopIcon}
+            inputRef={inputRef}
+          />
 
-            <TaskBar handleClock={handleClock} clock={clock} />
+          <TaskBar handleClock={handleClock} clock={clock} />
         </div>
       </Tasks.Provider>
     </Programs.Provider>

@@ -1,0 +1,16 @@
+
+#search {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    width: 800px;
+    height: 700px;
+    top: -700px;
+    left: 3.4%;
+    background-color: white;
+
+    input {
+        height: 30px;
+    }
+}
