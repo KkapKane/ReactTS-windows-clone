@@ -3,12 +3,15 @@ import { FcCalculator } from "react-icons/fc";
 import { Programs, Tasks } from "../context/Programs";
 import { useContext, useState, useEffect, useRef } from "react";
 import { taskType, programType } from "../../types/project_types";
-
+import {dragDrop} from '../../helper/DragDrop'
+import { minimizeProgram } from "../../helper/Minimize";
+import { programHandle } from "../../helper/ProgramHandle";
 
 interface Props {
   calcRef: React.RefObject<HTMLDivElement>;
   containerRef: React.RefObject<HTMLDivElement>;
 }
+
 
 
 export default function Calculator({calcRef, containerRef} : Props) {
@@ -38,37 +41,9 @@ export default function Calculator({calcRef, containerRef} : Props) {
     (task: taskType) => task.name === "Calculator"
   );
 
-  //create program div or not
-  const programHandle = (programName: string, status: boolean) => {
-    const newProgram = programs.map((program: programType) => {
-      if (program.name === programName) {
-        return { ...program, visible: status };
-      } else {
-        return { ...program, visible: false };
-      }
-    });
+  
 
-    // adds the program into task bar or remove it
-    const index = tasks.findIndex(
-      (task: taskType) => task.name !== programName
-    );
-    if (index > -1) {
-      setTask(tasks.filter((task: taskType) => task.name !== programName));
-    }
-    setPrograms(newProgram);
-  };
 
-  //maps through the whole tasks object array and when finds a match changes only the minimized property of it to true
-  const minimizeProgram = (programName: string) => {
-    const taskList = tasks.map((task: taskType) => {
-      if (task.name === programName) {
-        return { ...task, minimized: true };
-      } else {
-        return { ...task, minmized: false };
-      }
-    });
-    setTask(taskList);
-  };
 
   //anything related to the screen display done here
   const displayHandler = (btn: string | number) => {
@@ -159,53 +134,9 @@ export default function Calculator({calcRef, containerRef} : Props) {
     }
   };
 
-  //anything pertaining to the draggable feature
+
   useEffect(() => {
-    if (!calcRef.current || !containerRef.current) return;
-
-    const box = calcRef.current;
-    const container = containerRef.current;
-
-    const onMouseDown = (e: MouseEvent) => {
-      
-      const target = e.target as HTMLDivElement
-      //makes sure if the selected div is the handle before enabling this drag and drop feature
-      if(target.className === 'handle'){
-        console.log(target.className)
-      isClicked.current = true;
-      coords.current.startX = e.clientX;
-      coords.current.startY = e.clientY;
-      }
-      
-    };
-    const onMouseUp = (e: MouseEvent) => {
-      isClicked.current = false;
-      coords.current.lastX = box.offsetLeft;
-      coords.current.lastY = box.offsetTop;
-    };
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isClicked.current) return;
-
-      const nextX = e.clientX - coords.current.startX + coords.current.lastX;
-      const nextY = e.clientY - coords.current.startY + coords.current.lastY;
-
-      box.style.top = `${nextY}px`;
-      box.style.left = `${nextX}px`;
-    };
-
-    box.addEventListener("mousedown", onMouseDown);
-    box.addEventListener("mouseup", onMouseUp);
-    container.addEventListener("mousemove", onMouseMove);
-    container.addEventListener("mouseleave", onMouseUp);
-
-    const cleanup = () => {
-      box.removeEventListener("mousedown", onMouseDown);
-      box.removeEventListener("mouseup", onMouseUp);
-      box.removeEventListener("mousemove", onMouseMove);
-      box.removeEventListener("mouseleave", onMouseUp);
-    };
-
-    return cleanup;
+   dragDrop(calcRef,containerRef,'handle',coords,isClicked)
   }, []);
 
   return (
@@ -213,14 +144,14 @@ export default function Calculator({calcRef, containerRef} : Props) {
       ref={calcRef}
       id='calculator'
       draggable={false}
-      style={tasks[currentTaskIndex].minimized ? { display: "none" } : {}}
+      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
     >
       <div className='handle' draggable={false}>
         <FcCalculator size={30} />
         <span draggable={false}>Calculator</span>
         <div className='util-container' draggable={false}>
-          <button onClick={() => minimizeProgram("Calculator")}>-</button>
-          <button onClick={() => programHandle("Calculator", false)}>X</button>
+          <button onClick={() => minimizeProgram("Calculator", tasks, setTask)}>-</button>
+          <button onClick={() => programHandle("Calculator", false, programs, tasks, setTask, setPrograms)}>X</button>
         </div>
       </div>
       

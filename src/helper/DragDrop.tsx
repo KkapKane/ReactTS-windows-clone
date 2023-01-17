@@ -19,7 +19,7 @@ export function dragDrop(
 
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLDivElement;
-    if (target.id === targetHandle) {
+    if (target.id === targetHandle || target.className === targetHandle) {
       isClicked.current = true;
       coords.current.startX = e.clientX;
       coords.current.startY = e.clientY;

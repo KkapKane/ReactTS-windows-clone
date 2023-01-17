@@ -6,7 +6,7 @@ import minesweeper from '../../assets/minesweeper.png'
 import { taskType } from '../../types/project_types';
 import {Programs, Tasks} from '../context/Programs'
 import audition from '../../assets/audition.png'
-import solitaire from '../../assets/solitaire.png'
+
 
 
 
@@ -26,6 +26,14 @@ export default function StartPrograms(){
       });
       
       setPrograms(newProgram);
+      //if there is already a program open, close program down and open the new one that was just clicked.
+      if(tasks.length > 3){
+        let newState = tasks
+        newState.pop()
+        setTask(newState)
+      }
+
+
       //if this program already exist in the task bar just return
       const index = tasks.findIndex(
         (task: taskType) => task.name === programName
