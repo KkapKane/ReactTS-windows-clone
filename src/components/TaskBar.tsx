@@ -11,7 +11,7 @@ import { IoVolumeHighOutline } from 'react-icons/io5';
 import { RiWifiLine } from 'react-icons/ri';
 import { BsChevronUp } from 'react-icons/bs';
 import Weather from "./apps/Weather";
-import Search from "../Search";
+import Search from "./apps/Search";
 
 
 interface Props {
