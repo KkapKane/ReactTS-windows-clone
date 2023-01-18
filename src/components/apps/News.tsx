@@ -32,12 +32,6 @@ export default function News() {
         getNews();
     }, []);
 
-    useEffect(() => {
-        if (news) {
-            console.log(news);
-        }
-    }, [news]);
-
     // array for random color combinations for article cards //
     const colorCombo: colorCombo[] = [
         {
