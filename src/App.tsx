@@ -11,6 +11,7 @@ import RCMenu from './components/desktop/RCMenu';
 import "./styles/style.scss"
 import Desktop from './components/desktop/Desktop';
 import recycle from  './assets/recycle-bin.png'
+import { DesktopIcon } from './types/project_types';
 
 
 
@@ -44,8 +45,9 @@ const [tasks, setTask]  = useState([
 ]);
 
 
+
 const [desktopIcon,setDesktopIcon] = useState([
-  {name: 'Recycle Bin', icon: recycle, rename: false}
+  {name: 'Recycle Bin', icon: recycle, rename: false, type: 'bin', open: false}
 ])
 
 const [whichMenu , setWhichMenu] = useState('')
@@ -64,17 +66,20 @@ const rcMenuRef = useRef<HTMLDivElement>(null)
  
 const inputRef = useRef<HTMLInputElement>(null)
 
+const dragRef = useRef<HTMLImageElement>(null)
 
 const [currentFocus,setCurrentFocus] = useState('')
-
+const [currentDrag, setCurrentDrag] = useState(-1)
+//id of the element the mouse is on
+const [finalMouseDestination, setFinalMouseDestination] : any = useState()
 useEffect(()=>{
-
-  document.body.addEventListener("click", ()=> {
+//closes the right click menu if clicked anywhere on the desktop
+  document.body.addEventListener("click", (event: MouseEvent)=> {
     if (!rcMenuRef.current) return;
-  
     rcMenuRef.current.style.display ='none'
     
   })
+  
   
   //prevents right click on webpage so implementing our own right click function is possible
   document.addEventListener("contextmenu", (event: MouseEvent) => {
@@ -89,6 +94,7 @@ useEffect(()=>{
     
     
     if(!rcMenuRef.current) return;
+    //sets the right click menu div from none to flex and then put it at the position of mouse
     rcMenuRef.current.style.display ='flex'
     rcMenuRef.current.style.left = `${x}px`;
     rcMenuRef.current.style.top = `${y}px`;
@@ -108,6 +114,102 @@ useEffect(()=>{
   }
   return cleanUp
 },[])
+
+useEffect(()=>{
+//creates a clone of the icon being clicked and put it at mouse position
+  const createIconClone = (event: MouseEvent) =>{
+    event.preventDefault()
+    const target = event.target as HTMLDivElement;
+    // setCurrentFocus(target.id)
+    let currentTaskIndex = desktopIcon.findIndex(
+      (icon: DesktopIcon) => icon.name === target.id
+    );
+    setCurrentDrag(currentTaskIndex);
+    const x = event.clientX;
+    const y = event.clientY;
+    if (dragRef.current) {
+      dragRef.current.style.left = `${x}px`;
+      dragRef.current.style.top = `${y}px`;
+    }
+  }
+
+  const moveIconClone = (event: MouseEvent) => {
+      const x = event.clientX;
+      const y = event.clientY;
+      if (dragRef.current) {
+        dragRef.current.style.left = `${x}px`;
+        dragRef.current.style.top = `${y}px`;
+      }
+  }
+
+  const letGoIcon = (event: MouseEvent) => {
+    const target = event.target as HTMLDivElement
+    
+    setCurrentDrag(-1)
+    if(currentDrag === -1) return;
+    if(finalMouseDestination.type == 'bin'){
+       const index = desktopIcon.findIndex(
+         (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name
+         );
+         if (index > -1) {
+           
+           setDesktopIcon(
+             desktopIcon.filter(
+               (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name
+             )
+           );
+          }
+        }
+        else if(finalMouseDestination.type == 'folder'){
+          
+          //makes the icon on desktop dissapear
+          let updatedIcon = desktopIcon.filter(
+              (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name)
+          let addToFolder = updatedIcon.map((icon)=> {
+              
+            if(icon.name === desktopIcon[currentDrag].name){
+             
+              return {...icon, content:  [desktopIcon[currentDrag]]}
+            } else {
+              return {...icon, content: [desktopIcon[currentDrag]]}
+            }
+              
+          })
+          
+        addToFolder.map((t, i)=>{
+            if(t.content ){
+              t.content.map((c)=>{
+                console.log(c.type)
+              })
+            }
+          })
+
+          setDesktopIcon(addToFolder);
+         
+         
+    }
+    
+    
+  }
+  
+ 
+  
+document.body.addEventListener("mousedown", createIconClone)
+document.body.addEventListener("mouseup", letGoIcon)
+document.body.addEventListener("mousemove", moveIconClone)
+
+const cleanUp = () => {
+  document.body.removeEventListener("mousedown", createIconClone)
+  document.body.removeEventListener("mousemove", moveIconClone)
+  document.body.removeEventListener("mouseup", letGoIcon)
+  
+};
+return cleanUp
+
+},[desktopIcon, finalMouseDestination])
+
+
+
 
   return (
     //can retrieve programs data anywhere if it's wrapped inside programs.provider
@@ -132,8 +234,15 @@ useEffect(()=>{
             currentFocus={currentFocus}
             setDesktopIcon={setDesktopIcon}
             inputRef={inputRef}
+            setfinalMouseDestination={setFinalMouseDestination}
           />
-
+          {currentDrag !== -1 ? (
+            <img
+              src={desktopIcon[currentDrag].icon}
+              ref={dragRef}
+              style={{ position: "absolute", opacity: '.7' }}
+            ></img>
+          ) : null}
           <TaskBar handleClock={handleClock} clock={clock} />
         </div>
       </Tasks.Provider>

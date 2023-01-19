@@ -3,6 +3,7 @@ import Paint from "../../components/programs/Paint/Paint";
 import Calculator from "../../components/programs/Calculator";
 import Audition from "../../components/programs/Audition";
 import { useState, useRef } from "react";
+import OpenedFile from "./OpenedFile";
 
 interface Props {
   setDesktopIcon: React.Dispatch<
@@ -11,6 +12,8 @@ interface Props {
         name: string;
         icon: string;
         rename: boolean;
+        type: string;
+        open: boolean;
       }[]
     >
   >;
@@ -19,6 +22,8 @@ interface Props {
     name: string;
     icon: string;
     rename: boolean;
+    type: string;
+    open: boolean;
   }[];
   calcRef: React.RefObject<HTMLDivElement>;
   audiRef: React.RefObject<HTMLDivElement>;
@@ -28,6 +33,17 @@ interface Props {
     name: string;
     visible: boolean;
   }[];
+  setfinalMouseDestination: React.Dispatch<
+    React.SetStateAction<
+      {
+        name: string;
+        icon: string;
+        rename: boolean;
+        type: string;
+        open: boolean;
+      }
+    >
+  >;
   containerRef: React.RefObject<HTMLDivElement>;
   currentFocus: string;
 }
@@ -42,6 +58,7 @@ export default function Desktop({
   currentFocus,
   setDesktopIcon,
   inputRef,
+  setfinalMouseDestination
 }: Props) {
   const [input, setInput] = useState("");
 
@@ -68,6 +85,11 @@ export default function Desktop({
       setDesktopIcon(newName);
     }
   };
+  const findMouseLocation = (event: React.MouseEvent<HTMLDivElement>) => {
+    let target = event.target as HTMLDivElement;
+    const index = desktopIcon.findIndex((iconName) => iconName.name === target.id);
+    setfinalMouseDestination(desktopIcon[index]);
+  };
 
   return (
     <div id='desktop'>
@@ -80,16 +102,22 @@ export default function Desktop({
       {programs[2]?.visible === true ? (
         <Audition audiRef={audiRef} containerRef={containerRef} />
       ) : null}
-      {desktopIcon.map((cell, index) => {
+      {desktopIcon.map((icon, index) => {
         return (
-          <div className='desktop-icon' id={desktopIcon[index].name}>
+          <div
+            className='desktop-icon'
+            id={desktopIcon[index].name}
+            onMouseDown={() => {
+            }}
+            onMouseEnter={(e) => findMouseLocation(e)}
+          >
             <img
               className='icon'
               src={desktopIcon[index].icon}
               alt=''
               id={desktopIcon[index].name}
-        
             />
+
             {desktopIcon[index].rename === true ? (
               <input
                 type='text'
@@ -101,6 +129,15 @@ export default function Desktop({
             ) : (
               desktopIcon[index].name
             )}
+            {desktopIcon[index].open === true ? (
+              <OpenedFile
+                currentFocus={currentFocus}
+                desktopIcon={desktopIcon}
+                icon={icon}
+                setDesktopIcon={setDesktopIcon}
+                containerRef={containerRef}
+              />
+            ) : null}
           </div>
         );
       })}

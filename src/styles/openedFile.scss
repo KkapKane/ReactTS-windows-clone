@@ -1,0 +1,30 @@
+.opened-file {
+  position: absolute;
+  left: 100px;
+  top: 5%;
+  height: 800px;
+  width: 1000px;
+  background-color: white;
+
+  #handle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: grey;
+    height: 15px;
+    img {
+      scale: 3;
+      margin-left: 1rem;
+    }
+  }
+
+  .textdoc-text-area {
+    resize: none;
+    font-size: 1.3rem;
+    width: 100%;
+    height: 100%;
+    border: none;
+
+  }
+}
