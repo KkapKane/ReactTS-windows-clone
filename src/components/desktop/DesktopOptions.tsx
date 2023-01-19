@@ -2,22 +2,15 @@ import personalize from "../../assets/personalize.png";
 import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
+import { DesktopIcon } from "../../types/project_types";
 
 interface Props {
   setDesktopIcon: React.Dispatch<
     React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-      }[]
+      DesktopIcon[]
     >
   >;
-  desktopIcon: {
-    name: string;
-    icon: string;
-    rename: boolean;
-  }[];
+      desktopIcon: DesktopIcon[];
 }
 
 export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
@@ -60,7 +53,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
       ...desktopIcon,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
-        icon: folder, rename: false
+        icon: folder, rename: false, type: 'folder', open: false, content:[]
       },
     ]);
   };
@@ -82,6 +75,8 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
         name: textDocCount == 0 ? `New Text Document.txt` : `New Text Document(${textDocCount}).txt`,
         icon: textDoc,
         rename: false,
+        type: 'text_document',
+        open: false
       },
     ]);
   }

@@ -12,6 +12,8 @@ interface Props {
         name: string;
         icon: string;
         rename: boolean;
+        type: string;
+        open: boolean;
       }[]
     >
   >;
@@ -19,6 +21,8 @@ interface Props {
     name: string;
     icon: string;
     rename: boolean;
+    type: string;
+    open: boolean;
   }[];
 
   whichMenu: string;

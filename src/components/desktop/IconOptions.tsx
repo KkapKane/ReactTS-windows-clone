@@ -6,6 +6,8 @@ interface Props {
     name: string;
     icon: string;
     rename: boolean;
+    type: string;
+    open: boolean;
   }[];
 
   setDesktopIcon: React.Dispatch<
@@ -14,6 +16,8 @@ interface Props {
         name: string;
         icon: string;
         rename: boolean;
+        type: string;
+        open: boolean;
       }[]
     >
   >;
@@ -51,12 +55,24 @@ export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,in
         let newList = desktopIcon.filter((icon) => icon.name !== name)
         setDesktopIcon(newList)
     }    
-        
+    
+    const openIcon = (name: string) => {
+        let nameIndex = desktopIcon.map((icon)=>{
+            if(name === icon.name){
+             
+                return {...icon, open: true}
+               } else {
+                return {...icon, open: false}
+               }
+            
+        })
+        setDesktopIcon(nameIndex)
+    }
         
     return (
         <div className="icon-options">
             <ul>
-                <li>Open</li>
+                <li onClick={()=> openIcon(currentFocus)}>Open</li>
                 <li onClick={()=> renameIcon(currentFocus)}>Rename</li>
                 <li onClick={()=> deleteIcon(currentFocus)}>Delete</li>
             </ul>

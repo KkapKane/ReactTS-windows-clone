@@ -22,7 +22,7 @@ export default function Search(){
     }
 
 useEffect(()=>{
-getPhoto('war')
+getPhoto('aurora')
 },[])
 
     return (
