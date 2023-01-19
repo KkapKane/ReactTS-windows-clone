@@ -7,13 +7,17 @@
     height: 700px;
     top: -700px;
     left: 3.4%;
-    background-color: rgb(46, 43, 43);
+    background-color: rgba(41, 41, 41, 0.8);
+    backdrop-filter: blur(10px);
     overflow: hidden;
+    color: white;
+    border: 1px solid rgb(83, 83, 83);
+    border-bottom: none;
 
     #nav {
-        color: white;
+        background-color: rgba(41, 41, 41, 0.4);
         height: 55px;
-        background-color: rgba($color: #000000, $alpha: .8);
+        border-bottom: 1px solid rgb(46, 45, 45);
     }
 
     input {
@@ -34,7 +38,6 @@
 
             #system-files {
                 width: 400px;
-
             }
         }
 
@@ -43,7 +46,6 @@
             flex-direction: column;
             height: 100%;
             width: 100%;
-            color: white;
 
             #tih-container {
                 display: flex;
@@ -58,6 +60,7 @@
                         height: 200px;
                         object-fit: cover;
                         border-radius: 8px;
+                        object-position: 75% 25%;
                     }
 
                     #label {
@@ -66,63 +69,66 @@
                         bottom: 3%;
                         left: 3%;
                         text-shadow: #000 1px 0 10px;
-                        ;
+                        
+                        &:hover {
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
 
-            #news-container {
-                display: flex;
-                flex-direction: column;
-                width: 390px;
+            #trending-container {
                 border: 2px solid black;
 
-                &:hover {
-                    overflow-x: scroll;
-                }
-
-                #trending {
-                    padding: 1rem;
-                }
-
-                #news {
+                #news-container {
                     display: flex;
+                    flex-direction: column;
+                    width: 390px;
 
-                    .header {
-                        display: none;
+                    &:hover {
+                        overflow-x: scroll;
                     }
 
-                    .title {
-                        text-align: center;
-                        width: 150px;
-                        font-size: .8rem;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        white-space: nowrap;
+                    #trending {
+                        padding: 1rem;
                     }
 
-                    .article {
+                    #news {
                         display: flex;
-                        gap: 10px;
-                        color: white !important;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        margin: 1rem;
-                        background-color: rgb(46, 43, 43) !important;
-                    }
 
-                    img {
-                        height: 100px;
-                        width: 160px;
-                        border-radius: 8px;
+                        .header {
+                            display: none;
+                        }
+
+                        .title {
+                            text-align: center;
+                            width: 150px;
+                            font-size: .8rem;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                        }
+
+                        .article {
+                            display: flex;
+                            gap: 10px;
+                            color: white !important;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 1rem;
+                            background-color: rgb(46, 43, 43) !important;
+                        }
+
+                        img {
+                            height: 100px;
+                            width: 160px;
+                            border-radius: 8px;
+                        }
                     }
                 }
             }
         }
 
     }
-
-
-
 }

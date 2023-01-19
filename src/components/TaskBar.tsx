@@ -1,6 +1,5 @@
-
 import SmallClock from "./apps/SmallClock";
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import "../styles/taskbar.scss";
 import Start from "./start/Start";
 import Task from "./Task";
@@ -23,25 +22,43 @@ export default function TaskBar({ handleClock, clock }: Props) {
 
     const { tasks, setTask }: any = useContext(Tasks);
 
+    const [searchDisplay, setSearchDisplay] = useState(false);
+
+    useEffect(() => {
+        const closeSearch = (event : MouseEvent) => {
+            const target = event.target as HTMLDivElement;
+            console.log(target.id)
+            if (target.id !== 'search-btn') {
+                setSearchDisplay(false);
+            }
+        }
+        document.body.addEventListener('click', closeSearch)
+        return () => document.body.removeEventListener('click', closeSearch) 
+    }, [])
     return (
         <div id='task-bar'>
-            <Search />
+            {searchDisplay ? <Search /> : null}
             <div id="task-left">
                 <Start />
                 {tasks.map((taskd: taskType) => {
                     return (
-                        <Task task={taskd} tasks={tasks} key={taskd.name} setTask={setTask} />
+                        <Task task={taskd}
+                            tasks={tasks}
+                            key={taskd.name}
+                            setTask={setTask}
+                            setSearchDisplay={setSearchDisplay}
+                        />
                     );
                 })}
             </div>
             <div id="task-right">
                 <Weather />
-                <BsChevronUp size={16} style={{padding: '0 6px'}}/>
+                <BsChevronUp size={16} style={{ padding: '0 6px' }} />
                 <RiWifiLine size={20} />
-                <IoVolumeHighOutline size={20}/>
+                <IoVolumeHighOutline size={20} />
                 <span className="task-item">ENG</span>
                 <SmallClock handleClock={handleClock} clock={clock} />
-                <BiMessageAlt size={23} style={{padding: '0 10px'}} />
+                <BiMessageAlt size={23} style={{ padding: '0 10px' }} />
                 <span className="dismiss"> </span>
             </div>
         </div>
