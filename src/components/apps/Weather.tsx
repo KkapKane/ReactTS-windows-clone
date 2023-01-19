@@ -30,12 +30,6 @@ export default function Weather() {
             getWeather();
     }, []);
 
-    useEffect(() => {
-        if (weather) {
-            console.log(weather);
-        }
-    }, [weather]);
-
     // state for news display on weather hover // 
     const [hover, setHover] = useState(false);
 
