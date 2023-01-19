@@ -52,7 +52,6 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
     },[])
      
 
-    
     return (
         <div className="opened-file" ref={fileRef}>
             <div id="handle">

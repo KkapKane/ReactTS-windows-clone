@@ -28,7 +28,6 @@ interface Props {
   whichMenu: string;
   currentFocus: string;
 }
-
 export default function RCMenu({
   rcMenuRef,
   setDesktopIcon,

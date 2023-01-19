@@ -85,7 +85,6 @@ export default function Desktop({
       setDesktopIcon(newName);
     }
   };
-
   const findMouseLocation = (event: React.MouseEvent<HTMLDivElement>) => {
     let target = event.target as HTMLDivElement;
     const index = desktopIcon.findIndex((iconName) => iconName.name === target.id);

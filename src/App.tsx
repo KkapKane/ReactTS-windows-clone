@@ -162,7 +162,6 @@ useEffect(()=>{
         }
         else if(finalMouseDestination.type == 'folder'){
           
-
           //makes the icon on desktop dissapear
           let updatedIcon = desktopIcon.filter(
               (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name)

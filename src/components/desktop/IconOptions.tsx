@@ -36,7 +36,6 @@ export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,in
            
             inputRef.current.focus()
         }
-
     },10)
         let nameIndex = desktopIcon.map((icon)=>{
             if(name === icon.name){

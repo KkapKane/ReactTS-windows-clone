@@ -48,7 +48,6 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
         folderCount++;
       }
     });
-
     setDesktopIcon([
       ...desktopIcon,
       {
