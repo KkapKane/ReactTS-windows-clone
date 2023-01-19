@@ -5,12 +5,11 @@ import {taskType} from '../types/project_types'
 interface Props {
   task: taskType;
   tasks: taskType[];
-  setTask: React.Dispatch<
-    React.SetStateAction<taskType[]>
-  >;
+  setTask: React.Dispatch<React.SetStateAction<taskType[]>>;
+  setSearchDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Task({ task, tasks, setTask }: Props): JSX.Element {
+export default function Task({ task, tasks, setTask, setSearchDisplay }: Props): JSX.Element {
 
 
 
@@ -39,7 +38,7 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
   };
 
   const expandSearch = () =>{
-    
+    setSearchDisplay(true);
   }
 
   return (
@@ -47,9 +46,12 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
     
       <div
         className='task'
+        id={task.name == 'Search' ? 'search-btn' : ''}
         onMouseOver={() => hoverHandle(task.name, true)}
         onMouseOut={() => hoverHandle(task.name, false)}
-        onClick={()=> task.name !== 'Search' ? toggleMinimize(task.name) : console.log('hehe')}
+        onClick={()=> task.name !== 'Search' ? toggleMinimize(task.name) 
+        /* when the task IS search */
+        : expandSearch()}
       >
         <div
           className='task-toolTip'
@@ -58,7 +60,7 @@ export default function Task({ task, tasks, setTask }: Props): JSX.Element {
           {task.name}
         </div>
 
-        {typeof task.icon === 'string' ? <img src={task.icon} alt='' /> : task.icon }
+        {typeof task.icon === 'string' ? <img src={task.icon} alt={task.name} id={task.name == 'Search' ? 'search-btn' : ''}/> : task.icon }
       </div>
     </>
   );

@@ -30,35 +30,38 @@ export default function Search() {
     useEffect(() => {
         getTih();
     }, [])
-
+    
     useEffect(() => {
         if (tih) {
             console.log(tih);
             getRandomBirth();
+            getRandomEvents();
         }
     }, [tih])
 
+
     // get random featured birth of the day //
-    const [birthName, setBirthName] = useState<string>();
+    const [birthPerson, setBirthPerson] = useState<any>();
+    const [bpPic, setBpPic] = useState<string>();
     const getRandomBirth = () => {
         const births = tih.data.Births;
         let random = Math.floor(Math.random() * births.length);
         const person = births[random];
-        let name = person.links[0].title;
-        getBirthImage(name);
-        setBirthName(name);
+        setBirthPerson(person);
     }
 
+    useEffect(() => {
+        getImage(birthPerson, setBpPic);
+    }, [birthPerson])
 
     // get image for random featured birth //
-    const [birthPhoto, setBirthPhoto] = useState<string>();
-    async function getBirthImage(name: string) {
+    async function getImage(y: any, setPic: React.Dispatch<React.SetStateAction<string | undefined>>) {
         try {
             setLoading(true);
             const { data } = await axios.get(
                 'https://cors-anywhere.herokuapp.com/' +
                 'https://en.wikipedia.org/w/api.php?action=query&titles=' +
-                name +
+                y?.links[0]?.title +
                 '&format=json&prop=pageimages&pithumbsize=500', {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -68,12 +71,31 @@ export default function Search() {
 
             const info = data.query.pages;
             let picSrc = info[Object.keys(info)[0]].thumbnail.source;
-            setBirthPhoto(picSrc);
+            setPic(picSrc);
             setLoading(false);
         }
         catch (error) {
             console.error(error)
         }
+    }
+
+
+    // get 4 random today in history events //
+    const getRandomEvents = () => {
+        const allEvents = tih.data.Events;
+        let a = Math.floor(Math.random() * allEvents.length);
+        let b = Math.floor(Math.random() * allEvents.length);
+        let c = Math.floor(Math.random() * allEvents.length);
+        let d = Math.floor(Math.random() * allEvents.length);
+
+        // call function again if there are duplicates //
+        if (a == b || a == c || a == d ||
+            b == c || b == d || c == d) {
+            getRandomEvents();
+        }
+        let eventA = allEvents[a];
+        eventA['pic'] = 'hello';
+        /* console.log(eventA); */
     }
 
     return (
@@ -92,21 +114,26 @@ export default function Search() {
                             <div className="title">
                                 Today • {moment(current).format("DD MMMM")}
                             </div>
-                            <div id='img-container'>
-                                <img src={birthPhoto} alt={birthName} />
-                                <div id="label">{birthName}</div>
-                            </div>
+                            {birthPerson ?
+                                <div id='img-container'>
+                                    <img src={bpPic} alt={birthPerson?.links[0]?.title} />
+                                    <a id="label" href={birthPerson?.links[0]?.link} target="_blank">
+                                        {birthPerson.links[0].title}'s birthday</a>
+                                </div>
+                                : null}
                         </div>
 
                         : null}
-                    <div id="trending">
-                        <BiTrendingUp />
-                        Trending News from the web
+                    <div id="trending-container">
+                        <div id="trending">
+                            <BiTrendingUp />
+                            Trending News from the web
+                        </div>
+                        <div id="news-container">
+                            <News />
+                        </div>
                     </div>
-                    <div id="news-container">
 
-                        <News />
-                    </div>
 
                 </div>
             </div>
