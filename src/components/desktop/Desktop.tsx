@@ -4,6 +4,7 @@ import Calculator from "../../components/programs/Calculator";
 import Audition from "../../components/programs/Audition";
 import { useState, useRef } from "react";
 import OpenedFile from "./OpenedFile";
+import DesktopIcon from "./DesktopIcon";
 
 interface Props {
   setDesktopIcon: React.Dispatch<
@@ -104,41 +105,19 @@ export default function Desktop({
       ) : null}
       {desktopIcon.map((icon, index) => {
         return (
-          <div
-            className='desktop-icon'
-            id={desktopIcon[index].name}
-            onMouseDown={() => {
-            }}
-            onMouseEnter={(e) => findMouseLocation(e)}
-          >
-            <img
-              className='icon'
-              src={desktopIcon[index].icon}
-              alt=''
-              id={desktopIcon[index].name}
-            />
-
-            {desktopIcon[index].rename === true ? (
-              <input
-                type='text'
-                ref={inputRef}
-                style={{ width: "80%" }}
-                onKeyDown={(e) => handleKeyDown(e, currentFocus)}
-                onChange={(e) => setInput(e.target.value)}
-              />
-            ) : (
-              desktopIcon[index].name
-            )}
-            {desktopIcon[index].open === true ? (
-              <OpenedFile
-                currentFocus={currentFocus}
-                desktopIcon={desktopIcon}
-                icon={icon}
-                setDesktopIcon={setDesktopIcon}
-                containerRef={containerRef}
-              />
-            ) : null}
-          </div>
+          <DesktopIcon
+            icon={icon}
+            index={index}
+            desktopIcon={desktopIcon}
+            currentFocus={currentFocus}
+            inputRef={inputRef}
+            findMouseLocation={findMouseLocation}
+            handleKeyDown={handleKeyDown}
+            setInput={setInput}
+            setDesktopIcon={setDesktopIcon}
+            containerRef={containerRef}
+            setfinalMouseDestination={setfinalMouseDestination}
+          />
         );
       })}
     </div>

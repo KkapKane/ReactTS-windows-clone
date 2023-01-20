@@ -46,8 +46,8 @@ const [tasks, setTask]  = useState([
 
 
 
-const [desktopIcon,setDesktopIcon] = useState([
-  {name: 'Recycle Bin', icon: recycle, rename: false, type: 'bin', open: false}
+const [desktopIcon,setDesktopIcon]: any= useState([
+  {name: 'Recycle Bin', icon: recycle, rename: false, type: 'bin', open: false, content:[]}
 ])
 
 const [whichMenu , setWhichMenu] = useState('')
@@ -164,26 +164,26 @@ useEffect(()=>{
           
           //makes the icon on desktop dissapear
           let updatedIcon = desktopIcon.filter(
-              (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name)
-          let addToFolder = updatedIcon.map((icon)=> {
+          (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name)
+          let addToFolder = updatedIcon.map((icon: any)=> {
               
-            if(icon.name === desktopIcon[currentDrag].name){
-             
-              return {...icon, content:  [desktopIcon[currentDrag]]}
+            if(icon.name == finalMouseDestination.name){
+             if(icon.type === 'folder'){
+
+               return {...icon, content:  [...icon.content, desktopIcon[currentDrag]]}
+             }
             } else {
               return {...icon, content: [desktopIcon[currentDrag]]}
             }
               
           })
           
-        addToFolder.map((t, i)=>{
-            if(t.content ){
-              t.content.map((c)=>{
-                console.log(c.type)
-              })
-            }
-          })
+      const newState = {
+        ...updatedIcon,
+        
+      }
 
+        console.log(addToFolder)
           setDesktopIcon(addToFolder);
          
          
