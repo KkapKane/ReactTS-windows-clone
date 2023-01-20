@@ -27,7 +27,6 @@ export default function TaskBar({ handleClock, clock }: Props) {
     useEffect(() => {
         const closeSearch = (event : MouseEvent) => {
             const target = event.target as HTMLDivElement;
-            console.log(target.id)
             if (target.id !== 'search-btn') {
                 setSearchDisplay(false);
             }
@@ -35,6 +34,7 @@ export default function TaskBar({ handleClock, clock }: Props) {
         document.body.addEventListener('click', closeSearch)
         return () => document.body.removeEventListener('click', closeSearch) 
     }, [])
+    
     return (
         <div id='task-bar'>
             {searchDisplay ? <Search /> : null}
