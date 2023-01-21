@@ -11,7 +11,7 @@ import RCMenu from './components/desktop/RCMenu';
 import "./styles/style.scss"
 import Desktop from './components/desktop/Desktop';
 import recycle from  './assets/recycle-bin.png'
-import { DesktopIcon } from './types/project_types';
+import { DesktopIconType } from './types/project_types';
 
 
 
@@ -122,7 +122,7 @@ useEffect(()=>{
     const target = event.target as HTMLDivElement;
     // setCurrentFocus(target.id)
     let currentTaskIndex = desktopIcon.findIndex(
-      (icon: DesktopIcon) => icon.name === target.id
+      (icon: DesktopIconType) => icon.name === target.id
     );
     setCurrentDrag(currentTaskIndex);
     const x = event.clientX;
@@ -149,13 +149,13 @@ useEffect(()=>{
     if(currentDrag === -1) return;
     if(finalMouseDestination.type == 'bin'){
        const index = desktopIcon.findIndex(
-         (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name
+         (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name
          );
          if (index > -1) {
            
            setDesktopIcon(
              desktopIcon.filter(
-               (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name
+               (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name
              )
            );
           }
@@ -164,7 +164,7 @@ useEffect(()=>{
           
           //makes the icon on desktop dissapear
           let updatedIcon = desktopIcon.filter(
-          (icon: DesktopIcon) => icon.name !== desktopIcon[currentDrag]?.name)
+          (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
           let addToFolder = updatedIcon.map((icon: any)=> {
               
             if(icon.name == finalMouseDestination.name){
@@ -177,11 +177,6 @@ useEffect(()=>{
             }
               
           })
-          
-      const newState = {
-        ...updatedIcon,
-        
-      }
 
         console.log(addToFolder)
           setDesktopIcon(addToFolder);

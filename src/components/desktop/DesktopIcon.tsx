@@ -1,60 +1,29 @@
 import OpenedFile from "./OpenedFile";
+import { DesktopIconType } from "../../types/project_types";
+
 
 interface Props {
-  setDesktopIcon: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-      }[]
-    >
+  setfinalMouseDestination: React.Dispatch<
+    React.SetStateAction<DesktopIconType>
   >;
-
-  desktopIcon: {
-    name: string;
-    icon: string;
-    rename: boolean;
-    type: string;
-    open: boolean;
-  }[];
-  //   calcRef: React.RefObject<HTMLDivElement>;
-  //   audiRef: React.RefObject<HTMLDivElement>;
-  //   paintRef: React.RefObject<HTMLDivElement>;
+  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
+  findMouseLocation: (event: React.MouseEvent<HTMLDivElement>) => void;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+  containerRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
 
-  setfinalMouseDestination: React.Dispatch<
-    React.SetStateAction<{
-      name: string;
-      icon: string;
-      rename: boolean;
-      type: string;
-      open: boolean;
-    }>
-  >;
-  containerRef: React.RefObject<HTMLDivElement>;
+  desktopIcon: DesktopIconType[];
+
   currentFocus: string;
-  icon: {
-    name: string;
-    icon: string;
-    rename: boolean;
-    type: string;
-    open: boolean;
-  };
+  icon: DesktopIconType;
   index: number;
-  findMouseLocation: (event: React.MouseEvent<HTMLDivElement>) => void;
   handleKeyDown: (
     event: React.KeyboardEvent<HTMLInputElement>,
     name: string
   ) => void;
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-
- 
 }
 
-export default function DesktopIcon({icon, index, containerRef,desktopIcon, currentFocus, inputRef, setfinalMouseDestination, findMouseLocation, handleKeyDown, setInput, setDesktopIcon}: Props){
+export default function DesktopIcon({icon, index, containerRef,desktopIcon, currentFocus, inputRef,  findMouseLocation, handleKeyDown, setInput, setDesktopIcon}: Props){
     return (
       <div
         className='desktop-icon'
@@ -82,17 +51,11 @@ export default function DesktopIcon({icon, index, containerRef,desktopIcon, curr
         )}
         {desktopIcon[index].open === true ? (
           <OpenedFile
-            currentFocus={currentFocus}
+            
             desktopIcon={desktopIcon}
             icon={icon}
             setDesktopIcon={setDesktopIcon}
             containerRef={containerRef}
-            index={index}
-            inputRef={inputRef}
-            findMouseLocation={findMouseLocation}
-            handleKeyDown={handleKeyDown}
-            setInput={setInput}
-            setfinalMouseDestination={setfinalMouseDestination}
           />
         ) : null}
       </div>
