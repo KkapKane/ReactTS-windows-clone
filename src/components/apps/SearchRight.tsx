@@ -7,7 +7,6 @@ import { BiTrendingUp } from 'react-icons/bi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import '../../styles/searchright.scss';
 
-
 export default function SearchRight() {
 
     const [loading, setLoading] = useState(false);
@@ -119,23 +118,54 @@ export default function SearchRight() {
         getImage(eventC, setCPic);
     }, [eventA, eventB, eventC]);
 
-    // events scroll //
+    // scroll //
     const eventRef = useRef<null | HTMLDivElement>(null);
     const [eventPos, setEventPos] = useState<number>(0);
     const [maxEventPos, setMaxEventPos] = useState<number>(0);
 
-    const scroll = (direction: string) => {
-        if (eventRef.current) {
+    const newsRef = useRef<null | HTMLDivElement>(null);
+    const [newsPos, setNewsPos] = useState<number>(0);
+    const [maxNewsPos, setMaxNewsPos] = useState<number>(0);
+
+    const scroll = (
+        ref: React.MutableRefObject<HTMLDivElement | null>,
+        direction: string) => {
+        if (ref.current) {
             if (direction == 'right') {
-                eventRef.current.scrollLeft += 200;
-                setEventPos(eventPos + 200);
+                if (ref == eventRef) {
+                    ref.current.scrollLeft += 200;
+                    setEventPos(eventPos + 200);
+                }
+                else if (ref == newsRef) {
+                    ref.current.scrollLeft += 350;
+                    setNewsPos(newsPos + 350);
+                }
             }
             if (direction == 'left') {
-                eventRef.current.scrollLeft -= 200;
-                setEventPos(eventPos - 200);
+                if (ref == eventRef) {
+                    ref.current.scrollLeft -= 200;
+                    setEventPos(eventPos - 200);
+                }
+                else if (ref == newsRef) {
+                    ref.current.scrollLeft -= 350;
+                    setNewsPos(newsPos - 350);
+                }
             }
         }
     }
+
+    useEffect(() => {
+        if (eventRef.current) {
+            setMaxEventPos(eventRef.current.scrollWidth);
+        }
+    }, []);
+    
+    useEffect(() => {
+        if (newsRef.current) {
+            setMaxNewsPos(newsRef.current.scrollWidth);
+        }
+    }, [newsPos]);
+
 
     // quote of the day //
     const [quote, setQuote] = useState<any | undefined>();
@@ -151,108 +181,115 @@ export default function SearchRight() {
 
     useEffect(() => {
         getQuote();
-        if (eventRef.current) {
-            setMaxEventPos(eventRef.current.scrollWidth);
-        }
     }, [])
+
 
     return (
         <div className="right">
-                    {!loading ?
-                        <div id="tih-container">
-                            <div className="title">
-                                Today • {moment(current).format("DD MMMM")}
-                            </div>
-                            {birthPerson ?
-                                <div id='img-container'>
-                                    <img src={bpPic == undefined ? wikiLogo : bpPic} alt={birthPerson?.links[0]?.title} />
-                                    <a id="label" href={birthPerson?.links[0]?.link} target="_blank">
-                                        {birthPerson.links[0].title}'s birthday</a>
-                                </div>
-                                : null}
-                        </div>
-
-                        : null}
-
-                    {!loading ?
-                        <div id="events-container">
-                            <div className="title">
-                                Today in History
-                            </div>
-                            <div id="events-items" ref={eventRef}>
-                                {eventPos !== 0 ?
-                                    <button className='left-btn' onClick={() => scroll('left')}>
-                                        <BsChevronLeft />
-                                    </button>
-                                    : null}
-
-                                {eventA ?
-                                    <div className="event">
-                                        <img src={aPic == undefined ? wikiLogo : aPic} alt={eventA?.links[0]?.title} />
-                                        <div className="event-text">
-                                            {eventA.year}
-                                            <a href={eventA.links[0].link} target="_blank">{eventA.text}</a>
-                                        </div>
-                                    </div>
-                                    : null}
-                                {eventB ?
-                                    <div className="event">
-                                        <img src={bPic == undefined ? wikiLogo : bPic} alt={eventB?.links[0]?.title} />
-                                        <div className="event-text">
-                                            {eventB.year}
-                                            <a href={eventB.links[0].link} target="_blank">{eventB.text}</a>
-                                        </div>
-                                    </div>
-                                    : null}
-                                {eventC ?
-                                    <div className="event">
-                                        <img src={cPic == undefined ? wikiLogo : cPic} alt={eventC?.links[0]?.title} />
-                                        <div className="event-text">
-                                            {eventC.year}
-                                            <a href={eventC.links[0].link} target="_blank">{eventC.text}</a>
-                                        </div>
-                                    </div>
-                                    : null}
-
-                                {quote ? 
-                                    <div className="quote-container">
-                                        <div id="quote">"{quote.content}"</div>
-                                        <div id="author">{quote.author}</div>
-                                        <div className="title">Quote of the day</div>
-                                    </div>
-                                : null}
-
-                                {tih ?
-                                    <div className="event">
-                                        <img src={wikiLogo} alt='wiki' />
-                                        <div className="event-text">
-                                            On this day...
-                                            <a href={tih.url} target="_blank">See All Events</a>
-                                        </div>
-                                    </div>
-                                    : null}
-
-                                {maxEventPos !== 0 ?
-                                eventPos <= maxEventPos ?
-                                    <button className='right-btn' onClick={() => scroll('right')}>
-                                        <BsChevronRight />
-                                    </button>
-                                    : null : null}
-                            </div>
-                        </div>
-                        : null}
-
-                    <div id="trending-container">
-                        <div id="trending">
-                            <BiTrendingUp />
-                            Trending News from the web
-                        </div>
-                        <div id="news-container">
-                            <News />
-                        </div>
+            {!loading ?
+                <div id="tih-container">
+                    <div className="title">
+                        Today • {moment(current).format("DD MMMM")}
                     </div>
-
-
+                    {birthPerson ?
+                        <div id='img-container'>
+                            <img src={bpPic == undefined ? wikiLogo : bpPic} alt={birthPerson?.links[0]?.title} />
+                            <a id="label" href={birthPerson?.links[0]?.link} target="_blank">
+                                {birthPerson.links[0].title}'s birthday</a>
+                        </div>
+                        : null}
                 </div>
+
+                : null}
+
+            {!loading ?
+                <div id="events-container">
+                    <div className="title">
+                        Today in History
+                    </div>
+                    <div id="events-items" ref={eventRef}>
+                        {eventPos !== 0 ?
+                            <button className='left-btn' onClick={() => scroll(eventRef, 'left')}>
+                                <BsChevronLeft />
+                            </button>
+                            : null}
+
+                        {eventA ?
+                            <div className="event">
+                                <img src={aPic == undefined ? wikiLogo : aPic} alt={eventA?.links[0]?.title} />
+                                <div className="event-text">
+                                    {eventA.year}
+                                    <a href={eventA.links[0].link} target="_blank">{eventA.text}</a>
+                                </div>
+                            </div>
+                            : null}
+                        {eventB ?
+                            <div className="event">
+                                <img src={bPic == undefined ? wikiLogo : bPic} alt={eventB?.links[0]?.title} />
+                                <div className="event-text">
+                                    {eventB.year}
+                                    <a href={eventB.links[0].link} target="_blank">{eventB.text}</a>
+                                </div>
+                            </div>
+                            : null}
+                        {eventC ?
+                            <div className="event">
+                                <img src={cPic == undefined ? wikiLogo : cPic} alt={eventC?.links[0]?.title} />
+                                <div className="event-text">
+                                    {eventC.year}
+                                    <a href={eventC.links[0].link} target="_blank">{eventC.text}</a>
+                                </div>
+                            </div>
+                            : null}
+
+                        {quote ?
+                            <div className="quote-container">
+                                <div id="quote">"{quote.content}"</div>
+                                <div id="author">{quote.author}</div>
+                                <div className="title">Quote of the day</div>
+                            </div>
+                            : null}
+
+                        {tih ?
+                            <div className="event">
+                                <img src={wikiLogo} alt='wiki' />
+                                <div className="event-text">
+                                    On this day...
+                                    <a href={tih.url} target="_blank">See All Events</a>
+                                </div>
+                            </div>
+                            : null}
+
+                        {maxEventPos !== 0 ?
+                            maxEventPos >= eventPos ?
+                                <button className='right-btn' onClick={() => scroll(eventRef, 'right')}>
+                                    <BsChevronRight />
+                                </button>
+                                : null : null}
+                    </div>
+                </div>
+                : null}
+
+            <div id="trending-container">
+                <div id="trending">
+                    <BiTrendingUp />
+                    Trending News from the web
+                </div>
+                <div id="news-container" ref={newsRef}>
+                    {newsPos !== 0 ?
+                        <button className='left-btn' onClick={() => scroll(newsRef, 'left')}>
+                            <BsChevronLeft />
+                        </button>
+                        : null}
+                    <News />
+                    {maxNewsPos !== 0 ?
+                        maxNewsPos >= newsPos ?
+                            <button className='right-btn' onClick={() => scroll(newsRef, 'right')}>
+                                <BsChevronRight />
+                            </button>
+                            : null : null}
+                </div>
+            </div>
+        </div>
     )
 }

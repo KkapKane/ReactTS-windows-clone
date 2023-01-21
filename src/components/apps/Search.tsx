@@ -22,7 +22,7 @@ export default function Search() {
                 </div>
                 <SearchRight />
             </div>
-            <input type="text"  onChange={(e)=> setInput(e.target.value)}/>
+            <input type="text" onChange={(e)=> setInput(e.target.value)}/>
         </div>
     )
 }
