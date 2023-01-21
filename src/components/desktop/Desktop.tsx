@@ -5,27 +5,16 @@ import Audition from "../../components/programs/Audition";
 import { useState, useRef } from "react";
 import OpenedFile from "./OpenedFile";
 import DesktopIcon from "./DesktopIcon";
+import { DesktopIconType } from "../../types/project_types";
 
 interface Props {
   setDesktopIcon: React.Dispatch<
     React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-      }[]
+     DesktopIconType[]
     >
   >;
 
-  desktopIcon: {
-    name: string;
-    icon: string;
-    rename: boolean;
-    type: string;
-    open: boolean;
-  }[];
+  desktopIcon: DesktopIconType[];
   calcRef: React.RefObject<HTMLDivElement>;
   audiRef: React.RefObject<HTMLDivElement>;
   paintRef: React.RefObject<HTMLDivElement>;
@@ -35,14 +24,7 @@ interface Props {
     visible: boolean;
   }[];
   setfinalMouseDestination: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-      }
+    React.SetStateAction< DesktopIconType
     >
   >;
   containerRef: React.RefObject<HTMLDivElement>;

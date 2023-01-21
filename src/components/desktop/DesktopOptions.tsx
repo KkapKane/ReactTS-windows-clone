@@ -5,12 +5,8 @@ import { useState } from "react";
 import { DesktopIcon } from "../../types/project_types";
 
 interface Props {
-  setDesktopIcon: React.Dispatch<
-    React.SetStateAction<
-      DesktopIcon[]
-    >
-  >;
-      desktopIcon: DesktopIcon[];
+  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIcon[]>>;
+  desktopIcon: DesktopIcon[];
 }
 
 export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {

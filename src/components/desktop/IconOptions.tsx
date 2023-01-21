@@ -1,26 +1,10 @@
 import '../../styles/desktop.scss'
-import { useEffect } from 'react';
+import { DesktopIconType } from '../../types/project_types';
 
 interface Props {
-  desktopIcon: {
-    name: string;
-    icon: string;
-    rename: boolean;
-    type: string;
-    open: boolean;
-  }[];
+  desktopIcon: DesktopIconType[];
 
-  setDesktopIcon: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-      }[]
-    >
-  >;
+  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
   currentFocus: string;
   inputRef: React.RefObject<HTMLInputElement>;
  

@@ -14,13 +14,13 @@ export type programType = {
     visible: boolean;
 }
 
-export type DesktopIcon = {
+export type DesktopIconType = {
 
     name: string;
     icon: string;
     rename: boolean;
     type: string;
     open: boolean;
-    content?: DesktopIcon[]
+    content?: DesktopIconType[]
   
 };
