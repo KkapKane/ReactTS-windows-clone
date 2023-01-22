@@ -62,7 +62,9 @@ export default function Search({desktopIcon, setSearchDisplay, setDesktopIcon}: 
                 </div>
                 <SearchRight />
             </div>
+
             <input type="text" ref={searchRef} value={input} onChange={(e)=> setInput(e.target.value)}/>
+
         </div>
     )
 }
