@@ -20,24 +20,33 @@ export function dragDrop(
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLDivElement;
     if (target.id === targetHandle || target.className === targetHandle) {
-      isClicked.current = true;
       coords.current.startX = e.clientX;
       coords.current.startY = e.clientY;
+     var waitClick = setTimeout(()=>{
+
+        isClicked.current = true;
+      }, 10)
+      waitClick
     }
+    return ()=> clearTimeout(waitClick)
   };
   const onMouseUp = (e: MouseEvent) => {
     isClicked.current = false;
-    coords.current.lastX = box.offsetLeft;
+    coords.current.lastX = box.offsetLeft ;
     coords.current.lastY = box.offsetTop;
+
+    
   };
   const onMouseMove = (e: MouseEvent) => {
     if (!isClicked.current) return;
 
+    box.style.top = `${e.clientY}px`;
+    box.style.left = `${e.clientY}px`;
     const nextX = e.clientX - coords.current.startX + coords.current.lastX;
     const nextY = e.clientY - coords.current.startY + coords.current.lastY;
-
     box.style.top = `${nextY}px`;
     box.style.left = `${nextX}px`;
+
   };
 
   box.addEventListener("mousedown", onMouseDown);

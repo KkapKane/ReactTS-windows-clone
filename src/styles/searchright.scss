@@ -45,12 +45,12 @@
                 flex-direction: column;
                 margin-top: 8px;
                 gap: 3px;
+                
 
                 #events-items {
                     display: flex;
                     overflow-x: hidden;
                     scroll-behavior: smooth;
-
                     .left-btn, .right-btn {
                         position: fixed;
                         z-index: 99;
@@ -85,6 +85,7 @@
                     .event {
                         position: relative;
                         margin-right: 10px;
+                        
 
                         img {
                             min-height: 200px;

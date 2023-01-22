@@ -2,32 +2,18 @@ import "../../styles/RCMenu.scss";
 import "../../assets/folder.png";
 import DesktopOption from "./DesktopOptions";
 import IconOptions from "./IconOptions";
+import { DesktopIconType } from "../../types/project_types";
 
 interface Props {
   rcMenuRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
   setDesktopIcon: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-      }[]
-    >
-  >;
-  desktopIcon: {
-    name: string;
-    icon: string;
-    rename: boolean;
-    type: string;
-    open: boolean;
-  }[];
-
+    React.SetStateAction<DesktopIconType[]>>;
+  desktopIcon: DesktopIconType[];
   whichMenu: string;
   currentFocus: string;
 }
+
 export default function RCMenu({
   rcMenuRef,
   setDesktopIcon,

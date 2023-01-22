@@ -3,9 +3,9 @@ import {useContext, ReactNode} from 'react';
 import { FcCalculator } from 'react-icons/fc';
 import paint from '../../assets/paint.png'
 import minesweeper from '../../assets/minesweeper.png'
+import audition from '../../assets/audition.png'
 import { taskType } from '../../types/project_types';
 import {Programs, Tasks} from '../context/Programs'
-import audition from '../../assets/audition.png'
 
 
 

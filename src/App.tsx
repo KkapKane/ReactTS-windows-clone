@@ -2,7 +2,9 @@
 import {Programs} from './components/context/Programs'
 import { useState , useRef , useEffect } from 'react';
 import fileExplorer from "./assets/file-explorer.png";
-
+import paint from "./assets/paint.png";
+import audition from "./assets/audition.png";
+import { FcCalculator } from "react-icons/fc";
 import {Tasks} from './components/context/Programs'
 import taskView from "./assets/task-view.png";
 import TaskBar from "./components/TaskBar"
@@ -32,9 +34,9 @@ function App() {
 
   //global useContext can be used anywhere.
 const [programs,setPrograms] = useState([
-  { name:'Calculator', visible: false },
-  { name: 'Paint', visible: false },
-  { name: 'Dance Game', visible: false},
+  { name:'Calculator', icon : <FcCalculator size={30}/> ,visible: false, type: 'program' },
+  { name: 'Paint', icon: paint ,visible: false , type: 'program'},
+  { name: 'Dance Game', icon: audition,  visible: false, type: 'program'},
 
 ])
   //global useContext but for Tasks
@@ -238,7 +240,7 @@ return cleanUp
               style={{ position: "absolute", opacity: '.7' }}
             ></img>
           ) : null}
-          <TaskBar handleClock={handleClock} clock={clock} />
+          <TaskBar handleClock={handleClock} clock={clock} desktopIcon={desktopIcon} setDesktopIcon={setDesktopIcon}/>
         </div>
       </Tasks.Provider>
     </Programs.Provider>
