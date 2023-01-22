@@ -11,7 +11,9 @@ export type taskType = {
 
 export type programType = {
     name: string;
+    icon: string | ReactNode;
     visible: boolean;
+    type: string;
 }
 
 export type DesktopIconType = {

@@ -40,6 +40,7 @@ export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,in
     }    
     
     const openIcon = (name: string) => {
+
         let nameIndex = desktopIcon.map((icon)=>{
             if(name === icon.name){
              

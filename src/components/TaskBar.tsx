@@ -5,7 +5,7 @@ import Start from "./start/Start";
 import Task from "./Task";
 import { BiMessageAlt } from 'react-icons/bi';
 import { Tasks } from "./context/Programs";
-import { taskType } from "../types/project_types";
+import { DesktopIconType, taskType } from "../types/project_types";
 import { IoVolumeHighOutline } from 'react-icons/io5';
 import { RiWifiLine } from 'react-icons/ri';
 import { BsChevronUp } from 'react-icons/bs';
@@ -16,9 +16,11 @@ import Search from "./apps/Search";
 interface Props {
     clock: boolean;
     handleClock: () => void;
+    desktopIcon: DesktopIconType[];
+    setDesktopIcon: any;
 }
 
-export default function TaskBar({ handleClock, clock }: Props) {
+export default function TaskBar({ handleClock, clock, desktopIcon, setDesktopIcon }: Props) {
 
     const { tasks, setTask }: any = useContext(Tasks);
 
@@ -37,7 +39,7 @@ export default function TaskBar({ handleClock, clock }: Props) {
     
     return (
         <div id='task-bar'>
-            {searchDisplay ? <Search /> : null}
+            {searchDisplay ? <Search  desktopIcon={desktopIcon} setSearchDisplay={setSearchDisplay} setDesktopIcon={setDesktopIcon}/> : null}
             <div id="task-left">
                 <Start />
                 {tasks.map((taskd: taskType) => {

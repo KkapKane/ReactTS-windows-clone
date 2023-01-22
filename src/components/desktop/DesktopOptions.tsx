@@ -2,11 +2,11 @@ import personalize from "../../assets/personalize.png";
 import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
-import { DesktopIcon } from "../../types/project_types";
+import { DesktopIconType } from "../../types/project_types";
 
 interface Props {
-  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIcon[]>>;
-  desktopIcon: DesktopIcon[];
+  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
+  desktopIcon: DesktopIconType[];
 }
 
 export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
