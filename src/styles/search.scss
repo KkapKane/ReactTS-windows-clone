@@ -4,32 +4,45 @@
     justify-content: space-between;
     position: absolute;
     width: 800px;
-    height: 740px;
-    top: -740px;
+    height: 700px;
+    top: -700px;
     left: 3.4%;
     background-color: rgba(41, 41, 41, 0.8);
     backdrop-filter: blur(10px);
     overflow: hidden;
     color: white;
-    border: 1px solid rgb(83, 83, 83);
-    border-bottom: none;
+    outline: 1px solid rgb(83, 83, 83);
 
-    #nav {
-        background-color: rgba(41, 41, 41, 0.4);
-        height: 55px;
-        border-bottom: 1px solid rgb(46, 45, 45);
-    }
-
-    input {
-        height: 30px;
-        position: absolute;
+    #search-input {
+        height: 35px;
+        position: fixed;
         width: 100%;
         bottom: 0px;
+        padding: 0 0.5rem;
+        background-color: white;
+        color: black;
+        display: flex;
+        align-items: center;
+
+        svg {
+            padding: 0 0.75rem;
+        }
+
+        input {
+            flex: 1;
+            background: none;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 1.05rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
     }
 
     .middle {
         display: flex;
         align-items: center;
+        gap: 1rem;
         width: 100%;
         height: 100%;
         margin-top: 15px;

@@ -63,9 +63,6 @@ export default function StartPrograms(){
             <img id='paint-png' src={paint} alt="" />    
             Paint
             </span>
-
-           
-            <span>Calculator</span>
         </div>
     )
 }

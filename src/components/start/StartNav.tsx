@@ -3,7 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiFileBlank } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   isHover: boolean;
@@ -13,69 +13,56 @@ interface Props {
 
 export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
 
-   const [delayHandler, setDelayHandler] = useState<number | null | undefined>(null);
+  // new state so we can delay the display of sidebar after hovering //
+  const [isShow, setIsShow] = useState(false);
 
+useEffect(() => {
+  if (isHover == false) {
+    const timeout = setTimeout(() => setIsShow(!isShow), 700);
+    return () => clearInterval(timeout);
+  } 
+  else {
+    const timeout = setTimeout(() => setIsShow(!isShow), 1200);
+    return () => clearInterval(timeout);
+  }
+}, [isHover])
 
-  const handleMouseEnter = () => {
-    setDelayHandler(
-      setTimeout(() => {
-        setIsHover(true); 
-      }, 500)
-    );
-  };
-
-  const handleMouseLeave = (e: React.ChangeEvent<any>): void => {
-   
-    if(typeof delayHandler == 'number' ){
-     
-        setIsHover(false);
-
-        clearTimeout(delayHandler);
-      
-    }
-  
-  
-  };
-
-
- 
-  
   return (
     <div
       className='start-navBar'
-      onMouseOver={() => handleMouseEnter()}
-      onMouseOut={(e) => handleMouseLeave(e)}
+      onMouseOver={() => setIsHover(true)}
+      onMouseOut={() => setIsHover(false)}
       style={
-        isHover
+        isShow
           ? { width: "50%", boxShadow: "3px 1px 8px #1a1a1a" }
           : { width: "60px" }
       }
     >
       <div id='start-hamburger'>
         <RxHamburgerMenu size={22} />
-        {isHover ? <span style={{ fontWeight: "600" }}>START</span> : null}
+        {isShow ? <span style={{ fontWeight: "600" }}>START</span> : null}
       </div>
       <div className='start-bottomGroup' >
         <div className='start-utility'>
           <CgProfile size={21} />
-          {isHover ? <span>Profile</span> : null}
+          {isShow ? <span>Profile</span> : null}
         </div>
         <div className='start-utility'>
           <BiFileBlank size={21} />
-          {isHover ? <span>Documents</span> : null}
+          {isShow ? <span>Documents</span> : null}
         </div>
 
         <div className='start-utility'>
           <AiOutlinePicture size={21} />
-          {isHover ? <span>Pictures</span> : null}
+          {isShow ? <span>Pictures</span> : null}
         </div>
         <div className='start-utility'>
           <CiSettings size={21} />
-          {isHover ? <span>Settings</span> : null}
+          {isShow ? <span>Settings</span> : null}
         </div>
         <div className='start-utility'>
           <AiOutlinePoweroff size={21} />
-          {isHover ? <span>Power</span> : null}
+          {isShow ? <span>Power</span> : null}
         </div>
       </div>
     </div>
