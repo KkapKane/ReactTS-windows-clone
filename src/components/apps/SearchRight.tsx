@@ -35,7 +35,6 @@ export default function SearchRight() {
 
     useEffect(() => {
         if (tih) {
-            console.log(tih);
             getRandomBirth();
             getRandomEvents();
         }
@@ -64,15 +63,9 @@ export default function SearchRight() {
         try {
             setLoading(true);
             const { data } = await axios.get(
-                'https://cors-anywhere.herokuapp.com/' +
                 'https://en.wikipedia.org/w/api.php?action=query&titles=' +
                 y?.links[0]?.title +
-                '&format=json&prop=pageimages&pithumbsize=500', {
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-                },
-            });
+                '&format=json&prop=pageimages&pithumbsize=500' + '&origin=*');
 
             const info = data.query.pages;
             let picSrc = info[Object.keys(info)[0]].thumbnail.source;
@@ -80,7 +73,7 @@ export default function SearchRight() {
             setLoading(false);
         }
         catch (error) {
-            console.error(error)
+            return;
         }
     }
 

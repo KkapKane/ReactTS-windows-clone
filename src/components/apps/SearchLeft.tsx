@@ -32,11 +32,9 @@ export default function SearchLeft({suggestions, setSearchDisplay, openIcon}:Pro
     const { programs, setPrograms }: any = useContext(Programs);
     const { tasks, setTask }: any = useContext(Tasks);
 
- 
-
-
     return (
-        <div id="search-left">
+        <div className="left">
+            <div className="title">Suggested</div>
             {suggestions ? suggestions.map((suggestion: any)=>{
                 return (
                     <div className='search-icons' id={suggestion.name} onClick={()=>  openProgram(suggestion.name,true, programs, tasks, setTask, setPrograms, suggestion.type)}>
