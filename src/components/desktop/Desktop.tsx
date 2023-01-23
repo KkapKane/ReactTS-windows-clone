@@ -87,19 +87,21 @@ export default function Desktop({
       ) : null}
       {desktopIcon.map((icon, index) => {
         return (
-          <DesktopIcon
-            icon={icon}
-            index={index}
-            desktopIcon={desktopIcon}
-            currentFocus={currentFocus}
-            inputRef={inputRef}
-            findMouseLocation={findMouseLocation}
-            handleKeyDown={handleKeyDown}
-            setInput={setInput}
-            setDesktopIcon={setDesktopIcon}
-            containerRef={containerRef}
-            setfinalMouseDestination={setfinalMouseDestination}
-          />
+    
+        <DesktopIcon
+              icon={icon}
+              index={index}
+              desktopIcon={desktopIcon}
+              currentFocus={currentFocus}
+              inputRef={inputRef}
+              findMouseLocation={findMouseLocation}
+              handleKeyDown={handleKeyDown}
+              setInput={setInput}
+              setDesktopIcon={setDesktopIcon}
+              containerRef={containerRef}
+              setfinalMouseDestination={setfinalMouseDestination}
+            />
+    
         );
       })}
     </div>

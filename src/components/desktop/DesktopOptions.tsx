@@ -48,7 +48,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
       ...desktopIcon,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
-        icon: folder, rename: false, type: 'folder', open: false, content:[]
+        icon: folder, rename: false, type: 'folder', open: false, show: true, content:[]
       },
     ]);
   };
@@ -71,7 +71,8 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
         icon: textDoc,
         rename: false,
         type: 'text_document',
-        open: false
+        open: false,
+        show: true
       },
     ]);
   }

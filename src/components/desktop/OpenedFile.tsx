@@ -20,7 +20,7 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
     
     
     const [allFiles, setAllFiles] = useState<any[]>();
-     const { programs, setPrograms }: any = useContext(Programs);
+    const { programs, setPrograms }: any = useContext(Programs);
     const fileRef = useRef(null)
     const isClicked = useRef<boolean>(false);
     const coords = useRef<{startX: number;startY: number;lastX: number;lastY: number;}>
@@ -56,30 +56,72 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
         folderFiles.push(file)
         
       })
+      let hidefolder = folderFiles.map((x: any)=>{
+        return {...x, show: false}
+      })
+      console.log(hidefolder)
+      let allSystemFiles: any = [...desktopIcon, ...hidefolder]
       
-      let allSystemFiles: any = [...desktopIcon, ...folderFiles]
-      
+      let desktop = allSystemFiles.filter((x: any)=> {
+        return x.show === true;
+      })
+      setDesktopIcon(desktop)
       setAllFiles(allSystemFiles)
 
         dragDrop(fileRef,containerRef,'handle',coords,isClicked)
     },[])
 
+
    
      
     const openIcon = (name: string) => {
-        console.log(name)
+      let folderFiles: any = [];
+      if (icon.content)
+        icon.content.map((file: any) => {
+          folderFiles.push(file);
+        });
+     
+      let allSystemFiles: any = [...desktopIcon, ...folderFiles];
+      console.log(allSystemFiles)
         if(allFiles){
-          let nameIndex = allFiles.map((icon:any) => {
-            if (name === icon.name) {
-              return { ...icon, open: true };
+        
+         
+          let nameIndex = allSystemFiles.map((ticon:any) => {
+            if (name === ticon.name) {
+              return { ...ticon, open: true, show: false };
             } else {
-              return { ...icon, open: false };
+              return { ...ticon, open: false};
             }
           });
-          setDesktopIcon(nameIndex);
+          let testarr: any = []
+          let myMap = new Map ()
+          for(let i = 0; i < nameIndex.length; i++){
+            if(nameIndex[i] !== folderFiles[i]){
+              myMap.set(nameIndex[i], i)
+            }
+          
+          }
+          // let nameIndex = desktopIcon.map((x)=>{
+          //   if(x.content){
+          //     let supertry = x.content.map((c)=>{
+          //       if(c.name == name){
+          //       return {...c, open: true}
+          //       }
+          //       else {
+          //         return {...c, open: false}
+          //       }
+          //     })
+          //     console.log(supertry)
+          //     setDesktopIcon(supertry);
+          //   }
+          // })
+          
+          
           
         }
     };
+
+    
 
     return (
         <div className="opened-file" ref={fileRef}>
