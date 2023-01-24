@@ -42,7 +42,7 @@ function App() {
     { name: 'Twitter', icon: <FaTwitter size={30} color='#1d9bf0' />, visible: false, type: 'program' },
     { name: 'MapleStore', icon: maple, visible: false, type: 'program' },
     { name: 'Arashiyama', icon: arashiyama, visible: false, type: 'program' },
-    { name: 'Todo', icon: <FcTodoList  size={30}/>, visible: false, type: 'program' },
+    { name: 'Todo', icon: <FcTodoList size={30} />, visible: false, type: 'program' },
   ])
 
   //global useContext but for Tasks
@@ -139,6 +139,7 @@ function App() {
         dragRef.current.style.left = `${x}px`;
         dragRef.current.style.top = `${y}px`;
       }
+    }
 
     const moveIconClone = (event: MouseEvent) => {
       const x = event.clientX;
@@ -150,7 +151,7 @@ function App() {
     }
 
     const letGoIcon = (event: MouseEvent) => {
-      const target = event.target as HTMLDivElement;
+      const target = event.target as HTMLDivElement
 
       setCurrentDrag(-1)
       if (currentDrag === -1) return;
@@ -166,36 +167,32 @@ function App() {
             )
           );
         }
-        
-        else if(finalMouseDestination.type == 'folder'){
-          
-          //makes the icon on desktop dissapear
-          // let updatedIcon = desktopIcon.filter(
-          // (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
-          let testupdate =desktopIcon.map((c: DesktopIconType)=>{
-            if(c.name == desktopIcon[currentDrag].name){
-              return {...c, show: false}
-            }else {
-              return {...c, show: c.show}
-            }
-          })
-          let updatedIcon = testupdate.filter((icon: any)=>{ 
-            return icon.show === true;
-          })
-          let addToFolder = updatedIcon.map((icon: any)=> {
-              
-            if(icon.name == finalMouseDestination.name){
-             if(icon.type === 'folder'){
+      }
+      else if (finalMouseDestination.type == 'folder') {
 
-               return {...icon, content:  [...icon.content, desktopIcon[currentDrag]]}
-             }
-            } else {
-              return {...icon, content: [desktopIcon[currentDrag]]}
+        //makes the icon on desktop dissapear
+        // let updatedIcon = desktopIcon.filter(
+        // (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
+        let testupdate = desktopIcon.map((c: DesktopIconType) => {
+          if (c.name == desktopIcon[currentDrag].name) {
+            return { ...c, show: false }
+          } else {
+            return { ...c, show: c.show }
+          }
+        })
+        let updatedIcon = testupdate.filter((icon: any) => {
+          return icon.show === true;
+        })
+        let addToFolder = updatedIcon.map((icon: any) => {
+
+          if (icon.name == finalMouseDestination.name) {
+            if (icon.type === 'folder') {
+
+              return { ...icon, content: [...icon.content, desktopIcon[currentDrag]] }
             }
           } else {
             return { ...icon, content: [desktopIcon[currentDrag]] }
           }
-
         })
 
         console.log(addToFolder)
@@ -216,6 +213,7 @@ function App() {
     return cleanUp
 
   }, [desktopIcon, finalMouseDestination])
+
 
 
   return (
