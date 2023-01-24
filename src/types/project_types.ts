@@ -23,6 +23,7 @@ export type DesktopIconType = {
     rename: boolean;
     type: string;
     open: boolean;
+    show: boolean;
     content?: DesktopIconType[]
   
 };

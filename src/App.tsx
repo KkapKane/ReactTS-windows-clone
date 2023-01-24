@@ -46,6 +46,7 @@ function App() {
   ])
 
   //global useContext but for Tasks
+
   const [tasks, setTask] = useState([
     { name: "Search", icon: search, hover: false, minimized: false },
     { name: "Task view", icon: taskView, hover: false, minimized: false },
@@ -138,7 +139,6 @@ function App() {
         dragRef.current.style.left = `${x}px`;
         dragRef.current.style.top = `${y}px`;
       }
-    }
 
     const moveIconClone = (event: MouseEvent) => {
       const x = event.clientX;
@@ -166,18 +166,31 @@ function App() {
             )
           );
         }
-      }
-      else if (finalMouseDestination.type == 'folder') {
+        
+        else if(finalMouseDestination.type == 'folder'){
+          
+          //makes the icon on desktop dissapear
+          // let updatedIcon = desktopIcon.filter(
+          // (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
+          let testupdate =desktopIcon.map((c: DesktopIconType)=>{
+            if(c.name == desktopIcon[currentDrag].name){
+              return {...c, show: false}
+            }else {
+              return {...c, show: c.show}
+            }
+          })
+          let updatedIcon = testupdate.filter((icon: any)=>{ 
+            return icon.show === true;
+          })
+          let addToFolder = updatedIcon.map((icon: any)=> {
+              
+            if(icon.name == finalMouseDestination.name){
+             if(icon.type === 'folder'){
 
-        //makes the icon on desktop dissapear
-        let updatedIcon = desktopIcon.filter(
-          (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
-        let addToFolder = updatedIcon.map((icon: any) => {
-
-          if (icon.name == finalMouseDestination.name) {
-            if (icon.type === 'folder') {
-
-              return { ...icon, content: [...icon.content, desktopIcon[currentDrag]] }
+               return {...icon, content:  [...icon.content, desktopIcon[currentDrag]]}
+             }
+            } else {
+              return {...icon, content: [desktopIcon[currentDrag]]}
             }
           } else {
             return { ...icon, content: [desktopIcon[currentDrag]] }

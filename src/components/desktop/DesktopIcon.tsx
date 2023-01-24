@@ -49,7 +49,7 @@ export default function DesktopIcon({icon, index, containerRef,desktopIcon, curr
         ) : (
           desktopIcon[index].name
         )}
-        {desktopIcon[index].open === true ? (
+        {icon.open === true ? (
           <OpenedFile
             
             desktopIcon={desktopIcon}
