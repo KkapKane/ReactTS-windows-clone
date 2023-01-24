@@ -1,68 +1,108 @@
 
-import {useContext, ReactNode} from 'react';
+import { useContext, ReactNode } from 'react';
 import { FcCalculator } from 'react-icons/fc';
-import paint from '../../assets/paint.png'
-import minesweeper from '../../assets/minesweeper.png'
-import audition from '../../assets/audition.png'
+import paint from '../../assets/paint.png';
+import minesweeper from '../../assets/minesweeper.png';
+import audition from '../../assets/audition.png';
+import maple from '../../assets/maplestory-logo.png';
+import arashiyama from '../../assets/arashiyama.png';
 import { taskType } from '../../types/project_types';
-import {Programs, Tasks} from '../context/Programs'
+import { Programs, Tasks } from '../context/Programs';
+import { FaYoutube, FaTwitter, FaGithub, FaGithubAlt } from 'react-icons/fa';
+import { FcTodoList } from 'react-icons/fc';
 
 
+export default function StartPrograms() {
 
+  const { programs, setPrograms }: any = useContext(Programs)
+  const { tasks, setTask }: any = useContext(Tasks)
 
-export default function StartPrograms(){
-
-    const {programs, setPrograms}: any = useContext(Programs)
-    const {tasks, setTask}: any = useContext(Tasks)
-
-// makes the program visible or not. (close or open program)
-    const programHandle = (programName: string, icon:ReactNode, visible: boolean) => {
-      const newProgram = programs.map((program:any) => {
-        if (program.name === programName) {
-          return { ...program, visible: visible };
-        } else {
-          return { ...program, visible: false };
-        }
-      });
-      
-      setPrograms(newProgram);
-      //if there is already a program open, close program down and open the new one that was just clicked.
-      if(tasks.length > 3){
-        let newState = tasks
-        newState.pop()
-        setTask(newState)
+  // makes the program visible or not. (close or open program)
+  const programHandle = (programName: string, icon: ReactNode, visible: boolean) => {
+    const newProgram = programs.map((program: any) => {
+      if (program.name === programName) {
+        return { ...program, visible: visible };
+      } else {
+        return { ...program, visible: false };
       }
+    });
+
+    setPrograms(newProgram);
+    //if there is already a program open, close program down and open the new one that was just clicked.
+    if (tasks.length > 3) {
+      let newState = tasks
+      newState.pop()
+      setTask(newState)
+    }
 
 
-      //if this program already exist in the task bar just return
-      const index = tasks.findIndex(
-        (task: taskType) => task.name === programName
-        );
-        if (index > -1) {
-          return
-        } 
-        //this adds the program to the task list so it appears in the task bar
-      setTask([...tasks, {name: programName, icon: icon, isHover: false, minimized: false}])
-   
-    };
- 
+    //if this program already exist in the task bar just return
+    const index = tasks.findIndex(
+      (task: taskType) => task.name === programName
+    );
+    if (index > -1) {
+      return
+    }
+    //this adds the program to the task list so it appears in the task bar
+    setTask([...tasks, { name: programName, icon: icon, isHover: false, minimized: false }])
 
-    return (
-        <div id="start-programs" >
-            <span onClick={()=> programHandle('Calculator', <FcCalculator size={30}/> ,true)}>
-            <FcCalculator size={30}/> 
-            Calculator
-            </span>
-            <span onClick={()=> programHandle('Dance Game', audition, true)}>
-              <img src={audition} alt="" />
-              Dance Game</span>
-            <span>
-                <img id='minesweeper-png' src={minesweeper} alt="" />
-                Mine Sweeper</span>
-            <span onClick={()=> programHandle('Paint', paint ,true)}>
-            <img id='paint-png' src={paint} alt="" />    
-            Paint
-            </span>
-        </div>
-    )
+  };
+
+
+  return (
+    <div id="start-programs" >
+      <div className="left">
+        <span onClick={() => programHandle('Calculator', <FcCalculator size={30} />, true)}>
+          <FcCalculator size={30} />
+          Calculator
+        </span>
+        <span onClick={() => programHandle('Dance Game', audition, true)}>
+          <img src={audition} alt="audition" />
+          Dance Game
+        </span>
+        <span>
+          <img id='minesweeper-png' src={minesweeper} alt="" />
+          Mine Sweeper</span>
+        <span onClick={() => programHandle('Paint', paint, true)}>
+          <img id='paint-png' src={paint} alt="paint" />
+          Paint
+        </span>
+      </div>
+      <div className="right">
+        <div className="title">Apps</div>
+        <span onClick={() => programHandle('Youtube', <FaYoutube size={30} color='red' />, true)}>
+          <image><FaYoutube size={42} color='red' /></image>
+          <p>Youtube</p>
+        </span>
+        <span onClick={() => programHandle('Twitter', <FaTwitter size={30} color='#1d9bf0' />, true)}>
+          <image><FaTwitter size={42} color='#1d9bf0' /></image>
+          <p>Twitter</p>
+        </span>
+        <span onClick={() => programHandle('Dance Game', audition, true)}>
+          <image><img src={audition} alt="audition" /></image>
+          <p>Dance Game</p>
+        </span>
+        <span onClick={() => programHandle('MapleStore', maple, true)}>
+          <image><img src={maple} alt="maple" /></image>
+          <p>MapleStore</p>
+        </span>
+        <span onClick={() => programHandle('Arashiyama', arashiyama, true)}>
+          <image><img src={arashiyama} alt="arashiyama" /></image>
+          <p>Arashiyama Store</p>
+        </span>
+        <span onClick={() => programHandle('Todo', <FcTodoList size={30} />, true)}>
+          <image><FcTodoList size={42} /></image>
+          <p>To Do List</p>
+        </span>
+        <a href="https://github.com/KkapKane" target="_blank">
+          <image><FaGithub size={42} /></image>
+          <p>GitHub/KkapKane</p>
+        </a>
+        <a href="https://github.com/lisa-go" target="_blank">
+          <image><FaGithubAlt size={42} /></image>
+          <p>GitHub/lisa-go</p>
+        </a>
+      </div>
+    </div>
+  )
 }

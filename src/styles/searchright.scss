@@ -22,6 +22,10 @@
                         object-fit: cover;
                         border-radius: 8px;
                         object-position: 75% 25%;
+                        
+                        &:hover {
+                            filter: contrast(115%);
+                        }
                     }
 
                     #label {
@@ -30,7 +34,7 @@
                         font-size: 2rem;
                         bottom: 10%;
                         left: 3%;
-                        text-shadow: #000 1px 0 10px;
+                        text-shadow: #000 3px 2px 3px;
                         line-height: 2rem;
 
                         &:hover {
@@ -99,7 +103,7 @@
                             object-position: 75% 25%;
 
                             &:hover {
-                                filter: contrast(120%);
+                                filter: contrast(115%);
                             }
                         }
 
@@ -225,6 +229,7 @@
                             text-overflow: ellipsis;
                             overflow: hidden;
                             white-space: nowrap;
+
                         }
 
                         .article {
@@ -237,12 +242,20 @@
                             font-weight: 100;
                             color: white !important;
                             background: none !important;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
                         }
 
                         img {
                             height: 100px;
                             width: 160px;
                             border-radius: 8px;
+                            
+                            &:hover {
+                                filter: contrast(115%);
+                            }
                         }
                     }
                 }

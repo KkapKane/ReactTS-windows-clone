@@ -6,13 +6,13 @@ import { taskType, programType } from "../../types/project_types";
 import {dragDrop} from '../../helper/DragDrop'
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
+import { RxCross2 } from 'react-icons/rx';
+import { VscChromeMinimize } from 'react-icons/vsc';
 
 interface Props {
   calcRef: React.RefObject<HTMLDivElement>;
   containerRef: React.RefObject<HTMLDivElement>;
 }
-
-
 
 export default function Calculator({calcRef, containerRef} : Props) {
   const { programs, setPrograms }: any = useContext(Programs);
@@ -40,10 +40,6 @@ export default function Calculator({calcRef, containerRef} : Props) {
   const currentTaskIndex = tasks.findIndex(
     (task: taskType) => task.name === "Calculator"
   );
-
-  
-
-
 
   //anything related to the screen display done here
   const displayHandler = (btn: string | number) => {
@@ -150,8 +146,12 @@ export default function Calculator({calcRef, containerRef} : Props) {
         <FcCalculator size={30} />
         <span draggable={false}>Calculator</span>
         <div className='util-container' draggable={false}>
-          <button onClick={() => minimizeProgram("Calculator", tasks, setTask)}>-</button>
-          <button onClick={() => programHandle("Calculator", false, programs, tasks, setTask, setPrograms)}>X</button>
+          <button onClick={() => minimizeProgram("Calculator", tasks, setTask)}>
+            <VscChromeMinimize size={20} />
+          </button>
+          <button id='exit-btn' onClick={() => programHandle("Calculator", false, programs, tasks, setTask, setPrograms)}>
+            <RxCross2 size={20} />
+          </button>
         </div>
       </div>
       

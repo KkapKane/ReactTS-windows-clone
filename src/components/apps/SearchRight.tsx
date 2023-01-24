@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import News from './News';
 import { BiTrendingUp } from 'react-icons/bi';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import '../../styles/searchright.scss';
+import '../../styles/searchRight.scss';
 
 export default function SearchRight() {
 

@@ -18,11 +18,11 @@ export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
 
 useEffect(() => {
   if (isHover == false) {
-    const timeout = setTimeout(() => setIsShow(!isShow), 700);
+    const timeout = setTimeout(() => setIsShow(!isShow), 500);
     return () => clearInterval(timeout);
   } 
   else {
-    const timeout = setTimeout(() => setIsShow(!isShow), 1200);
+    const timeout = setTimeout(() => setIsShow(!isShow), 1000);
     return () => clearInterval(timeout);
   }
 }, [isHover])
@@ -34,7 +34,7 @@ useEffect(() => {
       onMouseOut={() => setIsHover(false)}
       style={
         isShow
-          ? { width: "50%", boxShadow: "3px 1px 8px #1a1a1a" }
+          ? { width: "50%", boxShadow: "2px 1px 7px #1a1a1a" }
           : { width: "60px" }
       }
     >

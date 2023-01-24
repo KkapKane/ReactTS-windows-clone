@@ -1,3 +1,4 @@
+
 import '../../styles/style.scss'
 import { taskType } from "../../types/project_types";
 import { Programs, Tasks } from "../context/Programs";
@@ -7,14 +8,14 @@ import { RxCross2 } from 'react-icons/rx';
 import { dragDrop } from '../../helper/DragDrop'
 import { minimizeProgram } from '../../helper/Minimize';
 import { programHandle } from '../../helper/ProgramHandle';
-import audition from '../../assets/audition.png';
+import { FaYoutube } from 'react-icons/fa';
 
 interface Props {
-  audiRef: React.RefObject<HTMLDivElement>;
+  ytRef: React.RefObject<HTMLDivElement>;
   containerRef: React.RefObject<HTMLDivElement>;
 }
 
-export default function Audition({ audiRef, containerRef }: Props) {
+export default function Youtube({ ytRef, containerRef }: Props) {
 
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
@@ -28,39 +29,39 @@ export default function Audition({ audiRef, containerRef }: Props) {
 
   //anything pertaining to the draggable feature
   useEffect(() => {
-    dragDrop(audiRef, containerRef, 'audition-handle', coords, isClicked)
+    dragDrop(ytRef, containerRef, 'youtube-handle', coords, isClicked)
   }, []);
 
   //finds the index of the the task in the task object array
   const currentTaskIndex = tasks.findIndex(
-    (task: taskType) => task.name === "Dance Game"
+    (task: taskType) => task.name === "Youtube"
   );
 
   return (
     <div
-      ref={audiRef}
-      id='audition'
+      ref={ytRef}
+      id='youtube'
       style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
     >
-      <div id='audition-handle'>
+      <div id='youtube-handle'>
         <div className="program">
-          <img src={audition} alt="audition" />
-          <p>Dance Game</p>
+          <FaYoutube color='red' />
+          <p>Youtube</p>
         </div>
         <div className='button-container'>
-          <button onClick={() => minimizeProgram("Dance Game", tasks, setTask)}>
+          <button onClick={() => minimizeProgram("Youtube", tasks, setTask)}>
             <VscChromeMinimize size={20} />
           </button>
-          <button id='exit-btn' onClick={() => programHandle("Dance Game", false, programs, tasks, setTask, setPrograms)}>
+          <button id='exit-btn' onClick={() => programHandle("Youtube", false, programs, tasks, setTask, setPrograms)}>
             <RxCross2 size={20} />
           </button>
         </div>
       </div>
       <iframe
         draggable={false}
-        id='audition-window'
-        src='https://kkapkane.github.io/R3F-Game/'
-        style={{ height: "800px", width: "1200px" }}
+        id='youtube-window'
+        src='https://kkapkane.github.io/youtube-clone/'
+        style={{ height: "800px", width: "1400px" }}
       ></iframe>
     </div>
   );
