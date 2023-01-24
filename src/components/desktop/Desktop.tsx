@@ -6,25 +6,35 @@ import { useState, useRef } from "react";
 import OpenedFile from "./OpenedFile";
 import DesktopIcon from "./DesktopIcon";
 import { DesktopIconType } from "../../types/project_types";
+import Youtube from '../programs/Youtube';
+import Twitter from "../programs/Twitter";
+import MapleStore from "../programs/MapleStore";
+import Arashiyama from "../programs/Arashiyama";
+import Todo from "../programs/Todo";
 
 interface Props {
   setDesktopIcon: React.Dispatch<
     React.SetStateAction<
-     DesktopIconType[]
+      DesktopIconType[]
     >
   >;
 
   desktopIcon: DesktopIconType[];
   calcRef: React.RefObject<HTMLDivElement>;
   audiRef: React.RefObject<HTMLDivElement>;
+  ytRef: React.RefObject<HTMLDivElement>;
+  twtRef: React.RefObject<HTMLDivElement>;
   paintRef: React.RefObject<HTMLDivElement>;
+  mpsRef: React.RefObject<HTMLDivElement>;
+  araRef: React.RefObject<HTMLDivElement>;
+  todoRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
   programs: {
     name: string;
     visible: boolean;
   }[];
   setfinalMouseDestination: React.Dispatch<
-    React.SetStateAction< DesktopIconType
+    React.SetStateAction<DesktopIconType
     >
   >;
   containerRef: React.RefObject<HTMLDivElement>;
@@ -36,6 +46,11 @@ export default function Desktop({
   paintRef,
   calcRef,
   audiRef,
+  ytRef,
+  twtRef,
+  mpsRef,
+  araRef,
+  todoRef,
   programs,
   containerRef,
   currentFocus,
@@ -84,6 +99,21 @@ export default function Desktop({
       ) : null}
       {programs[2]?.visible === true ? (
         <Audition audiRef={audiRef} containerRef={containerRef} />
+      ) : null}
+      {programs[3]?.visible === true ? (
+        <Youtube ytRef={ytRef} containerRef={containerRef} />
+      ) : null}
+      {programs[4]?.visible === true ? (
+        <Twitter twtRef={twtRef} containerRef={containerRef} />
+      ) : null}
+      {programs[5]?.visible === true ? (
+        <MapleStore mpsRef={mpsRef} containerRef={containerRef} />
+      ) : null}
+      {programs[6]?.visible === true ? (
+        <Arashiyama araRef={araRef} containerRef={containerRef} />
+      ) : null}
+      {programs[7]?.visible === true ? (
+        <Todo todoRef={todoRef} containerRef={containerRef} />
       ) : null}
       {desktopIcon.map((icon, index) => {
         return (

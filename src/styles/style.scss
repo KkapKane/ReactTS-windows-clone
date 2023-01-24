@@ -1,4 +1,4 @@
-
+@import 'variables.scss';
 
 * {
     margin: 0;
@@ -39,7 +39,12 @@ a {
 
 
 
-#audition {
+#audition,
+#youtube,
+#twitter,
+#maplestore,
+#arashiyama,
+#todo {
     position: absolute;
     top: 0;
     left: 0;
@@ -48,21 +53,64 @@ a {
     justify-content: center;
     align-items: center;
     z-index: 90;
-
 }
 
-#audition-handle {
+#youtube,
+#arashiyama {
+    background-color: white;
+}
+
+#audition-handle,
+#youtube-handle,
+#twitter-handle,
+#maplestore-handle,
+#arashiyama-handle,
+#todo-handle {
     display: flex;
-   
     justify-content: space-between;
     height: 24px;
-    background-color: grey;
     width: 100% ;
-    .button-container{
-        gap: 1px;
+    background-color: grey;
+
+    .program {
         display: flex;
+        align-items: center;
+        padding-left: 10px;
+        gap: 6px;
+
+        svg path,
+        img {
+            height: 22px;
+            width: 22px;
+        }
+
+        p {
+            color: white;
+        }
+    }
+
+    .button-container{
+        display: flex;
+
         button {
             width: 50px;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: none;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+                transition: 500ms;
+            }
+        }
+
+        #exit-btn {
+            &:hover {
+                color: white;
+                background-color: rgb(255, 30, 0);
+                transition: 500ms;
+            }
         }
     }
 }
