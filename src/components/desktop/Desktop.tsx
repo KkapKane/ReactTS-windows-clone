@@ -94,7 +94,7 @@ export default function Desktop({
     const index = allFiles.findIndex((iconName: any) => iconName.name === target.id);
     setfinalMouseDestination(allFiles[index]);
   };
-
+const [currentPath, setCurrentPath] = useState<string[]>([]);
   return (
     <div id='desktop'>
       {programs[0]?.visible === true ? (
@@ -126,26 +126,29 @@ export default function Desktop({
           <>
             {icon.parent == '' ? <DesktopIcon
               icon={icon}
-              index={index}
-              desktopIcon={desktopIcon}
+    
+             
               currentFocus={currentFocus}
               inputRef={inputRef}
               findMouseLocation={findMouseLocation}
               handleKeyDown={handleKeyDown}
               setInput={setInput}
-              setDesktopIcon={setDesktopIcon}
-              containerRef={containerRef}
-              setfinalMouseDestination={setfinalMouseDestination}
+      
+       
             />: null}
             {icon.open === true ? (
               <OpenedFile
                 containerRef={containerRef}
-                desktopIcon={desktopIcon}
                 icon={icon}
-                setDesktopIcon={setDesktopIcon}
+                currentFocus={currentFocus}
+                inputRef={inputRef}
                 allFiles={allFiles}
                 setAllFiles={setAllFiles}
+                handleKeyDown={handleKeyDown}
+                setInput={setInput}
                 findMouseLocation={findMouseLocation}
+                currentPath={currentPath}
+                setCurrentPath={setCurrentPath}
               />
             ) : null}
             

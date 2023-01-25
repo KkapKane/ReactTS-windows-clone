@@ -3,27 +3,24 @@ import { DesktopIconType } from "../../types/project_types";
 
 
 interface Props {
-  setfinalMouseDestination: React.Dispatch<
-    React.SetStateAction<DesktopIconType>
-  >;
-  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
+
   findMouseLocation: (event: React.MouseEvent<HTMLDivElement>) => void;
   setInput: React.Dispatch<React.SetStateAction<string>>;
-  containerRef: React.RefObject<HTMLDivElement>;
+ 
   inputRef: React.RefObject<HTMLInputElement>;
 
-  desktopIcon: DesktopIconType[];
+
 
   currentFocus: string;
   icon: DesktopIconType;
-  index: number;
+ 
   handleKeyDown: (
     event: React.KeyboardEvent<HTMLInputElement>,
     name: string
   ) => void;
 }
 
-export default function DesktopIcon({icon, index, containerRef,desktopIcon, currentFocus, inputRef,  findMouseLocation, handleKeyDown, setInput, setDesktopIcon}: Props){
+export default function DesktopIcon({icon, currentFocus, inputRef,  findMouseLocation, handleKeyDown, setInput}: Props){
     return (
       <div
         className='desktop-icon'
@@ -48,15 +45,7 @@ export default function DesktopIcon({icon, index, containerRef,desktopIcon, curr
         ) : (
           icon.name
         )}
-        {/* {icon.open === true ? (
-          <OpenedFile
-            
-            desktopIcon={desktopIcon}
-            icon={icon}
-            setDesktopIcon={setDesktopIcon}
-            containerRef={containerRef}
-          />
-        ) : null} */}
+        
       </div>
     );
 }
