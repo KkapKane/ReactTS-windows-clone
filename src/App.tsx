@@ -185,7 +185,16 @@ function App() {
             return {...file, parent: file.parent}
           }
         })
-        setAllFiles(setParent)
+        let setPath = setParent.map((file:any)=>{
+          if(file.name === allFiles[currentDrag].name){
+        
+            return {...file, filePath: [...file.filePath,  finalMouseDestination.name]}
+          }
+          else{
+            return {...file, filePath: file.filePath}
+          }
+        })
+        setAllFiles(setPath)
      
       }
     }

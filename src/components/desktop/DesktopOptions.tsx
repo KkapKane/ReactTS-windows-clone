@@ -57,14 +57,18 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
       ...desktopIcon,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
-        icon: folder, rename: false, type: 'folder', open: false, show: true, content: [], parent: ''
+
+        icon: folder, rename: false, type: 'folder', open: false, parent:'', filePath: []
+
       },
     ]);
     setAllFiles([
       ...allFiles,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
-        icon: folder, rename: false, type: 'folder', open: false, show: true, content: [], parent: ''
+
+        icon: folder, rename: false, type: 'folder', open: false, parent:'', filePath:[]
+
       },
     ]);
   };
@@ -88,8 +92,8 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
         rename: false,
         type: 'text_document',
         open: false,
-        show: true,
-        parent: ''
+        parent: '',
+        filePath: []
       },
     ]);
     setAllFiles([
@@ -100,8 +104,8 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
         rename: false,
         type: 'text_document',
         open: false,
-        show: true,
-        parent: ''
+        parent: '',
+        filePath: []
       },
     ]);
   }

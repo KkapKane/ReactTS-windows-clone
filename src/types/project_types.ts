@@ -23,8 +23,8 @@ export type DesktopIconType = {
     rename: boolean;
     type: string;
     open: boolean;
-    show: boolean;
     parent: string;
-    content?: DesktopIconType[]
+    filePath: string[];
+  
   
 };

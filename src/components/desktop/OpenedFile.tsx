@@ -5,25 +5,34 @@ import { MdOutlineClose } from 'react-icons/md'
 import { DesktopIconType } from '../../types/project_types';
 import { Programs } from '../context/Programs';
 import { MouseEvent } from 'react';
+import DesktopIcon from './DesktopIcon';
 
 interface Props {
-  desktopIcon: DesktopIconType[];
   icon: DesktopIconType;
   containerRef: React.RefObject<HTMLDivElement>;
-  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
+  inputRef: React.RefObject<HTMLInputElement>;
+
   allFiles: any;
   setAllFiles: any;
   findMouseLocation: (event: React.MouseEvent<HTMLDivElement>) => void;
+  handleKeyDown: (
+    event: React.KeyboardEvent<HTMLInputElement>,
+    name: string
+  ) => void;
+  currentFocus: any;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentPath: React.Dispatch<React.SetStateAction<string[]>>;
+  currentPath: string[];
 }
 
 
-export default function OpenedFile({ desktopIcon, icon, setDesktopIcon,findMouseLocation, containerRef, allFiles, setAllFiles}: Props){
+export default function OpenedFile({  icon,setCurrentPath, currentPath, findMouseLocation, containerRef, allFiles, setAllFiles, setInput,inputRef, currentFocus, handleKeyDown}: Props){
     
     
-    const [folderContent, setFolderContent] = useState<DesktopIconType[]>()
-    const { programs, setPrograms }: any = useContext(Programs);
+   
     const fileRef = useRef(null)
     const isClicked = useRef<boolean>(false);
+    
     const coords = useRef<{startX: number;startY: number;lastX: number;lastY: number;}>
     ({startX: 0,startY: 0,lastX: 0,lastY: 0,});
 
@@ -35,6 +44,7 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon,findMouse
                 return {...x, open: false}
             }
         })
+        setCurrentPath([])
         setAllFiles(newFile)
     }
 
@@ -43,35 +53,37 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon,findMouse
     //all system files
     
     useEffect(()=>{
-      console.log(allFiles)
-      let folderFiles: any = []
-      if(icon.content)
-      icon.content.map((file: any)=>{
-        
-        folderFiles.push(file)
-        
-      })
-      setFolderContent(folderFiles)
+      if(currentPath.includes(icon.name)) return;
+       
+       setCurrentPath((prev)=> ([...prev, icon.name]));
+      
+ 
       
         dragDrop(fileRef,containerRef,'handle',coords,isClicked)
     },[])
+    
+    useEffect(()=>{
+      console.log(currentPath)
+    },[currentPath])
 
-
+ const goBack= () =>{
+    if(icon.parent == '') return;
+    let previous = allFiles.map((file: any)=>{
+      if(icon.parent === file.name){
+        return {...file, open: true}
+      } else {
+        return {...file, open: false}
+      }  
+    })
+    let erasePath = currentPath
+    erasePath.pop()
+    erasePath.pop()
+    setCurrentPath(erasePath)
+    setAllFiles(previous)
    
-     
-    const openIcon = (name: string) => {
-      
-      let pleasework = allFiles.map((file: any)=>{
-        if(file.name == name){
-          return {...file, open: true}
-        }
-        else{
-          return {...file, open: false}
-        }
-      })
-      setAllFiles(pleasework)
-    };
+ }
 
+ 
     
 
     return (
@@ -82,28 +94,28 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon,findMouse
         onMouseEnter={(e) => findMouseLocation(e)}
       >
         <div id='handle'>
+          <button onClick={()=> goBack()}>back</button>
+      
           <img src={icon.icon} alt={icon.name} />
           {icon.name}
           <MdOutlineClose onClick={() => closeFile()} />
         </div>
+        <div className="file-path">{`${currentPath}`}</div>
         {allFiles
           ? allFiles.map((file: any) => {
               if (file.parent === icon.name) {
                 return (
-                  <div
-                    className='desktop-icon'
-                    onMouseEnter={(e) => findMouseLocation(e)}
-                    onClick={() => openIcon(file.name)}
-                    id={file.name}
-                  >
-                    <img
-                      src={file.icon}
-                      alt=''
-                      className='icon'
-                      id={file.name}
-                    />
-                    {file.name}
-                  </div>
+                  <DesktopIcon
+                    icon={file}
+         
+                    currentFocus={currentFocus}
+                    inputRef={inputRef}
+                    findMouseLocation={findMouseLocation}
+                    handleKeyDown={handleKeyDown}
+                    setInput={setInput}
+                  
+                
+                  />
                 );
               }
             })
