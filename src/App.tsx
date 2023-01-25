@@ -56,6 +56,13 @@ function App() {
   const [desktopIcon, setDesktopIcon]: any = useState([
     { name: 'Recycle Bin', icon: recycle, rename: false, type: 'bin', open: false, content: [] }
   ])
+  
+  const [allFiles, setAllFiles]: any = useState([
+    { name: 'Recycle Bin', icon: recycle, rename: false, type: 'bin', open: false, content: [], parent:"" }
+
+
+  ])
+
 
   const [whichMenu, setWhichMenu] = useState('')
 
@@ -129,7 +136,7 @@ function App() {
       event.preventDefault()
       const target = event.target as HTMLDivElement;
       // setCurrentFocus(target.id)
-      let currentTaskIndex = desktopIcon.findIndex(
+      let currentTaskIndex = allFiles.findIndex(
         (icon: DesktopIconType) => icon.name === target.id
       );
       setCurrentDrag(currentTaskIndex);
@@ -151,19 +158,19 @@ function App() {
     }
 
     const letGoIcon = (event: MouseEvent) => {
-      const target = event.target as HTMLDivElement
+     
 
       setCurrentDrag(-1)
       if (currentDrag === -1) return;
       if (finalMouseDestination.type == 'bin') {
-        const index = desktopIcon.findIndex(
-          (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name
+        const index = allFiles.findIndex(
+          (icon: DesktopIconType) => icon.name !== allFiles[currentDrag]?.name
         );
         if (index > -1) {
 
-          setDesktopIcon(
-            desktopIcon.filter(
-              (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name
+          setAllFiles(
+            allFiles.filter(
+              (icon: DesktopIconType) => icon.name !== allFiles[currentDrag]?.name
             )
           );
         }
@@ -171,30 +178,23 @@ function App() {
       else if (finalMouseDestination.type == 'folder') {
 
         //makes the icon on desktop dissapear
-        let updatedIcon = desktopIcon.filter(
-        (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
-       
-        let addToFolder = updatedIcon.map((icon: any) => {
-
-          if (icon.name == finalMouseDestination.name) {
-            if (icon.type === 'folder') {
-
-              return { ...icon, content: [...icon.content, desktopIcon[currentDrag]] }
-            }
+        let setParent = allFiles.map((file:any)=>{
+          if(file.name === allFiles[currentDrag].name){
+            return {...file, parent: finalMouseDestination.name}
           } else {
-            return { ...icon, content: icon.content }
+            return {...file, parent: file.parent}
           }
         })
-
-        console.log(addToFolder)
-        setDesktopIcon(addToFolder);
+        setAllFiles(setParent)
+     
       }
     }
 
     document.body.addEventListener("mousedown", createIconClone)
     document.body.addEventListener("mouseup", letGoIcon)
     document.body.addEventListener("mousemove", moveIconClone)
-
+    
+    console.log(allFiles)
     const cleanUp = () => {
       document.body.removeEventListener("mousedown", createIconClone)
       document.body.removeEventListener("mousemove", moveIconClone)
@@ -202,8 +202,7 @@ function App() {
 
     };
     return cleanUp
-
-  }, [desktopIcon, finalMouseDestination])
+  }, [finalMouseDestination, allFiles])
 
 
 
@@ -219,6 +218,8 @@ function App() {
             whichMenu={whichMenu}
             currentFocus={currentFocus}
             inputRef={inputRef}
+            setAllFiles={setAllFiles}
+            allFiles={allFiles}
           />
           <Desktop
             desktopIcon={desktopIcon}
@@ -236,15 +237,22 @@ function App() {
             setDesktopIcon={setDesktopIcon}
             inputRef={inputRef}
             setfinalMouseDestination={setFinalMouseDestination}
+            allFiles={allFiles}
+            setAllFiles={setAllFiles}
           />
           {currentDrag !== -1 ? (
             <img
-              src={desktopIcon[currentDrag].icon}
+              src={allFiles[currentDrag].icon}
               ref={dragRef}
-              style={{ position: "absolute", opacity: '.7' }}
+              style={{ position: "absolute", opacity: ".7" }}
             ></img>
           ) : null}
-          <TaskBar handleClock={handleClock} clock={clock} desktopIcon={desktopIcon} setDesktopIcon={setDesktopIcon} />
+          <TaskBar
+            handleClock={handleClock}
+            clock={clock}
+            desktopIcon={desktopIcon}
+            setDesktopIcon={setDesktopIcon}
+          />
         </div>
       </Tasks.Provider>
     </Programs.Provider>

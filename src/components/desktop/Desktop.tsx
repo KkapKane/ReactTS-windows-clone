@@ -29,6 +29,8 @@ interface Props {
   araRef: React.RefObject<HTMLDivElement>;
   todoRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
+  allFiles: any;
+  
   programs: {
     name: string;
     visible: boolean;
@@ -39,6 +41,8 @@ interface Props {
   >;
   containerRef: React.RefObject<HTMLDivElement>;
   currentFocus: string;
+
+  setAllFiles: any;
 }
 
 export default function Desktop({
@@ -56,7 +60,9 @@ export default function Desktop({
   currentFocus,
   setDesktopIcon,
   inputRef,
-  setfinalMouseDestination
+  setfinalMouseDestination,
+  allFiles,
+  setAllFiles
 }: Props) {
   const [input, setInput] = useState("");
 
@@ -66,7 +72,7 @@ export default function Desktop({
     name: string
   ) => {
     if (event.key === "Enter") {
-      let newName = desktopIcon.map((icon) => {
+      let newName = allFiles.map((icon: any) => {
         if (icon.name === name) {
           return { ...icon, name: input, rename: false };
         } else {
@@ -74,19 +80,19 @@ export default function Desktop({
         }
       });
       //tries to find if the current name being type already exist in desktopicon array or not.
-      const index = desktopIcon.findIndex(
-        (iconName) => iconName.name === input
+      const index = allFiles.findIndex(
+        (iconName:any) => iconName.name === input
       );
       if (input === "" || index !== -1) {
         return;
       }
-      setDesktopIcon(newName);
+      setAllFiles(newName);
     }
   };
   const findMouseLocation = (event: React.MouseEvent<HTMLDivElement>) => {
     let target = event.target as HTMLDivElement;
-    const index = desktopIcon.findIndex((iconName) => iconName.name === target.id);
-    setfinalMouseDestination(desktopIcon[index]);
+    const index = allFiles.findIndex((iconName: any) => iconName.name === target.id);
+    setfinalMouseDestination(allFiles[index]);
   };
 
   return (
@@ -115,10 +121,10 @@ export default function Desktop({
       {programs[7]?.visible === true ? (
         <Todo todoRef={todoRef} containerRef={containerRef} />
       ) : null}
-      {desktopIcon.map((icon, index) => {
+      {allFiles.map((icon: any, index:number) => {
         return (
           <>
-            <DesktopIcon
+            {icon.parent == '' ? <DesktopIcon
               icon={icon}
               index={index}
               desktopIcon={desktopIcon}
@@ -130,27 +136,19 @@ export default function Desktop({
               setDesktopIcon={setDesktopIcon}
               containerRef={containerRef}
               setfinalMouseDestination={setfinalMouseDestination}
-            />
+            />: null}
             {icon.open === true ? (
               <OpenedFile
                 containerRef={containerRef}
                 desktopIcon={desktopIcon}
                 icon={icon}
                 setDesktopIcon={setDesktopIcon}
+                allFiles={allFiles}
+                setAllFiles={setAllFiles}
+                findMouseLocation={findMouseLocation}
               />
             ) : null}
-            {icon.content? icon.content.map((x)=>{
-              if(x.open == true){
-                return (
-                  <OpenedFile
-                    containerRef={containerRef}
-                    desktopIcon={desktopIcon}
-                    icon={x}
-                    setDesktopIcon={setDesktopIcon}
-                  />
-                );
-              }
-            }):null }
+            
           </>
         );
       })}

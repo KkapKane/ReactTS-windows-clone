@@ -24,6 +24,7 @@ export type DesktopIconType = {
     type: string;
     open: boolean;
     show: boolean;
+    parent: string;
     content?: DesktopIconType[]
   
 };
