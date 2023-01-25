@@ -13,56 +13,56 @@ interface Props {
 
 export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
 
-  // new state so we can delay the display of sidebar after hovering //
-  const [isShow, setIsShow] = useState(false);
+  let timer: any = 0;
+  const TIMEOUT = 1500;
 
-useEffect(() => {
-  if (isHover == false) {
-    const timeout = setTimeout(() => setIsShow(!isShow), 500);
-    return () => clearInterval(timeout);
-  } 
-  else {
-    const timeout = setTimeout(() => setIsShow(!isShow), 1000);
-    return () => clearInterval(timeout);
+  function mouseEnter() {
+    timer = setTimeout(() => {
+      setIsHover(true);
+    }, TIMEOUT)
   }
-}, [isHover])
+
+  function mouseLeave() {
+    setIsHover(false);
+    clearTimeout(timer);
+  }
 
   return (
     <div
       className='start-navBar'
-      onMouseOver={() => setIsHover(true)}
-      onMouseOut={() => setIsHover(false)}
+      onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave}
       style={
-        isShow
+        isHover
           ? { width: "50%", boxShadow: "2px 1px 7px #1a1a1a" }
           : { width: "60px" }
       }
     >
       <div id='start-hamburger'>
         <RxHamburgerMenu size={22} />
-        {isShow ? <span style={{ fontWeight: "600" }}>START</span> : null}
+        {isHover ? <span style={{ fontWeight: "600" }}>START</span> : null}
       </div>
       <div className='start-bottomGroup' >
         <div className='start-utility'>
           <CgProfile size={21} />
-          {isShow ? <span>Profile</span> : null}
+          {isHover ? <span>Profile</span> : null}
         </div>
         <div className='start-utility'>
           <BiFileBlank size={21} />
-          {isShow ? <span>Documents</span> : null}
+          {isHover ? <span>Documents</span> : null}
         </div>
 
         <div className='start-utility'>
           <AiOutlinePicture size={21} />
-          {isShow ? <span>Pictures</span> : null}
+          {isHover ? <span>Pictures</span> : null}
         </div>
         <div className='start-utility'>
           <CiSettings size={21} />
-          {isShow ? <span>Settings</span> : null}
+          {isHover ? <span>Settings</span> : null}
         </div>
         <div className='start-utility'>
           <AiOutlinePoweroff size={21} />
-          {isShow ? <span>Power</span> : null}
+          {isHover ? <span>Power</span> : null}
         </div>
       </div>
     </div>

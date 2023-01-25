@@ -28,7 +28,7 @@ const coords = useRef<{startX: number , startY: number , lastX: number, lastY: n
 
 //anything pertaining to the draggable feature
 useEffect(() => {
-  dragDrop(mpsRef,containerRef,'maple-handle',coords,isClicked)
+  dragDrop(mpsRef,containerRef,'maplestore-handle',coords,isClicked)
 }, []);
   
 //finds the index of the the task in the task object array

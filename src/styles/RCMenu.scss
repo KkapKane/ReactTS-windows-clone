@@ -1,64 +1,91 @@
-#rc-menu{
+#rc-menu {
     display: none;
     flex-direction: column;
     justify-content: center;
     position: absolute;
     top: -1000%;
-    background-color: white;
+    background-color: rgb(241, 241, 241);
     width: 200px;
     gap: .2rem;
     z-index: 99;
-    li {
-        display: inline-block;
-        padding-top: 3px;
-        padding-left: 10px;
+    font-size: 0.9rem;
+    padding: 5px;
+
+    ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3px 0;
+        padding-left: 38px;
         text-align: start;
-        width: 100%;
+        margin-left: -5px;
+        width: calc(100% - 28px);
         list-style-type: none;
 
+        svg {
+            margin-right: 10px;
+        }
+
         &:hover {
-            background-color: rgb(198, 196, 196);
+            background-color: white;
         }
     }
+
     .new {
-        padding-left: 10px;
+        padding: 4px 0;
+        padding-left: 38px;
+        margin-left: -5px;
+        width: calc(100% - 28px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        svg {
+            margin-right: 10px;
+        }
+
         &:hover {
-            background-color: rgb(198, 196, 196);
+            background-color: white;
         }
     }
+
     .display-settings {
         display: flex;
         flex-direction: column;
-        padding-left: .6rem;
-        
+        width: calc(100% + 5px);
+
         img {
             height: 20px;
         }
+
         span {
             display: flex;
             gap: .5rem;
-                 &:hover {
-            background-color: rgb(198, 196, 196);
-        }   
+            margin-left: -5px;
+            padding: 2px;
+            padding-left: 10px;
+
+            &:hover {
+                background-color: white;
+            }
         }
     }
-
 }
+
 #extra-option {
     display: flex;
     flex-direction: column;
-   position: absolute;
-   height: 100px;
-   width: 200px;
-   background-color: white;
-   left: 100%;
-   bottom: -35%;
-   border: 1px solid gray;
+    position: absolute;
+    height: 100px;
+    width: 200px;
+    background-color: rgb(241, 241, 241);
+    left: 100%;
+    bottom: -35%;
+    border: 1px solid lightgray;
 
-   span{
-    &:hover {
-        background-color: lightgray;
+    span {
+        &:hover {
+            background-color: white;
+        }
     }
-   }
 }
- 
