@@ -35,14 +35,16 @@ export default function SearchLeft({suggestions, setSearchDisplay, openIcon}:Pro
     return (
         <div className="left">
             <div className="title">Suggested</div>
-            {suggestions ? suggestions.map((suggestion: any)=>{
-                return (
-                    <div className='search-icons' id={suggestion.name} onClick={()=>  openProgram(suggestion.name,true, programs, tasks, setTask, setPrograms, suggestion.type)}>
-                    {typeof suggestion.icon == 'string' ? <img src={suggestion.icon} alt={suggestion.name} /> : suggestion.icon}
-                    {suggestion.name}
-                    </div>
-                )
-            }):null} 
+            <div id="suggest-container">
+                {suggestions ? suggestions.map((suggestion: any) => {
+                    return (
+                        <div className='search-icons' id={suggestion.name} onClick={() => openProgram(suggestion.name, true, programs, tasks, setTask, setPrograms, suggestion.type)}>
+                            {typeof suggestion.icon == 'string' ? <img src={suggestion.icon} alt={suggestion.name} /> : suggestion.icon}
+                            {suggestion.name}
+                        </div>
+                    )
+                }) : null} 
+            </div>
         </div>
     )
 }

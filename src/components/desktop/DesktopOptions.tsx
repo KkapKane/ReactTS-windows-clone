@@ -3,6 +3,7 @@ import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
 import { DesktopIconType } from "../../types/project_types";
+import { BsChevronRight } from 'react-icons/bs';
 
 interface Props {
   setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
@@ -24,27 +25,22 @@ interface Props {
 
 export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFiles, allFiles }: Props) {
   const [showOption, setShowOption] = useState(false);
-  const [delayHandler, setDelayHandler] = useState<number | null | undefined>(
-    null
-  );
 
   // makes hovering over the 'new' option not pop out instantly
-  const mouseEnter = () => {
-    setDelayHandler(
-      setTimeout(() => {
-        setShowOption(true);
-      }, 500)
-    );
-  };
+  let timer: any = 0;
+  const TIMEOUT = 500;
+
+  function mouseEnter() {
+    timer = setTimeout(() => {
+      setShowOption(true);
+    }, TIMEOUT)
+  }
 
   //only goes away if mouse leaves the new extra-option div
-  const mouseLeave = (e: React.ChangeEvent<any>): void => {
-    if (typeof delayHandler == "number") {
-      setShowOption(false);
-
-      clearTimeout(delayHandler);
-    }
-  };
+  function mouseLeave() {
+    setShowOption(false);
+    clearTimeout(timer);
+  }
 
   const makeFolder = () => {
     let folderCount = 0;
@@ -61,19 +57,23 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
       ...desktopIcon,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
+
         icon: folder, rename: false, type: 'folder', open: false, parent:'', filePath: []
+
       },
     ]);
     setAllFiles([
       ...allFiles,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
+
         icon: folder, rename: false, type: 'folder', open: false, parent:'', filePath:[]
+
       },
     ]);
   };
 
-  const makeTextDoc = () => { 
+  const makeTextDoc = () => {
     let textDocCount = 0;
     desktopIcon.forEach((element, index, array) => {
       //if desktopIcon array already contains an object with the name New Folder then add to folder count
@@ -112,28 +112,28 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
   return (
     <div id='desktop-options'>
       <ul>
-        <li>View</li>
-        <li>Sort by</li>
+        <li><p>View</p> <BsChevronRight size={16} /></li>
+        <li><p>Sort by</p> <BsChevronRight size={16} /></li>
         <li>Refresh</li>
       </ul>
       <hr />
-      <div className='new' onMouseEnter={() => mouseEnter()}>
-        New
+      <div className='new' onMouseEnter={mouseEnter}>
+        <p>New</p> <BsChevronRight size={16} />
       </div>
       {showOption ? (
-        <div id='extra-option' onMouseLeave={(e) => mouseLeave(e)}>
+        <div id='extra-option' onMouseLeave={mouseLeave}>
           <span onClick={() => makeFolder()}>New Folder</span>
-          <span onClick={()=> makeTextDoc()}>Text Document</span>
+          <span onClick={() => makeTextDoc()}>Text Document</span>
         </div>
       ) : null}
       <hr />
       <div className='display-settings'>
         <span>
-          <img src={personalize} alt='' />
+          <img src={personalize} alt='personalize' />
           Display Settings
         </span>
         <span>
-          <img src={personalize} alt='' />
+          <img src={personalize} alt='personalize' />
           Personalize
         </span>
       </div>

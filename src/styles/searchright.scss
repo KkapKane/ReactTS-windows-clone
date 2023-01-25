@@ -53,14 +53,13 @@
                 #events-items {
                     display: flex;
                     scroll-behavior: smooth;
-
                     overflow: hidden;
 
                     .left-btn,
                     .right-btn {
                         position: fixed;
                         z-index: 99;
-                        top: 55%;
+                        top: 52%;
                         width: 18px;
                         height: 50px;
                         display: flex;
@@ -167,7 +166,7 @@
             #trending-container {
                 background-color: rgba(41, 41, 41, 0.4);
                 margin-top: 8px;
-                margin-bottom: 25px;
+                margin-bottom: 30px;
                 border-radius: 8px;
 
                 #trending {
@@ -187,7 +186,7 @@
                     .right-btn {
                         position: fixed;
                         z-index: 99;
-                        top: 81%;
+                        top: 80%;
                         width: 18px;
                         height: 50px;
                         display: flex;
