@@ -1,10 +1,10 @@
-import '../../styles/search.scss';
-import SearchRight from './SearchRight';
-import { useState, useEffect, useRef, useContext } from 'react';
-import { Programs } from '../context/Programs';
-import { DesktopIconType } from '../../types/project_types';
-import SearchLeft from './SearchLeft';
-import { VscSearch } from 'react-icons/vsc'
+import { useState, useEffect, useRef, useContext } from "react";
+import "../../styles/search.scss";
+import SearchRight from "./SearchRight";
+import SearchLeft from "./SearchLeft";
+import { Programs } from "../context/Programs";
+import { DesktopIconType } from "../../types/project_types";
+import { VscSearch } from "react-icons/vsc";
 
 interface Props {
 
@@ -16,16 +16,15 @@ interface Props {
 
 export default function Search({setAllFiles, allFiles, setSearchDisplay, }: Props) {
 
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState('');
   const { programs, setPrograms }: any = useContext(Programs);
-  const [suggestions, setSuggestions]: any = useState()
+  const [suggestions, setSuggestions]: any = useState();
   const searchRef = useRef<HTMLInputElement>(null);
 
   const getAutoComplete = (query: string) => {
-    let everyFile = [...programs, ...allFiles]
-
-    let result: string[] = everyFile.filter((ev) => ev.name.toLowerCase().includes(query.toLowerCase()))
-    setSuggestions(result)
+    let everyFile = [...programs, ...allFiles];
+    let result: string[] = everyFile.filter((ev) => ev.name.toLowerCase().includes(query.toLowerCase()));
+    setSuggestions(result);
   }
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function Search({setAllFiles, allFiles, setSearchDisplay, }: Prop
     }
   }, [])
   useEffect(() => {
-    getAutoComplete(input)
+    getAutoComplete(input);
   }, [input])
 
   const openIcon = (name: string) => {
@@ -54,8 +53,8 @@ export default function Search({setAllFiles, allFiles, setSearchDisplay, }: Prop
         <SearchLeft
           suggestions={suggestions}
           setSearchDisplay={setSearchDisplay}
-          openIcon={openIcon} 
-          />
+          openIcon={openIcon}
+        />
         <SearchRight />
       </div>
       <div id="search-input">
@@ -64,8 +63,8 @@ export default function Search({setAllFiles, allFiles, setSearchDisplay, }: Prop
           ref={searchRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder='Type here to search' 
-          />
+          placeholder='Type here to search'
+        />
       </div>
     </div>
   )

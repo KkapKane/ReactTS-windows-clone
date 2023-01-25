@@ -25,18 +25,18 @@ export default function BigClock({ current }: Props) {
                 </div>
             </div>
             <div id="clock-calendar">
-                <Calendar 
-                    value={current} 
+                <Calendar
+                    value={current}
                     calendarType="US"
                     nextLabel={<IoIosArrowDown />}
                     prevLabel={<IoIosArrowUp />}
-                    tileClassName={({date, view }) => 
-                        view === 'month' && 
-                        date.getDate() === day ?
-                        date.getMonth() === month ?
-                        date.getFullYear() === year ? 'today' 
-                        : null : null : null}
-                     />
+                    tileClassName={({ date, view }) =>
+                        view === 'month' &&
+                            date.getDate() === day ?
+                            date.getMonth() === month ?
+                                date.getFullYear() === year ? 'today'
+                                    : null : null : null}
+                />
             </div>
         </div>
     )

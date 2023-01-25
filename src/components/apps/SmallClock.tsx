@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import moment from 'moment';
-import '../../styles/smallclock.scss'
-import BigClock from './BigClock';
+import { useEffect, useState } from "react";
+import "../../styles/smallclock.scss"
+import moment from "moment";
+import BigClock from "./BigClock";
 
 interface Props {
     clock: boolean;
@@ -17,29 +17,21 @@ export default function SmallClock({ handleClock, clock }: Props) {
         // updates time every second //
         const interval = setInterval(() => { setCurrent(new Date()) }, 1000);
         return () => {
-            clearInterval(interval)
+            clearInterval(interval);
         }
     }, []);
 
     // state & functions for hover status for the tooltip visibility //
     const [hover, setHover] = useState(false);
 
-    const handleMouseIn = () => {
-        setHover(true);
-    }
-
-    const handleMouseOut = () => {
-        setHover(false);
-    }
-
     return (
         <div id="small-clock"
-            onMouseOver={handleMouseIn}
-            onMouseOut={handleMouseOut}
+            onMouseOver={() => setHover(true)}
+            onMouseOut={() => setHover(false)}
             onClick={(e) => e.stopPropagation()}>
 
-            {hover === true ? clock === false ? 
-                <div id="clock-tooltip">{moment(current).format("dddd, DD MMMM, YYYY")}</div> 
+            {hover === true ? clock === false ?
+                <div id="clock-tooltip">{moment(current).format("dddd, DD MMMM, YYYY")}</div>
                 : null : null}
 
             <div id="clock-container" onClick={handleClock}>
