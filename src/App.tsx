@@ -261,6 +261,8 @@ function App() {
             clock={clock}
             desktopIcon={desktopIcon}
             setDesktopIcon={setDesktopIcon}
+            setAllFiles={setAllFiles}
+            allFiles={allFiles}
           />
         </div>
       </Tasks.Provider>
