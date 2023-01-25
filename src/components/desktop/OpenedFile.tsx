@@ -19,7 +19,7 @@ interface Props {
 export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containerRef}: Props){
     
     
-    const [allFiles, setAllFiles] = useState<any[]>();
+    const [folderContent, setFolderContent] = useState<DesktopIconType[]>()
     const { programs, setPrograms }: any = useContext(Programs);
     const fileRef = useRef(null)
     const isClicked = useRef<boolean>(false);
@@ -56,18 +56,8 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
         folderFiles.push(file)
         
       })
-      let hidefolder = folderFiles.map((x: any)=>{
-        return {...x, show: false}
-      })
-      console.log(hidefolder)
-      let allSystemFiles: any = [...desktopIcon, ...hidefolder]
+      setFolderContent(folderFiles)
       
-      let desktop = allSystemFiles.filter((x: any)=> {
-        return x.show === true;
-      })
-      setDesktopIcon(desktop)
-      setAllFiles(allSystemFiles)
-
         dragDrop(fileRef,containerRef,'handle',coords,isClicked)
     },[])
 
@@ -75,50 +65,31 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
    
      
     const openIcon = (name: string) => {
-      let folderFiles: any = [];
-      if (icon.content)
-        icon.content.map((file: any) => {
-          folderFiles.push(file);
-        });
-     
-      let allSystemFiles: any = [...desktopIcon, ...folderFiles];
-      console.log(allSystemFiles)
-        if(allFiles){
-        
-         
-          let nameIndex = allSystemFiles.map((ticon:any) => {
-            if (name === ticon.name) {
-              return { ...ticon, open: true, show: false };
-            } else {
-              return { ...ticon, open: false};
-            }
-          });
-          let testarr: any = []
-          let myMap = new Map ()
-          for(let i = 0; i < nameIndex.length; i++){
-            if(nameIndex[i] !== folderFiles[i]){
-              myMap.set(nameIndex[i], i)
-            }
-          
+      if (icon.content) {
+        let testlist = icon.content.map((file) => {
+          if (file.name == name) {
+            return { ...file, open: true };
+          } else {
+            return { ...file, open: false };
           }
-          // let nameIndex = desktopIcon.map((x)=>{
-          //   if(x.content){
-          //     let supertry = x.content.map((c)=>{
-          //       if(c.name == name){
-          //       return {...c, open: true}
-          //       }
-          //       else {
-          //         return {...c, open: false}
-          //       }
-          //     })
-          //     console.log(supertry)
-          //     setDesktopIcon(supertry);
-          //   }
-          // })
-          
-          
-          
-        }
+        });
+        let testlist2 = desktopIcon.map((folder) => {
+          if (folder.name == icon.name) {
+            return { ...folder, content: testlist };
+          } else {
+            return { ...folder, content: folder.content };
+          }
+        });
+        let testlist3 = testlist2.map((x) => {
+          if (x.name == icon.name) {
+            return { ...x, open: false };
+          } else {
+            return { ...x, open: x.open };
+          }
+        });
+        console.log(testlist3);
+        setDesktopIcon(testlist3);
+      }
     };
 
     
@@ -130,7 +101,7 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
             {icon.name}
             <MdOutlineClose onClick={()=>closeFile()}/>
             </div>
-            {icon.type === 'folder' ? <div>{icon.content?.map((c)=>{return (
+            {folderContent ? <div>{folderContent.map((c:any)=>{return (
               <div className='desktop-icon' onClick={()=> openIcon(c.name)}>
                 <img src={c.icon} alt="" />
                   {c.name}

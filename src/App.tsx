@@ -171,18 +171,9 @@ function App() {
       else if (finalMouseDestination.type == 'folder') {
 
         //makes the icon on desktop dissapear
-        // let updatedIcon = desktopIcon.filter(
-        // (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
-        let testupdate = desktopIcon.map((c: DesktopIconType) => {
-          if (c.name == desktopIcon[currentDrag].name) {
-            return { ...c, show: false }
-          } else {
-            return { ...c, show: c.show }
-          }
-        })
-        let updatedIcon = testupdate.filter((icon: any) => {
-          return icon.show === true;
-        })
+        let updatedIcon = desktopIcon.filter(
+        (icon: DesktopIconType) => icon.name !== desktopIcon[currentDrag]?.name)
+       
         let addToFolder = updatedIcon.map((icon: any) => {
 
           if (icon.name == finalMouseDestination.name) {
@@ -191,7 +182,7 @@ function App() {
               return { ...icon, content: [...icon.content, desktopIcon[currentDrag]] }
             }
           } else {
-            return { ...icon, content: [desktopIcon[currentDrag]] }
+            return { ...icon, content: icon.content }
           }
         })
 
