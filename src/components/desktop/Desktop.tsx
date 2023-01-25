@@ -117,8 +117,8 @@ export default function Desktop({
       ) : null}
       {desktopIcon.map((icon, index) => {
         return (
-    
-        <DesktopIcon
+          <>
+            <DesktopIcon
               icon={icon}
               index={index}
               desktopIcon={desktopIcon}
@@ -131,7 +131,27 @@ export default function Desktop({
               containerRef={containerRef}
               setfinalMouseDestination={setfinalMouseDestination}
             />
-    
+            {icon.open === true ? (
+              <OpenedFile
+                containerRef={containerRef}
+                desktopIcon={desktopIcon}
+                icon={icon}
+                setDesktopIcon={setDesktopIcon}
+              />
+            ) : null}
+            {icon.content? icon.content.map((x)=>{
+              if(x.open == true){
+                return (
+                  <OpenedFile
+                    containerRef={containerRef}
+                    desktopIcon={desktopIcon}
+                    icon={x}
+                    setDesktopIcon={setDesktopIcon}
+                  />
+                );
+              }
+            }):null }
+          </>
         );
       })}
     </div>
