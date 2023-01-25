@@ -11,12 +11,13 @@ interface Props {
   icon: DesktopIconType;
   containerRef: React.RefObject<HTMLDivElement>;
   setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
- 
-  
+  allFiles: any;
+  setAllFiles: any;
+  findMouseLocation: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 
-export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containerRef}: Props){
+export default function OpenedFile({ desktopIcon, icon, setDesktopIcon,findMouseLocation, containerRef, allFiles, setAllFiles}: Props){
     
     
     const [folderContent, setFolderContent] = useState<DesktopIconType[]>()
@@ -27,28 +28,22 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
     ({startX: 0,startY: 0,lastX: 0,lastY: 0,});
 
     const closeFile = () => {
-        let newFile = desktopIcon.map((x)=>{
+        let newFile = allFiles.map((x: any)=>{
             if(x.name == icon.name){
                 return {...x, open: false}
             }else {
                 return {...x, open: false}
             }
         })
-        setDesktopIcon(newFile)
+        setAllFiles(newFile)
     }
 
-    const setStartingCoord = (e: MouseEvent) => {
-      let target = e.target as HTMLDivElement;
-        
-           coords.current.startX = e.clientX;
-           coords.current.startY = e.clientY;
-         
-    
-    }
+ 
     
     //all system files
     
     useEffect(()=>{
+      console.log(allFiles)
       let folderFiles: any = []
       if(icon.content)
       icon.content.map((file: any)=>{
@@ -65,49 +60,54 @@ export default function OpenedFile({ desktopIcon, icon, setDesktopIcon, containe
    
      
     const openIcon = (name: string) => {
-      if (icon.content) {
-        let testlist = icon.content.map((file) => {
-          if (file.name == name) {
-            return { ...file, open: true };
-          } else {
-            return { ...file, open: false };
-          }
-        });
-        let testlist2 = desktopIcon.map((folder) => {
-          if (folder.name == icon.name) {
-            return { ...folder, content: testlist };
-          } else {
-            return { ...folder, content: folder.content };
-          }
-        });
-        let testlist3 = testlist2.map((x) => {
-          if (x.name == icon.name) {
-            return { ...x, open: false };
-          } else {
-            return { ...x, open: x.open };
-          }
-        });
-        console.log(testlist3);
-        setDesktopIcon(testlist3);
-      }
+      
+      let pleasework = allFiles.map((file: any)=>{
+        if(file.name == name){
+          return {...file, open: true}
+        }
+        else{
+          return {...file, open: false}
+        }
+      })
+      setAllFiles(pleasework)
     };
 
     
 
     return (
-        <div className="opened-file" ref={fileRef}>
-            <div id="handle" >
-            <img src={icon.icon} alt="" />
-            {icon.name}
-            <MdOutlineClose onClick={()=>closeFile()}/>
-            </div>
-            {folderContent ? <div>{folderContent.map((c:any)=>{return (
-              <div className='desktop-icon' onClick={()=> openIcon(c.name)}>
-                <img src={c.icon} alt="" />
-                  {c.name}
-                
-              </div>
-            );})}</div> : <textarea className='textdoc-text-area' > </textarea>}
+      <div
+        className='opened-file'
+        ref={fileRef}
+        id={icon.name}
+        onMouseEnter={(e) => findMouseLocation(e)}
+      >
+        <div id='handle'>
+          <img src={icon.icon} alt={icon.name} />
+          {icon.name}
+          <MdOutlineClose onClick={() => closeFile()} />
         </div>
-    )
+        {allFiles
+          ? allFiles.map((file: any) => {
+              if (file.parent === icon.name) {
+                return (
+                  <div
+                    className='desktop-icon'
+                    onMouseEnter={(e) => findMouseLocation(e)}
+                    onClick={() => openIcon(file.name)}
+                    id={file.name}
+                  >
+                    <img
+                      src={file.icon}
+                      alt=''
+                      className='icon'
+                      id={file.name}
+                    />
+                    {file.name}
+                  </div>
+                );
+              }
+            })
+          : null}
+      </div>
+    );
 }

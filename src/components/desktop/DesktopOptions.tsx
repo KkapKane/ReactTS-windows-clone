@@ -7,9 +7,22 @@ import { DesktopIconType } from "../../types/project_types";
 interface Props {
   setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
   desktopIcon: DesktopIconType[];
+  setAllFiles: React.Dispatch<
+    React.SetStateAction<
+      {
+        name: string;
+        icon: string;
+        rename: boolean;
+        type: string;
+        open: boolean;
+        content: never[];
+      }[]
+    >
+  >;
+  allFiles: any;
 }
 
-export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
+export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFiles, allFiles }: Props) {
   const [showOption, setShowOption] = useState(false);
   const [delayHandler, setDelayHandler] = useState<number | null | undefined>(
     null
@@ -48,7 +61,14 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
       ...desktopIcon,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
-        icon: folder, rename: false, type: 'folder', open: false, show: true, content:[]
+        icon: folder, rename: false, type: 'folder', open: false, show: true, content:[], parent:''
+      },
+    ]);
+    setAllFiles([
+      ...allFiles,
+      {
+        name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
+        icon: folder, rename: false, type: 'folder', open: false, show: true, content:[], parent:''
       },
     ]);
   };
@@ -72,7 +92,20 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon }: Props) {
         rename: false,
         type: 'text_document',
         open: false,
-        show: true
+        show: true,
+        parent: ''
+      },
+    ]);
+    setAllFiles([
+      ...allFiles,
+      {
+        name: textDocCount == 0 ? `New Text Document.txt` : `New Text Document(${textDocCount}).txt`,
+        icon: textDoc,
+        rename: false,
+        type: 'text_document',
+        open: false,
+        show: true,
+        parent: ''
       },
     ]);
   }

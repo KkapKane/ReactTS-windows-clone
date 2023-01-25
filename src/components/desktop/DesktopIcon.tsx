@@ -27,18 +27,17 @@ export default function DesktopIcon({icon, index, containerRef,desktopIcon, curr
     return (
       <div
         className='desktop-icon'
-        id={desktopIcon[index].name}
-        onMouseDown={() => {}}
+        id={icon.name}
         onMouseEnter={(e) => findMouseLocation(e)}
       >
         <img
           className='icon'
-          src={desktopIcon[index].icon}
+          src={icon.icon}
           alt=''
-          id={desktopIcon[index].name}
+          id={icon.name}
         />
 
-        {desktopIcon[index].rename === true ? (
+        {icon.rename === true ? (
           <input
             type='text'
             ref={inputRef}
@@ -47,9 +46,9 @@ export default function DesktopIcon({icon, index, containerRef,desktopIcon, curr
             onChange={(e) => setInput(e.target.value)}
           />
         ) : (
-          desktopIcon[index].name
+          icon.name
         )}
-        {icon.open === true ? (
+        {/* {icon.open === true ? (
           <OpenedFile
             
             desktopIcon={desktopIcon}
@@ -57,7 +56,7 @@ export default function DesktopIcon({icon, index, containerRef,desktopIcon, curr
             setDesktopIcon={setDesktopIcon}
             containerRef={containerRef}
           />
-        ) : null}
+        ) : null} */}
       </div>
     );
 }

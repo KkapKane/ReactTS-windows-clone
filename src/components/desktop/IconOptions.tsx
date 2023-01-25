@@ -7,10 +7,12 @@ interface Props {
   setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
   currentFocus: string;
   inputRef: React.RefObject<HTMLInputElement>;
+  allFiles: any;
+  setAllFiles: any;
  
 }
 
-export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,inputRef}: Props){
+export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,inputRef, allFiles, setAllFiles}: Props){
 
     
 
@@ -21,7 +23,7 @@ export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,in
             inputRef.current.focus()
         }
     },10)
-        let nameIndex = desktopIcon.map((icon)=>{
+        let nameIndex = allFiles.map((icon: any)=>{
             if(name === icon.name){
 
                 return {...icon, rename: true} 
@@ -29,19 +31,19 @@ export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,in
                 return {...icon, rename: false}
             }
         })
-        setDesktopIcon(nameIndex)
+        setAllFiles(nameIndex)
  
         return ()=> clearTimeout(inputTimer)
     }
 
     const deleteIcon = (name: string) => {
-        let newList = desktopIcon.filter((icon) => icon.name !== name)
-        setDesktopIcon(newList)
+        let newList = allFiles.filter((icon: any) => icon.name !== name)
+        setAllFiles(newList)
     }    
     
     const openIcon = (name: string) => {
 
-        let nameIndex = desktopIcon.map((icon)=>{
+        let nameIndex = allFiles.map((icon: any)=>{
             if(name === icon.name){
              
                 return {...icon, open: true}
@@ -50,7 +52,7 @@ export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,in
                }
             
         })
-        setDesktopIcon(nameIndex)
+        setAllFiles(nameIndex)
     }
         
     return (
