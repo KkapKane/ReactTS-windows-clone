@@ -1,11 +1,11 @@
-import axios from 'axios';
-import moment from 'moment';
-import wikiLogo from '../../assets/Wikipedia-logo.png';
-import { useState, useEffect, useRef } from 'react';
-import News from './News';
-import { BiTrendingUp } from 'react-icons/bi';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import '../../styles/searchRight.scss';
+import { useState, useEffect, useRef } from "react";
+import "../../styles/searchRight.scss";
+import axios from "axios";
+import moment from "moment";
+import News from "./News";
+import wikiLogo from "../../assets/Wikipedia-logo.png";
+import { BiTrendingUp } from "react-icons/bi";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 export default function SearchRight() {
 
@@ -25,7 +25,7 @@ export default function SearchRight() {
             setLoading(false);
         }
         catch (error) {
-            console.error(error)
+            console.error(error);
         }
     }
 
@@ -39,7 +39,6 @@ export default function SearchRight() {
             getRandomEvents();
         }
     }, [tih])
-
 
     // states for person //
     const [birthPerson, setBirthPerson] = useState<any>();
@@ -122,7 +121,8 @@ export default function SearchRight() {
 
     const scroll = (
         ref: React.MutableRefObject<HTMLDivElement | null>,
-        direction: string) => {
+        direction: string
+    ) => {
         if (ref.current) {
             if (direction == 'right') {
                 if (ref == eventRef) {
@@ -152,30 +152,28 @@ export default function SearchRight() {
             setMaxEventPos(eventRef.current.scrollWidth);
         }
     }, []);
-    
+
     useEffect(() => {
         if (newsRef.current) {
             setMaxNewsPos(newsRef.current.scrollWidth);
         }
     }, [newsPos]);
 
-
     // quote of the day //
     const [quote, setQuote] = useState<any | undefined>();
     async function getQuote() {
         try {
-            const { data } = await axios.get('https://api.quotable.io/random?maxLength=100')
-            setQuote(data)
+            const { data } = await axios.get('https://api.quotable.io/random?maxLength=100');
+            setQuote(data);
         }
         catch (error) {
-            console.error(error)
+            console.error(error);
         }
     }
 
     useEffect(() => {
         getQuote();
     }, [])
-
 
     return (
         <div className="right">
@@ -188,11 +186,11 @@ export default function SearchRight() {
                         <div id='img-container'>
                             <img src={bpPic == undefined ? wikiLogo : bpPic} alt={birthPerson?.links[0]?.title} />
                             <a id="label" href={birthPerson?.links[0]?.link} target="_blank">
-                                {birthPerson.links[0].title}'s birthday</a>
+                                {birthPerson.links[0].title}'s birthday
+                            </a>
                         </div>
                         : null}
                 </div>
-
                 : null}
 
             {!loading ?

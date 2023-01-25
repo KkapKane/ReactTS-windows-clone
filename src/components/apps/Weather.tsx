@@ -1,8 +1,7 @@
-import '../../styles/weathernews.scss';
+import { useEffect, useState } from "react";
+import "../../styles/weathernews.scss";
 import axios from "axios";
-import { useEffect, useState } from 'react';
-import News from './News';
-
+import News from "./News";
 
 export default function Weather() {
 
@@ -27,7 +26,7 @@ export default function Weather() {
     }
 
     useEffect(() => {
-            getWeather();
+        getWeather();
     }, []);
 
     // state for news display on weather hover // 
@@ -61,8 +60,7 @@ export default function Weather() {
 
             {/* news panel display when weather is hovered */}
             {hover ?
-                <News
-                    />
+                <News />
                 : null
             }
         </span>

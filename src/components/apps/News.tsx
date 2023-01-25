@@ -1,7 +1,6 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import moment from 'moment';
-
+import axios from "axios";
+import moment from "moment";
 
 type colorCombo = {
     backgroundColor: string;
@@ -21,7 +20,7 @@ export default function News() {
                 '74e9bda30eea425781bff6a334093b25'
             )
             setNews(data.articles);
-            setLoading(false)
+            setLoading(false);
         }
         catch (error) {
             console.error(error);
@@ -122,8 +121,8 @@ export default function News() {
                 news ?
                     news.map((n, index) => {
                         return (
-                            <a className="article" 
-                                href={n.url} 
+                            <a className="article"
+                                href={n.url}
                                 target="_blank"
                                 key={index}
                                 style={{
