@@ -7,12 +7,14 @@ import SearchLeft from './SearchLeft';
 import { VscSearch } from 'react-icons/vsc'
 
 interface Props {
-  desktopIcon: DesktopIconType[];
+
   setSearchDisplay: React.Dispatch<React.SetStateAction<boolean>>;
-  setDesktopIcon: any;
+ 
+  allFiles: any;
+  setAllFiles: any;
 }
 
-export default function Search({ desktopIcon, setSearchDisplay, setDesktopIcon }: Props) {
+export default function Search({setAllFiles, allFiles, setSearchDisplay, }: Props) {
 
   const [input, setInput] = useState('')
   const { programs, setPrograms }: any = useContext(Programs);
@@ -20,7 +22,7 @@ export default function Search({ desktopIcon, setSearchDisplay, setDesktopIcon }
   const searchRef = useRef<HTMLInputElement>(null);
 
   const getAutoComplete = (query: string) => {
-    let everyFile = [...programs, ...desktopIcon]
+    let everyFile = [...programs, ...allFiles]
 
     let result: string[] = everyFile.filter((ev) => ev.name.toLowerCase().includes(query.toLowerCase()))
     setSuggestions(result)
@@ -36,14 +38,14 @@ export default function Search({ desktopIcon, setSearchDisplay, setDesktopIcon }
   }, [input])
 
   const openIcon = (name: string) => {
-    let nameIndex = desktopIcon.map((icon) => {
+    let nameIndex = allFiles.map((icon: any) => {
       if (name === icon.name) {
         return { ...icon, open: true };
       } else {
         return { ...icon, open: false };
       }
     });
-    setDesktopIcon(nameIndex);
+    setAllFiles(nameIndex);
   };
 
   return (

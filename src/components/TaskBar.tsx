@@ -18,9 +18,11 @@ interface Props {
     handleClock: () => void;
     desktopIcon: DesktopIconType[];
     setDesktopIcon: any;
+    allFiles: any;
+    setAllFiles: any;
 }
 
-export default function TaskBar({ handleClock, clock, desktopIcon, setDesktopIcon }: Props) {
+export default function TaskBar({ handleClock, clock, desktopIcon, setDesktopIcon, setAllFiles, allFiles }: Props) {
 
     const { tasks, setTask }: any = useContext(Tasks);
 
@@ -39,7 +41,7 @@ export default function TaskBar({ handleClock, clock, desktopIcon, setDesktopIco
     
     return (
         <div id='task-bar'>
-            {searchDisplay ? <Search  desktopIcon={desktopIcon} setSearchDisplay={setSearchDisplay} setDesktopIcon={setDesktopIcon}/> : null}
+            {searchDisplay ? <Search  setSearchDisplay={setSearchDisplay} allFiles={allFiles} setAllFiles={setAllFiles}/> : null}
             <div id="task-left">
                 <Start />
                 {tasks.map((taskd: taskType) => {
