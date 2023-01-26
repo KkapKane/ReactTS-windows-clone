@@ -18,6 +18,7 @@ import { FaYoutube, FaTwitter } from 'react-icons/fa';
 import maple from "./assets/maplestory-logo.png";
 import arashiyama from "./assets/arashiyama.png";
 import { FcTodoList } from 'react-icons/fc';
+import { dragging, dragStart } from './helper/BetterDragDrop';
 
 function App() {
 
@@ -63,6 +64,12 @@ function App() {
 
   ])
 
+  const [fileContainerInfo, setFileContainerInfo] = useState({
+    diffX: 0,
+    diffY: 0,
+    dragging: false,
+    styles: {},
+  });
 
   const [whichMenu, setWhichMenu] = useState('')
 
@@ -133,6 +140,7 @@ function App() {
   useEffect(() => {
     //creates a clone of the icon being clicked and put it at mouse position
     const createIconClone = (event: MouseEvent) => {
+
       event.preventDefault()
       const target = event.target as HTMLDivElement;
       // setCurrentFocus(target.id)
@@ -148,17 +156,20 @@ function App() {
       }
     }
 
-    const moveIconClone = (event: MouseEvent) => {
+    const moveIconClone = (event: MouseEvent)  =>  {
+     
+
       const x = event.clientX;
       const y = event.clientY;
       if (dragRef.current) {
         dragRef.current.style.left = `${x}px`;
         dragRef.current.style.top = `${y}px`;
       }
-    }
+    };
 
     const letGoIcon = (event: MouseEvent) => {
      
+      
 
       setCurrentDrag(-1)
       if (currentDrag === -1) return;
@@ -248,6 +259,8 @@ function App() {
             setfinalMouseDestination={setFinalMouseDestination}
             allFiles={allFiles}
             setAllFiles={setAllFiles}
+            setFileContainerInfo={setFileContainerInfo}
+            fileContainerInfo={fileContainerInfo}
           />
           {currentDrag !== -1 ? (
             <img

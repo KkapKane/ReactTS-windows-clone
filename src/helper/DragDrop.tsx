@@ -20,8 +20,8 @@ export function dragDrop(
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLDivElement;
     if (target.id === targetHandle || target.className === targetHandle) {
-      coords.current.startX = e.clientX;
-      coords.current.startY = e.clientY;
+      coords.current.startX = e.screenX;
+      coords.current.startY = e.screenY;
      var waitClick = setTimeout(()=>{
 
         isClicked.current = true;
@@ -40,10 +40,10 @@ export function dragDrop(
   const onMouseMove = (e: MouseEvent) => {
     if (!isClicked.current) return;
 
-    box.style.top = `${e.clientY}px`;
-    box.style.left = `${e.clientY}px`;
-    const nextX = e.clientX - coords.current.startX + coords.current.lastX;
-    const nextY = e.clientY - coords.current.startY + coords.current.lastY;
+    box.style.top = `${e.screenX}px`;
+    box.style.left = `${e.screenY}px`;
+    const nextX = e.screenX - coords.current.startX + coords.current.lastX;
+    const nextY = e.screenY - coords.current.startY + coords.current.lastY;
     box.style.top = `${nextY}px`;
     box.style.left = `${nextX}px`;
 

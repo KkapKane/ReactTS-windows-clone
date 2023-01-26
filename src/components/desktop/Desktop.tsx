@@ -13,12 +13,16 @@ import Arashiyama from "../programs/Arashiyama";
 import Todo from "../programs/Todo";
 
 interface Props {
-  setDesktopIcon: React.Dispatch<
-    React.SetStateAction<
-      DesktopIconType[]
-    >
+  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
+  setFileContainerInfo: React.Dispatch<
+    React.SetStateAction<{
+      diffX: number;
+      diffY: number;
+      dragging: boolean;
+      styles: {};
+    }>
   >;
-
+  fileContainerInfo: any;
   desktopIcon: DesktopIconType[];
   calcRef: React.RefObject<HTMLDivElement>;
   audiRef: React.RefObject<HTMLDivElement>;
@@ -30,14 +34,13 @@ interface Props {
   todoRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
   allFiles: any;
-  
+
   programs: {
     name: string;
     visible: boolean;
   }[];
   setfinalMouseDestination: React.Dispatch<
-    React.SetStateAction<DesktopIconType
-    >
+    React.SetStateAction<DesktopIconType>
   >;
   containerRef: React.RefObject<HTMLDivElement>;
   currentFocus: string;
@@ -46,7 +49,7 @@ interface Props {
 }
 
 export default function Desktop({
-  desktopIcon,
+
   paintRef,
   calcRef,
   audiRef,
@@ -62,7 +65,9 @@ export default function Desktop({
   inputRef,
   setfinalMouseDestination,
   allFiles,
-  setAllFiles
+  setAllFiles,
+  setFileContainerInfo,
+  fileContainerInfo
 }: Props) {
   const [input, setInput] = useState("");
 
@@ -149,6 +154,8 @@ const [currentPath, setCurrentPath] = useState<string[]>([]);
                 findMouseLocation={findMouseLocation}
                 currentPath={currentPath}
                 setCurrentPath={setCurrentPath}
+                setFileContainerInfo={setFileContainerInfo}
+                fileContainerInfo={fileContainerInfo}
               />
             ) : null}
             
