@@ -128,18 +128,14 @@ const [currentPath, setCurrentPath] = useState<string[]>([]);
       ) : null}
       {allFiles.map((icon: any, index:number) => {
         return (
-          <>
+          <div key={index}>
             {icon.parent == '' ? <DesktopIcon
               icon={icon}
-    
-             
               currentFocus={currentFocus}
               inputRef={inputRef}
               findMouseLocation={findMouseLocation}
               handleKeyDown={handleKeyDown}
               setInput={setInput}
-      
-       
             />: null}
             {icon.open === true ? (
               <OpenedFile
@@ -159,7 +155,7 @@ const [currentPath, setCurrentPath] = useState<string[]>([]);
               />
             ) : null}
             
-          </>
+          </div>
         );
       })}
     </div>

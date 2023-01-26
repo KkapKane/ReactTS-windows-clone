@@ -3,7 +3,9 @@ import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
 import { DesktopIconType } from "../../types/project_types";
-import { BsChevronRight } from 'react-icons/bs';
+import { BsChevronRight } from "react-icons/bs";
+import { FcFolder } from "react-icons/fc";
+import { ImFileText2 } from "react-icons/im";
 
 interface Props {
   setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
@@ -58,7 +60,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
 
-        icon: folder, rename: false, type: 'folder', open: false, parent:'', filePath: []
+        icon: folder, rename: false, type: 'folder', open: false, parent: '', filePath: []
 
       },
     ]);
@@ -67,7 +69,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
 
-        icon: folder, rename: false, type: 'folder', open: false, parent:'', filePath:[]
+        icon: folder, rename: false, type: 'folder', open: false, parent: '', filePath: []
 
       },
     ]);
@@ -122,8 +124,14 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
       </div>
       {showOption ? (
         <div id='extra-option' onMouseLeave={mouseLeave}>
-          <span onClick={() => makeFolder()}>New Folder</span>
-          <span onClick={() => makeTextDoc()}>Text Document</span>
+          <span onClick={() => makeFolder()}>
+            <FcFolder size={17} />
+            <p>New Folder</p>
+          </span>
+          <span onClick={() => makeTextDoc()}>
+            <ImFileText2 size={17} />
+            <p>Text Document</p>
+          </span>
         </div>
       ) : null}
       <hr />

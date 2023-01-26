@@ -53,6 +53,11 @@ a {
     justify-content: center;
     align-items: center;
     z-index: 90;
+
+    iframe {
+        border-color: rgb(85, 85, 85);
+        border-style: solid;
+    }
 }
 
 #youtube,
@@ -70,7 +75,7 @@ a {
     justify-content: space-between;
     height: 24px;
     width: 100% ;
-    background-color: grey;
+    background-color: rgb(85, 85, 85);
 
     .program {
         display: flex;

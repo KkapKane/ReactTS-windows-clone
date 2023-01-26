@@ -49,6 +49,7 @@ export default function SearchLeft({ suggestions, setSearchDisplay, openIcon }: 
                     return (
                         <div className='search-icons'
                             id={suggestion.name}
+                            key={suggestion.name}
                             onClick={() => openProgram(suggestion.name, true, programs, tasks, setTask, setPrograms, suggestion.type)}>
                             {typeof suggestion.icon == 'string' ?
                                 <img src={suggestion.icon} alt={suggestion.name} />
