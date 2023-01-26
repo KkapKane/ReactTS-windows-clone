@@ -8,6 +8,7 @@ import { dragDrop } from '../../helper/DragDrop'
 import { minimizeProgram } from '../../helper/Minimize';
 import { programHandle } from '../../helper/ProgramHandle';
 import audition from '../../assets/audition.png';
+import { dragStart, dragging, dragEnd } from '../../helper/BetterDragDrop';
 
 interface Props {
   audiRef: React.RefObject<HTMLDivElement>;
@@ -28,7 +29,9 @@ export default function Audition({ audiRef, containerRef }: Props) {
 
   //anything pertaining to the draggable feature
   useEffect(() => {
+    
     dragDrop(audiRef, containerRef, 'audition-handle', coords, isClicked)
+ 
   }, []);
 
   //finds the index of the the task in the task object array
@@ -41,6 +44,7 @@ export default function Audition({ audiRef, containerRef }: Props) {
       ref={audiRef}
       id='audition'
       style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
+      
     >
       <div id='audition-handle'>
         <div className="program">
