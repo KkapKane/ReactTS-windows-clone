@@ -4,4 +4,4 @@ export const Programs = createContext({});
 
 export const Tasks = createContext({});
 
-export const fileContainerInfo = createContext({});
+export const dragInfo = createContext({});

@@ -1,49 +1,62 @@
-import '../../styles/style.scss'
+import "../../styles/style.scss";
 import { taskType } from "../../types/project_types";
-import { Programs, Tasks } from "../context/Programs";
+import { Programs, Tasks } from "../context/Context";
 import { useContext, useRef, useEffect } from "react";
-import { VscChromeMinimize } from 'react-icons/vsc'
-import { RxCross2 } from 'react-icons/rx';
-import { dragDrop } from '../../helper/DragDrop'
-import { minimizeProgram } from '../../helper/Minimize';
-import { programHandle } from '../../helper/ProgramHandle';
-import { FaTwitter } from 'react-icons/fa';
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
+import { minimizeProgram } from "../../helper/Minimize";
+import { programHandle } from "../../helper/ProgramHandle";
+import { FaTwitter } from "react-icons/fa";
+import { dragInfo } from "../context/Context";
+import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
 
-interface Props {
-  twtRef: React.RefObject<HTMLDivElement>;
-  containerRef: React.RefObject<HTMLDivElement>;
-}
-
-export default function Twitter({ twtRef, containerRef }: Props) {
-
+export default function Twitter() {
+  //twitter client dom node
+  const twtRef = useRef<HTMLDivElement>(null);
+  const helperHandleRef = useRef<HTMLDivElement>(null);
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
-  const isClicked = useRef<boolean>(false);
-  const coords = useRef<{ startX: number, startY: number, lastX: number, lastY: number }>({
-    startX: 0,
-    startY: 0,
-    lastX: 0,
-    lastY: 0
-  })
-
-  //anything pertaining to the draggable feature
-  useEffect(() => {
-    dragDrop(twtRef, containerRef, 'twitter-handle', coords, isClicked)
-  }, []);
+  const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
 
   //finds the index of the the task in the task object array
   const currentTaskIndex = tasks.findIndex(
     (task: taskType) => task.name === "Twitter"
   );
 
+  useEffect(() => {
+    const falseDrag = () => {
+      setDragContainerInfo({ ...dragContainerInfo, dragging: false });
+    };
+    document.body.addEventListener("mouseup", falseDrag);
+    return () => document.body.removeEventListener("mouseup", falseDrag);
+  }, [dragContainerInfo]);
+
   return (
     <div
       ref={twtRef}
+      onMouseDown={(e) =>
+        dragStart(
+          e,
+          "twitter-handle",
+          setDragContainerInfo,
+          dragContainerInfo,
+          helperHandleRef
+        )
+      }
+      onMouseMove={(e) => dragging(e, setDragContainerInfo, dragContainerInfo)}
+      onMouseUp={(e) =>
+        dragEnd(e, setDragContainerInfo, dragContainerInfo, helperHandleRef)
+      }
       id='twitter'
-      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
+      style={
+        tasks[currentTaskIndex]?.minimized
+          ? { display: "none" }
+          : dragContainerInfo.styles
+      }
     >
+      <span className='extended-handle' ref={helperHandleRef}></span>
       <div id='twitter-handle'>
-        <div className="program">
+        <div className='program'>
           <FaTwitter color='#1d9bf0' />
           <p>Twitter</p>
         </div>
@@ -51,7 +64,19 @@ export default function Twitter({ twtRef, containerRef }: Props) {
           <button onClick={() => minimizeProgram("Twitter", tasks, setTask)}>
             <VscChromeMinimize size={20} />
           </button>
-          <button id='exit-btn' onClick={() => programHandle("Twitter", false, programs, tasks, setTask, setPrograms)}>
+          <button
+            id='exit-btn'
+            onClick={() =>
+              programHandle(
+                "Twitter",
+                false,
+                programs,
+                tasks,
+                setTask,
+                setPrograms
+              )
+            }
+          >
             <RxCross2 size={20} />
           </button>
         </div>
