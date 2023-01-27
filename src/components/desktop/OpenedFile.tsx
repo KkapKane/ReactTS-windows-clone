@@ -1,19 +1,16 @@
 import "../../styles/openedFile.scss";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { HiChevronRight } from "react-icons/hi";
 import { FiArrowLeft } from "react-icons/fi";
 import { DesktopIconType } from "../../types/project_types";
 import { dragInfo } from "../context/Context";
-
 import DesktopIcon from "./DesktopIcon";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
 
 interface Props {
   icon: DesktopIconType;
-  containerRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
-
   allFiles: any;
   setAllFiles: any;
   findMouseLocation: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -32,7 +29,6 @@ export default function OpenedFile({
   setCurrentPath,
   currentPath,
   findMouseLocation,
-  containerRef,
   allFiles,
   setAllFiles,
   setInput,
@@ -40,9 +36,11 @@ export default function OpenedFile({
   currentFocus,
   handleKeyDown,
 }: Props) {
+
   const fileRef = useRef(null);
   const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
   const helperHandleRef = useRef<HTMLDivElement>(null);
+
   const closeFile = () => {
     let newFile = allFiles.map((x: any) => {
       if (x.name == icon.name) {
@@ -56,18 +54,11 @@ export default function OpenedFile({
   };
 
   //all system files
-
   useEffect(() => {
     if (currentPath.includes(icon.name)) return;
-
     setCurrentPath((prev) => [...prev, icon.name]);
-
     // dragDrop(fileRef,containerRef,'handle',coords,isClicked)
   }, []);
-
-  useEffect(() => {
-    console.log(currentPath);
-  }, [currentPath]);
 
   const goBack = () => {
     if (icon.parent == "") return;
@@ -112,9 +103,9 @@ export default function OpenedFile({
       className='opened-file'
       ref={fileRef}
       id={icon.name}
-      onMouseEnter={(e) => findMouseLocation(e)}
-    >
+      onMouseEnter={(e) => findMouseLocation(e)}>
       <span className='extended-handle' ref={helperHandleRef}></span>
+
       <div id='handle'>
         <div className='icon'>
           <img src={icon.icon} alt={icon.name} />
@@ -122,6 +113,7 @@ export default function OpenedFile({
         </div>
         <RxCross2 size={20} onClick={() => closeFile()} />
       </div>
+      
       <div className='file-navigation'>
         <button onClick={() => goBack()}>
           {" "}
@@ -141,19 +133,19 @@ export default function OpenedFile({
 
       {allFiles
         ? allFiles.map((file: any) => {
-            if (file.parent === icon.name) {
-              return (
-                <DesktopIcon
-                  icon={file}
-                  currentFocus={currentFocus}
-                  inputRef={inputRef}
-                  findMouseLocation={findMouseLocation}
-                  handleKeyDown={handleKeyDown}
-                  setInput={setInput}
-                />
-              );
-            }
-          })
+          if (file.parent === icon.name) {
+            return (
+              <DesktopIcon
+                icon={file}
+                currentFocus={currentFocus}
+                inputRef={inputRef}
+                findMouseLocation={findMouseLocation}
+                handleKeyDown={handleKeyDown}
+                setInput={setInput}
+              />
+            );
+          }
+        })
         : null}
     </div>
   );

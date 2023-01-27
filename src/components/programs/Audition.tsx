@@ -1,16 +1,14 @@
+import { useContext, useRef } from "react";
 import "../../styles/style.scss";
 import { taskType } from "../../types/project_types";
 import { Programs, Tasks } from "../context/Context";
-import { useContext, useRef, useEffect } from "react";
-import { VscChromeMinimize } from "react-icons/vsc";
-import { RxCross2 } from "react-icons/rx";
 import { dragInfo } from "../context/Context";
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
-import audition from "../../assets/audition.png";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
-
-
+import audition from "../../assets/audition.png";
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
 
 export default function Audition() {
   const { programs, setPrograms }: any = useContext(Programs);
@@ -25,9 +23,6 @@ export default function Audition() {
   const currentTaskIndex = tasks.findIndex(
     (task: taskType) => task.name === "Dance Game"
   );
-
-
-
 
   return (
     <div
@@ -51,10 +46,7 @@ export default function Audition() {
       }
     >
       <span className='extended-handle' ref={helperHandleRef}></span>
-      <div
-        id='audition-handle'
-
-      >
+      <div id='audition-handle'>
         <div className='program'>
           <img src={audition} alt='audition' />
           <p>Dance Game</p>

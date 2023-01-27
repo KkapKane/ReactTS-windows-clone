@@ -3,15 +3,13 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiFileBlank } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
-import { useEffect, useState } from 'react';
 
 interface Props {
   isHover: boolean;
-  isClicked: boolean;
   setIsHover: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function StartNav({ isClicked, isHover, setIsHover }: Props) {
+export default function StartNav({ isHover, setIsHover }: Props) {
 
   let timer: any = 0;
   const TIMEOUT = 1500;

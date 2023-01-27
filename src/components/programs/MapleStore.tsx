@@ -1,22 +1,19 @@
+import { useContext, useRef } from "react";
 import "../../styles/style.scss";
 import { taskType } from "../../types/project_types";
 import { Programs, Tasks } from "../context/Context";
-import { useContext, useRef } from "react";
-import { VscChromeMinimize } from "react-icons/vsc";
-import { RxCross2 } from "react-icons/rx";
-import { dragInfo } from "../context/Context";
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
-import maple from "../../assets/maplestory-logo.png";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
-
-
+import { dragInfo } from "../context/Context";
+import maple from "../../assets/maplestory-logo.png";
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
 
 export default function MapleStore() {
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
-    const { dragContainerInfo, setDragContainerInfo }: any =
-      useContext(dragInfo);
+  const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
 
   //maplestore client dom node
   const mpsRef = useRef<HTMLDivElement>(null);

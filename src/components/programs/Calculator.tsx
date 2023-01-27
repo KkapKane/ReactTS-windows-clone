@@ -1,11 +1,11 @@
-import "../../styles/calculator.scss";
-import { FcCalculator } from "react-icons/fc";
-import { Programs, Tasks } from "../context/Context";
 import { useContext, useState, useEffect, useRef } from "react";
-import { taskType, programType } from "../../types/project_types";
+import "../../styles/calculator.scss";
+import { Programs, Tasks } from "../context/Context";
+import { taskType } from "../../types/project_types";
 import { dragDrop } from "../../helper/DragDrop";
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
+import { FcCalculator } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { VscChromeMinimize } from "react-icons/vsc";
 
@@ -15,12 +15,11 @@ interface Props {
 }
 
 export default function Calculator({ calcRef, containerRef }: Props) {
+
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
   const [display, setDisplay] = useState<number | string | undefined>("");
-  const [prevDisplay, setPrevDisplay] = useState<number | string | undefined>(
-    ""
-  );
+  const [prevDisplay, setPrevDisplay] = useState<number | string | undefined>("");
   const [lastOp, setLastOp] = useState("");
   const [helperOp, setHelperOp] = useState(true);
   const [currentOp, setCurrentOp] = useState("");
@@ -77,7 +76,6 @@ export default function Calculator({ calcRef, containerRef }: Props) {
       }
     } else {
       //btn pressed type is a number
-
       setDisplay((prev) => prev + btn.toString());
     }
   };
@@ -139,8 +137,7 @@ export default function Calculator({ calcRef, containerRef }: Props) {
       ref={calcRef}
       id='calculator'
       draggable={false}
-      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
-    >
+      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}} >
       <div className='handle' draggable={false}>
         <FcCalculator size={30} />
         <span draggable={false}>Calculator</span>

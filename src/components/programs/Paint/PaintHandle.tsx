@@ -1,10 +1,10 @@
-import '../../../styles/paint/handle.scss';
-import paintIcon from '../../../assets/microsoft-paint.png';
-import { VscChromeMinimize } from 'react-icons/vsc';
-import { RxCross2 } from 'react-icons/rx';
-import { BsChevronUp } from 'react-icons/bs';
-import { IoHelpCircleSharp } from 'react-icons/io5';
+import "../../../styles/paint/handle.scss";
 import { minimizeProgram } from "../../../helper/Minimize";
+import paintIcon from "../../../assets/microsoft-paint.png";
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
+import { BsChevronUp } from "react-icons/bs";
+import { IoHelpCircleSharp } from "react-icons/io5";
 
 interface Props {
     tasks: any;

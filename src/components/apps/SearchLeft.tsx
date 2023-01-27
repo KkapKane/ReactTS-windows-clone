@@ -14,6 +14,7 @@ export default function SearchLeft({
   setSearchDisplay,
   openIcon,
 }: Props) {
+
   const openProgram = (
     name: string,
     bool: boolean,
@@ -21,14 +22,12 @@ export default function SearchLeft({
     tasks: any,
     setTask: any,
     setPrograms: any,
-    type: string
-  ) => {
+    type: string) => {
     if (type === "program") {
       programHandle(name, bool, programs, tasks, setTask, setPrograms);
     } else {
       openIcon(name);
     }
-
     setSearchDisplay(false);
   };
 
@@ -41,31 +40,32 @@ export default function SearchLeft({
       <div id='suggest-container'>
         {suggestions
           ? suggestions.map((suggestion: any) => {
-              return (
-                <div
-                  className='search-icons'
-                  id={suggestion.name}
-                  onClick={() =>
-                    openProgram(
-                      suggestion.name,
-                      true,
-                      programs,
-                      tasks,
-                      setTask,
-                      setPrograms,
-                      suggestion.type
-                    )
-                  }
-                >
-                  {typeof suggestion.icon == "string" ? (
-                    <img src={suggestion.icon} alt={suggestion.name} />
-                  ) : (
-                    suggestion.icon
-                  )}
-                  {suggestion.name}
-                </div>
-              );
-            })
+            return (
+              <div
+                className='search-icons'
+                id={suggestion.name}
+                key={suggestion.name}
+                onClick={() =>
+                  openProgram(
+                    suggestion.name,
+                    true,
+                    programs,
+                    tasks,
+                    setTask,
+                    setPrograms,
+                    suggestion.type
+                  )
+                }
+              >
+                {typeof suggestion.icon == "string" ? (
+                  <img src={suggestion.icon} alt={suggestion.name} />
+                ) : (
+                  suggestion.icon
+                )}
+                {suggestion.name}
+              </div>
+            );
+          })
           : null}
       </div>
     </div>

@@ -1,14 +1,13 @@
 import { taskType, programType } from "../types/project_types";
 
-
 export const programHandle = (
   programName: string,
   status: boolean,
   programs: programType[],
   tasks: taskType[],
   setTask: any,
-  setPrograms:any
-) => {
+  setPrograms: any) => {
+    
   // makes the program visible or not. (close or open program)
   const newProgram = programs.map((program: programType) => {
     if (program.name === programName) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import "../../styles/weathernews.scss";
-import axios from "axios";
+import "../../styles/weatherNews.scss";
 import News from "./News";
+import axios from "axios";
 
 export default function Weather() {
 

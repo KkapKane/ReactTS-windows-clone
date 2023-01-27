@@ -3,12 +3,10 @@ import "../../styles/search.scss";
 import SearchRight from "./SearchRight";
 import SearchLeft from "./SearchLeft";
 import { Programs } from "../context/Context";
-import { DesktopIconType } from "../../types/project_types";
 import { VscSearch } from "react-icons/vsc";
 
 interface Props {
   setSearchDisplay: React.Dispatch<React.SetStateAction<boolean>>;
-
   allFiles: any;
   setAllFiles: any;
 }

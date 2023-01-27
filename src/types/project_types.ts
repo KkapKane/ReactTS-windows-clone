@@ -1,6 +1,4 @@
-import {ReactNode} from 'react'
-
-
+import { ReactNode } from 'react'
 
 export type taskType = {
   name: string;
@@ -10,21 +8,18 @@ export type taskType = {
 };
 
 export type programType = {
-    name: string;
-    icon: string | ReactNode;
-    visible: boolean;
-    type: string;
+  name: string;
+  icon: string | ReactNode;
+  visible: boolean;
+  type: string;
 }
 
 export type DesktopIconType = {
-
-    name: string;
-    icon: string;
-    rename: boolean;
-    type: string;
-    open: boolean;
-    parent: string;
-    filePath: string[];
-  
-  
+  name: string;
+  icon: string;
+  rename: boolean;
+  type: string;
+  open: boolean;
+  parent: string;
+  filePath: string[];
 };

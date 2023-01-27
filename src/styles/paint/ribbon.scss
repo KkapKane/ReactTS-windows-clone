@@ -1,7 +1,6 @@
-$ribbonbg: #e7ebee;
+@import '../variables.scss';
 
 #paint {
-
     #paint-ribbon {
         background-color: $ribbonbg;
         padding: 5px 0;
@@ -23,7 +22,7 @@ $ribbonbg: #e7ebee;
 
         #paint-tools {
             width: 55px;
-            
+
             .tool-btns {
                 display: flex;
                 flex-wrap: wrap;

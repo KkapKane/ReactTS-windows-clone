@@ -1,28 +1,24 @@
+import { useContext, useRef } from "react";
 import "../../styles/style.scss";
-import { taskType } from "../../types/project_types";
-import { Programs, Tasks } from "../context/Context";
-import { useContext, useRef, useEffect } from "react";
-import { VscChromeMinimize } from "react-icons/vsc";
-import { RxCross2 } from "react-icons/rx";
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
-import arashiyama from "../../assets/arashiyama.png";
+import { taskType } from "../../types/project_types";
+import { Programs, Tasks } from "../context/Context";
 import { dragInfo } from "../context/Context";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
-
-
+import arashiyama from "../../assets/arashiyama.png";
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
 
 export default function Arashiyama() {
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
-   const { dragContainerInfo, setDragContainerInfo }: any =
-     useContext(dragInfo);
+  const { dragContainerInfo, setDragContainerInfo }: any =
+    useContext(dragInfo);
 
   //arashiyama client dom node
   const araRef = useRef<HTMLDivElement>(null);
   const helperHandleRef = useRef<HTMLDivElement>(null);
-
-
 
   //finds the index of the the task in the task object array
   const currentTaskIndex = tasks.findIndex(

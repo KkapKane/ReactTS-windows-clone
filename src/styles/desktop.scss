@@ -1,14 +1,10 @@
-
 #desktop {
     display: none;
-   
-
-
     display: flex;
     flex-wrap: wrap;
     height: 100%;
     flex-direction: column;
-   
+
     .desktop-icon {
         display: flex;
         flex-direction: column;
@@ -20,19 +16,16 @@
         height: 100px;
         padding: .2rem;
         scale: .9;
-        // border: 1px solid black;
 
-       
-     
-        input{
+        input {
             border: 0;
             height: 20px;
             padding: 3px;
             background-color: white;
         }
+
         img {
             height: 38%;
-            
         }
     }
 

@@ -1,5 +1,3 @@
-
-
 export function dragDrop(
   targetRef: React.RefObject<HTMLDivElement>,
   containerRef: React.RefObject<HTMLDivElement>,
@@ -22,20 +20,17 @@ export function dragDrop(
     if (target.id === targetHandle || target.className === targetHandle) {
       coords.current.startX = e.screenX;
       coords.current.startY = e.screenY;
-     var waitClick = setTimeout(()=>{
-
+      var waitClick = setTimeout(() => {
         isClicked.current = true;
       }, 10)
       waitClick
     }
-    return ()=> clearTimeout(waitClick)
+    return () => clearTimeout(waitClick)
   };
   const onMouseUp = (e: MouseEvent) => {
     isClicked.current = false;
-    coords.current.lastX = box.offsetLeft ;
+    coords.current.lastX = box.offsetLeft;
     coords.current.lastY = box.offsetTop;
-
-    
   };
   const onMouseMove = (e: MouseEvent) => {
     if (!isClicked.current) return;
@@ -46,7 +41,6 @@ export function dragDrop(
     const nextY = e.screenY - coords.current.startY + coords.current.lastY;
     box.style.top = `${nextY}px`;
     box.style.left = `${nextX}px`;
-
   };
 
   box.addEventListener("mousedown", onMouseDown);
@@ -60,6 +54,5 @@ export function dragDrop(
     box.removeEventListener("mousemove", onMouseMove);
     box.removeEventListener("mouseleave", onMouseUp);
   };
-
   return cleanup;
 }
