@@ -32,22 +32,28 @@ export default function SearchLeft({
     setSearchDisplay(false);
   };
 
+  const { programs, setPrograms }: any = useContext(Programs);
+  const { tasks, setTask }: any = useContext(Tasks);
 
-    return (
-        <div className="left">
-            <div className="title">Suggested</div>
-            <div id="suggest-container">
-                {suggestions ? suggestions.map((suggestion: any) => {
-                    return (
-                        <div className='search-icons'
-                            id={suggestion.name}
-                            key={suggestion.name}
-                            onClick={() => openProgram(suggestion.name, true, programs, tasks, setTask, setPrograms, suggestion.type)}>
-                            {typeof suggestion.icon == 'string' ?
-                                <img src={suggestion.icon} alt={suggestion.name} />
-                                : suggestion.icon}
-                            {suggestion.name}
-                        </div>
+  return (
+    <div className='left'>
+      <div className='title'>Suggested</div>
+      <div id='suggest-container'>
+        {suggestions
+          ? suggestions.map((suggestion: any) => {
+              return (
+                <div
+                  className='search-icons'
+                  id={suggestion.name}
+                  onClick={() =>
+                    openProgram(
+                      suggestion.name,
+                      true,
+                      programs,
+                      tasks,
+                      setTask,
+                      setPrograms,
+                      suggestion.type
                     )
                   }
                 >

@@ -1,6 +1,8 @@
 import "../../styles/openedFile.scss";
-import { useEffect, useRef,  useContext } from "react";
-import { MdOutlineClose } from "react-icons/md";
+import { useEffect, useRef, useState, useContext } from "react";
+import { RxCross2 } from "react-icons/rx";
+import { HiChevronRight } from "react-icons/hi";
+import { FiArrowLeft } from "react-icons/fi";
 import { DesktopIconType } from "../../types/project_types";
 import { dragInfo } from "../context/Context";
 
@@ -39,8 +41,8 @@ export default function OpenedFile({
   handleKeyDown,
 }: Props) {
   const fileRef = useRef(null);
-const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
-const helperHandleRef = useRef<HTMLDivElement>(null);
+  const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
+  const helperHandleRef = useRef<HTMLDivElement>(null);
   const closeFile = () => {
     let newFile = allFiles.map((x: any) => {
       if (x.name == icon.name) {
@@ -95,7 +97,13 @@ const helperHandleRef = useRef<HTMLDivElement>(null);
     <div
       style={dragContainerInfo.styles}
       onMouseDown={(e) =>
-        dragStart(e, "handle", setDragContainerInfo, dragContainerInfo, helperHandleRef)
+        dragStart(
+          e,
+          "handle",
+          setDragContainerInfo,
+          dragContainerInfo,
+          helperHandleRef
+        )
       }
       onMouseMove={(e) => dragging(e, setDragContainerInfo, dragContainerInfo)}
       onMouseUp={(e) =>
@@ -108,13 +116,29 @@ const helperHandleRef = useRef<HTMLDivElement>(null);
     >
       <span className='extended-handle' ref={helperHandleRef}></span>
       <div id='handle'>
-        <button onClick={() => goBack()}>back</button>
-
-        <img src={icon.icon} alt={icon.name} />
-        {icon.name}
-        <MdOutlineClose onClick={() => closeFile()} />
+        <div className='icon'>
+          <img src={icon.icon} alt={icon.name} />
+          <span>{icon.name}</span>
+        </div>
+        <RxCross2 size={20} onClick={() => closeFile()} />
       </div>
-      <div className='file-path'>{`${currentPath}`}</div>
+      <div className='file-navigation'>
+        <button onClick={() => goBack()}>
+          {" "}
+          <FiArrowLeft size={16} />{" "}
+        </button>
+        <div className='file-path'>
+          {currentPath.map((path: string, index: number) => {
+            return (
+              <span key={index}>
+                <p>{path}</p>
+                <HiChevronRight />
+              </span>
+            );
+          })}
+        </div>
+      </div>
+
       {allFiles
         ? allFiles.map((file: any) => {
             if (file.parent === icon.name) {
@@ -134,4 +158,3 @@ const helperHandleRef = useRef<HTMLDivElement>(null);
     </div>
   );
 }
-
