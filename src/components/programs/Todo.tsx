@@ -1,24 +1,21 @@
+import { useContext, useRef } from "react";
 import "../../styles/style.scss";
 import { taskType } from "../../types/project_types";
 import { Programs, Tasks } from "../context/Context";
-import { useContext, useRef } from "react";
-import { VscChromeMinimize } from "react-icons/vsc";
-import { RxCross2 } from "react-icons/rx";
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
-import { FcTodoList } from "react-icons/fc";
 import { dragInfo } from "../context/Context";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
-
-
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
+import { FcTodoList } from "react-icons/fc";
 
 export default function Todo() {
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
-    const { dragContainerInfo, setDragContainerInfo }: any =
-    useContext(dragInfo);
-    
-    //todo client dom node
+  const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
+
+  //todo client dom node
   const todoRef = useRef<HTMLDivElement>(null);
   const helperHandleRef = useRef<HTMLDivElement>(null);
 

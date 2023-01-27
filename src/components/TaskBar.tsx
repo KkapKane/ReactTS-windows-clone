@@ -1,22 +1,20 @@
-import SmallClock from "./apps/SmallClock";
 import { useState, useContext, useEffect } from "react";
 import "../styles/taskbar.scss";
+import SmallClock from "./apps/SmallClock";
+import Weather from "./apps/Weather";
+import Search from "./apps/Search";
 import Start from "./start/Start";
 import Task from "./Task";
-import { BiMessageAlt } from "react-icons/bi";
 import { Tasks } from "./context/Context";
-import {  taskType } from "../types/project_types";
+import { taskType } from "../types/project_types";
+import { BiMessageAlt } from "react-icons/bi";
 import { IoVolumeHighOutline } from "react-icons/io5";
 import { RiWifiLine } from "react-icons/ri";
 import { BsChevronUp } from "react-icons/bs";
-import Weather from "./apps/Weather";
-import Search from "./apps/Search";
 
 interface Props {
   clock: boolean;
   handleClock: () => void;
-
- 
   allFiles: any;
   setAllFiles: any;
 }
@@ -24,10 +22,10 @@ interface Props {
 export default function TaskBar({
   handleClock,
   clock,
-
-    setAllFiles,
+  setAllFiles,
   allFiles,
 }: Props) {
+
   const { tasks, setTask }: any = useContext(Tasks);
 
   const [searchDisplay, setSearchDisplay] = useState(false);
@@ -45,13 +43,13 @@ export default function TaskBar({
 
   return (
     <div id='task-bar'>
-      {searchDisplay ? (
+      {searchDisplay ?
         <Search
           setSearchDisplay={setSearchDisplay}
           allFiles={allFiles}
           setAllFiles={setAllFiles}
         />
-      ) : null}
+        : null}
       <div id='task-left'>
         <Start />
         {tasks.map((taskd: taskType) => {
@@ -66,6 +64,7 @@ export default function TaskBar({
           );
         })}
       </div>
+      
       <div id='task-right'>
         <Weather />
         <BsChevronUp size={16} style={{ padding: "0 6px" }} />

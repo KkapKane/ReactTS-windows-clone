@@ -1,6 +1,6 @@
-import '../../../styles/paint/colors.scss'
-import { useEffect, useState } from 'react';
-import { PhotoshopPicker } from 'react-color';
+import { useEffect, useState } from "react";
+import "../../../styles/paint/colors.scss"
+import { PhotoshopPicker } from "react-color";
 
 interface Props {
     chosenColor: string | undefined;
@@ -90,13 +90,10 @@ export default function PaintColors({ chosenColor, setChosenColor }: Props) {
                 <PhotoshopPicker
                     color={currentColor}
                     onChange={(updatedColor) =>
-                        setCurrentColor(updatedColor.hex)
-                    }
+                        setCurrentColor(updatedColor.hex)}
                     onAccept={() => {
                         setChosenColor(currentColor);
-                        handlePicker();
-                    }
-                    }
+                        handlePicker(); }}
                     onCancel={handlePicker}
                 />
                 : null}

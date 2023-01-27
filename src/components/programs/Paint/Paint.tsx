@@ -23,8 +23,6 @@ export default function Paint({ paintRef, containerRef }: Props) {
   // state for current brush size //
   const [brushSize, setBrushSize] = useState<number | "">(10);
   
-
-
   // function for switching brush sizes //
   const handleBrushSize = (size: number) => {
     setBrushSize(size);
@@ -46,7 +44,6 @@ export default function Paint({ paintRef, containerRef }: Props) {
     let color = event.target.style.backgroundColor;
     setChosenColor(color);
   };
-
   // above for eyedropper tool //
 
   const isClicked = useRef<boolean>(false);
@@ -99,13 +96,12 @@ export default function Paint({ paintRef, containerRef }: Props) {
       id='paint'
       onClick={closeBrushMenu}
       ref={paintRef}
-      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
-    >
+      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}} >
       <PaintHandle
         programHandle={programHandle}
         tasks={tasks}
         setTask={setTask}
-      />
+        />
       <PaintRibbon
         brushMenu={brushMenu}
         setBrushMenu={setBrushMenu}
@@ -116,13 +112,13 @@ export default function Paint({ paintRef, containerRef }: Props) {
         eye={eye}
         activeEye={activeEye}
         brushSize={brushSize}
-      />
+        />
       <PaintCanvas
         brushSize={brushSize}
         chosenColor={chosenColor}
         eye={eye}
         getColor={getColor}
-      />
+        />
     </div>
   );
 }

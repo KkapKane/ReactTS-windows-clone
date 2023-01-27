@@ -1,7 +1,7 @@
-import '../../../styles/paint/ribbon.scss';
-import PaintBrush from './PaintBrush';
-import PaintColors from './PaintColors';
-import PaintTools from './PaintTools';
+import "../../../styles/paint/ribbon.scss";
+import PaintBrush from "./PaintBrush";
+import PaintColors from "./PaintColors";
+import PaintTools from "./PaintTools";
 
 interface Props {
     brushMenu: boolean;
@@ -15,7 +15,17 @@ interface Props {
     activeEye: () => void;
 }
 
-export default function PaintRibbon({ brushMenu, setBrushMenu, brushSize, closeBrushMenu, chosenColor, setChosenColor, handleBrushSize, activeEye, eye }: Props) {
+export default function PaintRibbon({
+    brushMenu,
+    setBrushMenu,
+    brushSize,
+    closeBrushMenu,
+    chosenColor,
+    setChosenColor,
+    handleBrushSize,
+    activeEye,
+    eye
+}: Props) {
 
     return (
         <div id="paint-ribbon">
@@ -25,18 +35,18 @@ export default function PaintRibbon({ brushMenu, setBrushMenu, brushSize, closeB
                 activeEye={activeEye}
                 eye={eye}
                 handleBrushSize={handleBrushSize}
-            />
+                />
             <PaintBrush
                 brushMenu={brushMenu}
                 setBrushMenu={setBrushMenu}
                 closeBrushMenu={closeBrushMenu}
                 handleBrushSize={handleBrushSize}
                 brushSize={brushSize}
-            />
+                />
             <PaintColors
                 chosenColor={chosenColor}
                 setChosenColor={setChosenColor}
-            />
+                />
         </div>
     )
 }

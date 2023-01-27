@@ -1,6 +1,6 @@
-import eraseIcon from '../../../assets/eraser.png';
-import eyedropIcon from '../../../assets/eye-dropper.png';
-import trashIcon from '../../../assets/trash-can.png';
+import eraseIcon from "../../../assets/eraser.png";
+import eyedropIcon from "../../../assets/eye-dropper.png";
+import trashIcon from "../../../assets/trash-can.png";
 
 interface Props {
     eye: boolean;
@@ -10,14 +10,19 @@ interface Props {
     handleBrushSize: (size: number) => void;
 }
 
-export default function PaintTools({ chosenColor, setChosenColor, activeEye, eye, handleBrushSize }: Props) {
+export default function PaintTools({
+    chosenColor,
+    setChosenColor,
+    activeEye,
+    eye,
+    handleBrushSize
+}: Props) {
 
     // clear all tool function //
     const clearAll = () => {
         const boxes = Array.from(
             document.getElementsByClassName('box') as HTMLCollectionOf<HTMLElement>,
         );
-
         boxes.forEach(box => {
             box.style.backgroundColor = 'white';
         });

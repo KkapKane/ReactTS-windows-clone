@@ -1,11 +1,10 @@
+import { useEffect, useState } from "react";
 import "../../styles/start.scss";
-import { useEffect } from "react";
-
-import { useState } from "react";
-import windows from "../../assets/windows.png";
 import StartPanel from "./StartPanel";
+import windows from "../../assets/windows.png";
 
 export default function Start() {
+
   const [isClicked, setIsClicked] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
@@ -23,19 +22,17 @@ export default function Start() {
     <div
       id='start'
       className='start-icon'
-      onClick={() => setIsClicked(!isClicked)}
-    >
+      onClick={() => setIsClicked(!isClicked)} >
       <img
         src={windows}
         onClick={() => setIsClicked(!isClicked)}
         className='start-icon'
-        alt=''
-      />
+        alt='' />
       <StartPanel
         isClicked={isClicked}
         isHover={isHover}
         setIsHover={setIsHover}
-      />
+        />
     </div>
   );
 }

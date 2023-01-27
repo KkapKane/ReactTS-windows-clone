@@ -14,16 +14,23 @@ body {
     overflow: hidden;
 }
 
-#root, .App {
+#root,
+.App {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
@@ -37,8 +44,6 @@ a {
     color: inherit;
 }
 
-
-
 #audition,
 #youtube,
 #twitter,
@@ -47,7 +52,7 @@ a {
 #todo {
     position: absolute;
     top: 0;
-    left:0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,13 +78,13 @@ a {
 #todo-handle {
     display: flex;
     justify-content: space-between;
-    height: 24px;
-    width: 100% ;
+    height: 26px;
+    width: 100%;
     background-color: rgb(85, 85, 85);
 
     .program {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         padding-left: 10px;
         gap: 6px;
 
@@ -94,7 +99,7 @@ a {
         }
     }
 
-    .button-container{
+    .button-container {
         display: flex;
 
         button {

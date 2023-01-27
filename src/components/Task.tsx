@@ -1,6 +1,5 @@
 import "../styles/taskbar.scss";
-import {taskType} from '../types/project_types'
-
+import { taskType } from "../types/project_types";
 
 interface Props {
   task: taskType;
@@ -10,8 +9,6 @@ interface Props {
 }
 
 export default function Task({ task, tasks, setTask, setSearchDisplay }: Props): JSX.Element {
-
-
 
   //changes the hover property in task to the set parameter (status)
   const hoverHandle = (taskName: string, status: boolean) => {
@@ -37,30 +34,29 @@ export default function Task({ task, tasks, setTask, setSearchDisplay }: Props):
     setTask(taskList);
   };
 
-  const expandSearch = () =>{
+  const expandSearch = () => {
     setSearchDisplay(true);
   }
 
   return (
     <>
-    
       <div
         className='task'
         id={task.name == 'Search' ? 'search-btn' : ''}
         onMouseOver={() => hoverHandle(task.name, true)}
         onMouseOut={() => hoverHandle(task.name, false)}
-        onClick={()=> task.name !== 'Search' ? toggleMinimize(task.name) 
-        /* when the task IS search */
-        : expandSearch()}
-      >
+        onClick={() => task.name !== 'Search' ? toggleMinimize(task.name)
+          /* when the task IS search */
+          : expandSearch()} >
         <div
           className='task-toolTip'
-          style={task.hover === true ? { display: "inline-block" } : {}}
-        >
+          style={task.hover === true ? { display: "inline-block" } : {}} >
           {task.name}
         </div>
-
-        {typeof task.icon === 'string' ? <img src={task.icon} alt={task.name} id={task.name == 'Search' ? 'search-btn' : ''}/> : task.icon }
+        
+        {typeof task.icon === 'string' ?
+          <img src={task.icon} alt={task.name} id={task.name == 'Search' ? 'search-btn' : ''} />
+          : task.icon}
       </div>
     </>
   );

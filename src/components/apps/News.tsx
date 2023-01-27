@@ -33,87 +33,27 @@ export default function News() {
 
     // array for random color combinations for article cards //
     const colorCombo: colorCombo[] = [
-        {
-            backgroundColor: '#E9D758',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#297373',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#FF8552',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#BF8B85',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#5D5F71',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#934683',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#FCC8C2',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#2B3A67',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#66999B',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#F9C784',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#493843',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#61988E',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#A0B2A6',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#101D42',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#0D1317',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#5A5353',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#A07178',
-            color: '#fff'
-        },
-        {
-            backgroundColor: '#FFFC99',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#E6B89C',
-            color: '#000'
-        },
-        {
-            backgroundColor: '#9CAFB7',
-            color: '#000'
-        },
-    ]
+        { backgroundColor: '#E9D758', color: '#000' },
+        { backgroundColor: '#297373', color: '#fff' },
+        { backgroundColor: '#FF8552', color: '#000' },
+        { backgroundColor: '#BF8B85', color: '#fff' },
+        { backgroundColor: '#5D5F71', color: '#fff' },
+        { backgroundColor: '#934683', color: '#fff' },
+        { backgroundColor: '#FCC8C2', color: '#000' },
+        { backgroundColor: '#2B3A67', color: '#fff' },
+        { backgroundColor: '#66999B', color: '#fff' },
+        { backgroundColor: '#F9C784', color: '#000' },
+        { backgroundColor: '#493843', color: '#fff' },
+        { backgroundColor: '#61988E', color: '#fff' },
+        { backgroundColor: '#A0B2A6', color: '#000' },
+        { backgroundColor: '#101D42', color: '#fff' },
+        { backgroundColor: '#0D1317', color: '#fff' },
+        { backgroundColor: '#5A5353', color: '#fff' },
+        { backgroundColor: '#A07178', color: '#fff' },
+        { backgroundColor: '#FFFC99', color: '#000' },
+        { backgroundColor: '#E6B89C', color: '#000' },
+        { backgroundColor: '#9CAFB7', color: '#000' },
+    ];
 
     return (
         <div id="news">

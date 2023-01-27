@@ -5,12 +5,11 @@ interface Props {
   draw: boolean;
   index: number;
   brushSize: number | "";
-  elementsRef: React.MutableRefObject<React.RefObject<HTMLDivElement>[]>;
   eye: boolean;
   getColor: (event: any) => void;
 }
 
-export default function PixelBox({ chosenColor, draw, index, brushSize, elementsRef, eye, getColor }: Props) {
+export default function PixelBox({ chosenColor, draw, index, brushSize, eye, getColor }: Props) {
 
   const boxRef: any = useRef(null);
 

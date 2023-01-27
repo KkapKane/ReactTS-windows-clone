@@ -1,14 +1,14 @@
+import { useContext, useRef, useEffect } from "react";
 import "../../styles/style.scss";
 import { taskType } from "../../types/project_types";
 import { Programs, Tasks } from "../context/Context";
-import { useContext, useRef, useEffect } from "react";
-import { VscChromeMinimize } from "react-icons/vsc";
-import { RxCross2 } from "react-icons/rx";
 import { minimizeProgram } from "../../helper/Minimize";
 import { programHandle } from "../../helper/ProgramHandle";
-import { FaTwitter } from "react-icons/fa";
 import { dragInfo } from "../context/Context";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
+import { FaTwitter } from "react-icons/fa";
 
 export default function Twitter() {
   //twitter client dom node

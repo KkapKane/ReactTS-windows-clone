@@ -1,16 +1,17 @@
 import { useContext, ReactNode } from "react";
-import { FcCalculator } from "react-icons/fc";
+import { taskType } from "../../types/project_types";
+import { Programs, Tasks } from "../context/Context";
 import paint from "../../assets/paint.png";
 import minesweeper from "../../assets/minesweeper.png";
 import audition from "../../assets/audition.png";
 import maple from "../../assets/maplestory-logo.png";
 import arashiyama from "../../assets/arashiyama.png";
-import { taskType } from "../../types/project_types";
-import { Programs, Tasks } from "../context/Context";
+import { FcCalculator } from "react-icons/fc";
 import { FaYoutube, FaTwitter, FaGithub, FaGithubAlt } from "react-icons/fa";
 import { FcTodoList } from "react-icons/fc";
 
 export default function StartPrograms() {
+
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
 
@@ -27,7 +28,6 @@ export default function StartPrograms() {
         return { ...program, visible: false };
       }
     });
-
     setPrograms(newProgram);
     //if there is already a program open, close program down and open the new one that was just clicked.
     if (tasks.length > 3) {
@@ -56,8 +56,7 @@ export default function StartPrograms() {
         <span
           onClick={() =>
             programHandle("Calculator", <FcCalculator size={30} />, true)
-          }
-        >
+          } >
           <FcCalculator size={30} />
           Calculator
         </span>
@@ -79,11 +78,10 @@ export default function StartPrograms() {
         <span
           onClick={() =>
             programHandle("Youtube", <FaYoutube size={30} color='red' />, true)
-          }
-        >
-          <image>
+          } >
+          <div className="image">
             <FaYoutube size={42} color='red' />
-          </image>
+          </div>
           <p>Youtube</p>
         </span>
         <span
@@ -95,47 +93,47 @@ export default function StartPrograms() {
             )
           }
         >
-          <image>
+          <div className="image">
             <FaTwitter size={42} color='#1d9bf0' />
-          </image>
+          </div>
           <p>Twitter</p>
         </span>
         <span onClick={() => programHandle("Dance Game", audition, true)}>
-          <image>
+          <div className="image">
             <img src={audition} alt='audition' />
-          </image>
+          </div>
           <p>Dance Game</p>
         </span>
         <span onClick={() => programHandle("MapleStore", maple, true)}>
-          <image>
+          <div className="image">
             <img src={maple} alt='maple' />
-          </image>
+          </div>
           <p>MapleStore</p>
         </span>
         <span onClick={() => programHandle("Arashiyama", arashiyama, true)}>
-          <image>
+          <div className="image">
             <img src={arashiyama} alt='arashiyama' />
-          </image>
+          </div>
           <p>Arashiyama Store</p>
         </span>
         <span
           onClick={() => programHandle("Todo", <FcTodoList size={30} />, true)}
         >
-          <image>
+          <div className="image">
             <FcTodoList size={42} />
-          </image>
+          </div>
           <p>To Do List</p>
         </span>
         <a href='https://github.com/KkapKane' target='_blank'>
-          <image>
+          <div className="image">
             <FaGithub size={42} />
-          </image>
+          </div>
           <p>GitHub/KkapKane</p>
         </a>
         <a href='https://github.com/lisa-go' target='_blank'>
-          <image>
+          <div className="image">
             <FaGithubAlt size={42} />
-          </image>
+          </div>
           <p>GitHub/lisa-go</p>
         </a>
       </div>
