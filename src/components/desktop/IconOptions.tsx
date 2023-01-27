@@ -1,18 +1,13 @@
 import '../../styles/desktop.scss'
-import { DesktopIconType } from '../../types/project_types';
 
 interface Props {
-  desktopIcon: DesktopIconType[];
-
-  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
   currentFocus: string;
   inputRef: React.RefObject<HTMLInputElement>;
   allFiles: any;
   setAllFiles: any;
- 
 }
 
-export default function IconOptions({desktopIcon, setDesktopIcon,currentFocus,inputRef, allFiles, setAllFiles}: Props){
+export default function IconOptions({currentFocus,inputRef, allFiles, setAllFiles}: Props){
 
     
 

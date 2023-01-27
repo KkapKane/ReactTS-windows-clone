@@ -1,36 +1,32 @@
-
-import '../../styles/style.scss'
+import "../../styles/style.scss";
 import { taskType } from "../../types/project_types";
-import { Programs, Tasks } from "../context/Programs";
+import { Programs, Tasks } from "../context/Context";
 import { useContext, useRef, useEffect } from "react";
-import { VscChromeMinimize } from 'react-icons/vsc'
-import { RxCross2 } from 'react-icons/rx';
-import { dragDrop } from '../../helper/DragDrop'
-import { minimizeProgram } from '../../helper/Minimize';
-import { programHandle } from '../../helper/ProgramHandle';
-import { FaYoutube } from 'react-icons/fa';
+import { VscChromeMinimize } from "react-icons/vsc";
+import { RxCross2 } from "react-icons/rx";
 
-interface Props {
-  ytRef: React.RefObject<HTMLDivElement>;
-  containerRef: React.RefObject<HTMLDivElement>;
-}
+import { minimizeProgram } from "../../helper/Minimize";
+import { programHandle } from "../../helper/ProgramHandle";
+import { FaYoutube } from "react-icons/fa";
+import { dragInfo } from "../context/Context";
+import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
 
-export default function Youtube({ ytRef, containerRef }: Props) {
 
+export default function Youtube() {
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
-  const isClicked = useRef<boolean>(false);
-  const coords = useRef<{ startX: number, startY: number, lastX: number, lastY: number }>({
-    startX: 0,
-    startY: 0,
-    lastX: 0,
-    lastY: 0
-  })
-
+ const { dragContainerInfo, setDragContainerInfo }: any = useContext(dragInfo);
+   const helperHandleRef = useRef<HTMLDivElement>(null);
+  //youtube client dom node
+  const ytRef = useRef<HTMLDivElement>(null);
   //anything pertaining to the draggable feature
-  useEffect(() => {
-    dragDrop(ytRef, containerRef, 'youtube-handle', coords, isClicked)
-  }, []);
+useEffect(() => {
+  const falseDrag = () => {
+    setDragContainerInfo({ ...dragContainerInfo, dragging: false });
+  };
+  document.body.addEventListener("mouseup", falseDrag);
+  return () => document.body.removeEventListener("mouseup", falseDrag);
+}, [dragContainerInfo]);
 
   //finds the index of the the task in the task object array
   const currentTaskIndex = tasks.findIndex(
@@ -41,10 +37,28 @@ export default function Youtube({ ytRef, containerRef }: Props) {
     <div
       ref={ytRef}
       id='youtube'
-      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
+      style={
+        tasks[currentTaskIndex]?.minimized
+          ? { display: "none" }
+          : dragContainerInfo.styles
+      }
+      onMouseDown={(e) =>
+        dragStart(
+          e,
+          "youtube-handle",
+          setDragContainerInfo,
+          dragContainerInfo,
+          helperHandleRef
+        )
+      }
+      onMouseMove={(e) => dragging(e, setDragContainerInfo, dragContainerInfo)}
+      onMouseUp={(e) =>
+        dragEnd(e, setDragContainerInfo, dragContainerInfo, helperHandleRef)
+      }
     >
+      <span className='extended-handle' ref={helperHandleRef}></span>
       <div id='youtube-handle'>
-        <div className="program">
+        <div className='program'>
           <FaYoutube color='red' />
           <p>Youtube</p>
         </div>
@@ -52,7 +66,19 @@ export default function Youtube({ ytRef, containerRef }: Props) {
           <button onClick={() => minimizeProgram("Youtube", tasks, setTask)}>
             <VscChromeMinimize size={20} />
           </button>
-          <button id='exit-btn' onClick={() => programHandle("Youtube", false, programs, tasks, setTask, setPrograms)}>
+          <button
+            id='exit-btn'
+            onClick={() =>
+              programHandle(
+                "Youtube",
+                false,
+                programs,
+                tasks,
+                setTask,
+                setPrograms
+              )
+            }
+          >
             <RxCross2 size={20} />
           </button>
         </div>

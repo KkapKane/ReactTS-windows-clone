@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 import PaintHandle from "./PaintHandle";
 import PaintRibbon from "./PaintRibbon";
 import PaintCanvas from "./PaintCanvas";
-import { Tasks, Programs } from "../../context/Programs";
+import { Tasks, Programs } from "../../context/Context";
 import { taskType, programType } from "../../../types/project_types";
 import { dragDrop } from "../../../helper/DragDrop";
 
@@ -22,12 +22,14 @@ export default function Paint({ paintRef, containerRef }: Props) {
 
   // state for current brush size //
   const [brushSize, setBrushSize] = useState<number | "">(10);
+  
+
 
   // function for switching brush sizes //
   const handleBrushSize = (size: number) => {
     setBrushSize(size);
     setEye(false);
-  }
+  };
 
   // state for the color saved that will be used if mouse clicks canvas now //
   const [chosenColor, setChosenColor] = useState<string | undefined>("#000000");
@@ -38,12 +40,12 @@ export default function Paint({ paintRef, containerRef }: Props) {
   const activeEye = () => {
     setEye(true);
     setBrushSize(0);
-  }
+  };
 
   const getColor = (event: any) => {
     let color = event.target.style.backgroundColor;
     setChosenColor(color);
-  }
+  };
 
   // above for eyedropper tool //
 
@@ -62,7 +64,7 @@ export default function Paint({ paintRef, containerRef }: Props) {
 
   //anything pertaining to the draggable feature
   useEffect(() => {
-    dragDrop(paintRef, containerRef, 'paint-handle', coords, isClicked);
+    dragDrop(paintRef, containerRef, "paint-handle", coords, isClicked);
   }, []);
 
   // here to end for minimizing and closing programs //
@@ -71,7 +73,6 @@ export default function Paint({ paintRef, containerRef }: Props) {
     (task: taskType) => task.name === "Paint"
   );
   const { programs, setPrograms }: any = useContext(Programs);
-
 
   //create program div or not
   const programHandle = (programName: string, status: boolean) => {
@@ -93,14 +94,18 @@ export default function Paint({ paintRef, containerRef }: Props) {
     setPrograms(newProgram);
   };
 
-
   return (
-    <div id='paint' onClick={closeBrushMenu} ref={paintRef}
-      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}>
+    <div
+      id='paint'
+      onClick={closeBrushMenu}
+      ref={paintRef}
+      style={tasks[currentTaskIndex]?.minimized ? { display: "none" } : {}}
+    >
       <PaintHandle
         programHandle={programHandle}
         tasks={tasks}
-        setTask={setTask} />
+        setTask={setTask}
+      />
       <PaintRibbon
         brushMenu={brushMenu}
         setBrushMenu={setBrushMenu}

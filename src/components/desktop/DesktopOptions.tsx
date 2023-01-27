@@ -2,12 +2,9 @@ import personalize from "../../assets/personalize.png";
 import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
-import { DesktopIconType } from "../../types/project_types";
 import { BsChevronRight } from 'react-icons/bs';
 
 interface Props {
-  setDesktopIcon: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
-  desktopIcon: DesktopIconType[];
   setAllFiles: React.Dispatch<
     React.SetStateAction<
       {
@@ -23,7 +20,7 @@ interface Props {
   allFiles: any;
 }
 
-export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFiles, allFiles }: Props) {
+export default function DesktopOptions({ setAllFiles, allFiles }: Props) {
   const [showOption, setShowOption] = useState(false);
 
   // makes hovering over the 'new' option not pop out instantly
@@ -44,7 +41,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
 
   const makeFolder = () => {
     let folderCount = 0;
-    desktopIcon.forEach((element, index, array) => {
+    allFiles.forEach((element: any) => {
       //if desktopIcon array already contains an object with the name New Folder then add to folder count
       if (
         element.name.match(/New Folder/g) ||
@@ -53,8 +50,8 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
         folderCount++;
       }
     });
-    setDesktopIcon([
-      ...desktopIcon,
+    setAllFiles([
+      ...allFiles,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
 
@@ -75,7 +72,7 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
 
   const makeTextDoc = () => {
     let textDocCount = 0;
-    desktopIcon.forEach((element, index, array) => {
+    allFiles.forEach((element: any) => {
       //if desktopIcon array already contains an object with the name New Folder then add to folder count
       if (
         element.name.match(/New Text Document/g) ||
@@ -84,8 +81,8 @@ export default function DesktopOptions({ desktopIcon, setDesktopIcon, setAllFile
         textDocCount++;
       }
     });
-    setDesktopIcon([
-      ...desktopIcon,
+    setAllFiles([
+      ...allFiles,
       {
         name: textDocCount == 0 ? `New Text Document.txt` : `New Text Document(${textDocCount}).txt`,
         icon: textDoc,
