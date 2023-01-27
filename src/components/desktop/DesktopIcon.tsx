@@ -25,6 +25,7 @@ export default function DesktopIcon({icon, currentFocus, inputRef,  findMouseLoc
       <div
         className='desktop-icon'
         id={icon.name}
+        key={icon.name}
         onMouseEnter={(e) => findMouseLocation(e)}
       >
         <img

@@ -105,7 +105,7 @@ const [currentPath, setCurrentPath] = useState<string[]>([]);
       ) : null}
       {allFiles.map((icon: any, index:number) => {
         return (
-          <>
+          <div key={index}>
             {icon.parent == '' ? <DesktopIcon
               icon={icon}
               currentFocus={currentFocus}
@@ -130,7 +130,7 @@ const [currentPath, setCurrentPath] = useState<string[]>([]);
               />
             ) : null}
             
-          </>
+          </div>
         );
       })}
     </div>
