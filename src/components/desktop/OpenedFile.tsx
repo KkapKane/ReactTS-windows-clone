@@ -5,7 +5,6 @@ import { HiChevronRight } from "react-icons/hi";
 import { FiArrowLeft } from "react-icons/fi";
 import { DesktopIconType } from "../../types/project_types";
 import { dragInfo } from "../context/Context";
-
 import DesktopIcon from "./DesktopIcon";
 import { dragStart, dragging, dragEnd } from "../../helper/BetterDragDrop";
 
