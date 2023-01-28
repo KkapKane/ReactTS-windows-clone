@@ -218,7 +218,6 @@ function App() {
     document.body.addEventListener("mouseup", letGoIcon);
     document.body.addEventListener("mousemove", moveIconClone);
 
-    console.log(allFiles);
     const cleanUp = () => {
       document.body.removeEventListener("mousedown", createIconClone);
       document.body.removeEventListener("mousemove", moveIconClone);
