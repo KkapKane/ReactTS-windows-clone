@@ -40,10 +40,6 @@ Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live preview
 
 # Previews
 
-## Desktop
-
-
-<img src="https://s9.gifyu.com/images/windowsClone.png" alt="preview" width="900">
 
 ## MS Paint
 
