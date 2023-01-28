@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import "../../styles/searchRight.scss";
+import "../../styles/searchright.scss";
 import axios from "axios";
 import moment from "moment";
 import News from "./News";
