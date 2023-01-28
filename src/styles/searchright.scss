@@ -1,263 +1,267 @@
 #search {
-    .middle {
-        .right {
+  .middle {
+    .right {
+      display: flex;
+      flex-direction: column;
+      width: 390px;
+      padding-right: 1.5rem;
+
+      #tih-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        #img-container {
+          position: relative;
+
+          img {
+            width: 390px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            object-position: 75% 25%;
+
+            &:hover {
+              filter: contrast(115%);
+            }
+          }
+
+          #label {
+            position: absolute;
+            width: 380px;
+            font-size: 2rem;
+            bottom: 10%;
+            left: 3%;
+            text-shadow: #000 3px 2px 3px;
+            line-height: 2rem;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      #events-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+        gap: 3px;
+
+        #events-items {
+          display: flex;
+          scroll-behavior: smooth;
+          overflow: hidden;
+
+          .left-btn,
+          .right-btn {
+            position: fixed;
+            z-index: 99;
+            top: 51%;
+            width: 18px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(41, 41, 41);
+            border-radius: 2px;
+            border: none;
+            color: rgb(201, 201, 201);
+            box-shadow: 0 3px 6px rgba(41, 41, 41, 0.9);
+
+            svg path {
+              stroke-width: 1;
+            }
+
+            &:hover {
+              background-color: rgba(48, 48, 48);
+
+              svg path {
+                stroke: white;
+              }
+            }
+          }
+
+          .right-btn {
+            right: 1.5rem;
+          }
+
+          .event {
+            position: relative;
+            margin-right: 10px;
+
+            img {
+              min-height: 200px;
+              min-width: 150px;
+              height: 200px;
+              width: 150px;
+              background-color: white;
+              border-radius: 8px;
+              object-fit: cover;
+              object-position: 75% 25%;
+
+              &:hover {
+                filter: contrast(115%);
+              }
+            }
+
+            .event-text {
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              bottom: 6%;
+              left: 5px;
+              font-weight: 500;
+              background: rgba(0, 0, 0, 0.75);
+              border-radius: 5px;
+              padding: 3px;
+
+              a {
+                width: 134px;
+                font-size: 0.85rem;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+
+          .quote-container {
+            position: relative;
+            height: 200px;
+            min-width: 140px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            width: 390px;
-            padding-right: 1.5rem;
+            justify-content: space-around;
+            padding: 0 5px;
+            margin-right: 10px;
+            background-image: linear-gradient(
+              320deg,
+              rgba(255, 202, 88, 1) 0%,
+              rgba(139, 73, 255, 1) 100.2%
+            );
 
-            #tih-container {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-
-                #img-container {
-                    position: relative;
-
-                    img {
-                        width: 390px;
-                        height: 200px;
-                        object-fit: cover;
-                        border-radius: 8px;
-                        object-position: 75% 25%;
-
-                        &:hover {
-                            filter: contrast(115%);
-                        }
-                    }
-
-                    #label {
-                        position: absolute;
-                        width: 380px;
-                        font-size: 2rem;
-                        bottom: 10%;
-                        left: 3%;
-                        text-shadow: #000 3px 2px 3px;
-                        line-height: 2rem;
-
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-                }
+            #quote {
+              font-style: italic;
+              font-weight: 100;
             }
 
-            #events-container {
-                display: flex;
-                flex-direction: column;
-                margin-top: 8px;
-                gap: 3px;
-
-                #events-items {
-                    display: flex;
-                    scroll-behavior: smooth;
-                    overflow: hidden;
-
-                    .left-btn,
-                    .right-btn {
-                        position: fixed;
-                        z-index: 99;
-                        top: 51%;
-                        width: 18px;
-                        height: 50px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background-color: rgba(41, 41, 41);
-                        border-radius: 2px;
-                        border: none;
-                        color: rgb(201, 201, 201);
-                        box-shadow: 0 3px 6px rgba(41, 41, 41, 0.9);
-
-                        svg path {
-                            stroke-width: 1;
-                        }
-
-                        &:hover {
-                            background-color: rgba(48, 48, 48);
-
-                            svg path {
-                                stroke: white;
-                            }
-                        }
-                    }
-
-                    .right-btn {
-                        right: 1.5rem;
-                    }
-
-                    .event {
-                        position: relative;
-                        margin-right: 10px;
-
-                        img {
-                            min-height: 200px;
-                            min-width: 150px;
-                            height: 200px;
-                            width: 150px;
-                            background-color: white;
-                            border-radius: 8px;
-                            object-fit: cover;
-                            object-position: 75% 25%;
-
-                            &:hover {
-                                filter: contrast(115%);
-                            }
-                        }
-
-                        .event-text {
-                            position: absolute;
-                            display: flex;
-                            flex-direction: column;
-                            bottom: 6%;
-                            left: 5px;
-                            font-weight: 500;
-                            background: rgba(0, 0, 0, 0.75);
-                            border-radius: 5px;
-                            padding: 3px;
-
-                            a {
-                                width: 134px;
-                                font-size: 0.85rem;
-                                text-overflow: ellipsis;
-                                overflow: hidden;
-                                white-space: nowrap;
-
-                                &:hover {
-                                    text-decoration: underline;
-                                }
-                            }
-                        }
-                    }
-
-                    .quote-container {
-                        position: relative;
-                        height: 200px;
-                        min-width: 140px;
-                        border-radius: 8px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-around;
-                        padding: 0 5px;
-                        margin-right: 10px;
-                        background-image: linear-gradient(320deg, rgba(255, 202, 88, 1) 0%, rgba(139, 73, 255, 1) 100.2%);
-
-                        #quote {
-                            font-style: italic;
-                            font-weight: 100;
-                        }
-
-                        #author {
-                            align-self: flex-end;
-                            font-style: italic;
-                            font-size: 0.85rem;
-                        }
-
-                        .title {
-                            font-weight: 600;
-                            align-self: center;
-                        }
-                    }
-                }
+            #author {
+              align-self: flex-end;
+              font-style: italic;
+              font-size: 0.85rem;
             }
 
-            #trending-container {
-                background-color: rgba(41, 41, 41, 0.4);
-                margin-top: 8px;
-                margin-bottom: 30px;
-                border-radius: 8px;
-
-                #trending {
-                    padding-left: 1rem;
-                    padding-top: 0.5rem;
-                    display: flex;
-                    align-items: center;
-                }
-
-                #news-container {
-                    display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
-                    scroll-behavior: smooth;
-
-                    .left-btn,
-                    .right-btn {
-                        position: fixed;
-                        z-index: 99;
-                        top: 80%;
-                        width: 18px;
-                        height: 50px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background-color: rgba(41, 41, 41);
-                        border-radius: 2px;
-                        border: none;
-                        color: rgb(201, 201, 201);
-                        box-shadow: 0 3px 6px rgba(41, 41, 41, 0.9);
-
-                        svg path {
-                            stroke-width: 1;
-                        }
-
-                        &:hover {
-                            background-color: rgba(48, 48, 48);
-
-                            svg path {
-                                stroke: white;
-                            }
-                        }
-                    }
-
-                    .right-btn {
-                        right: 1.5rem;
-                    }
-
-                    #news {
-                        display: flex;
-                        padding-left: 1rem;
-
-                        .header {
-                            display: none;
-                        }
-
-                        .title {
-                            width: 150px;
-                            font-size: .8rem;
-                            text-overflow: ellipsis;
-                            overflow: hidden;
-                            white-space: nowrap;
-                        }
-
-                        .article {
-                            display: flex;
-                            flex-direction: column-reverse;
-                            align-items: center;
-                            justify-content: center;
-                            margin: 10px 1rem 10px 0;
-                            gap: 2px;
-                            font-weight: 100;
-                            color: white !important;
-                            background: none !important;
-
-                            &:hover {
-                                text-decoration: underline;
-                            }
-
-                            img {
-                                height: 100px;
-                                width: 160px;
-                                border-radius: 8px;
-                                object-fit: cover;
-
-                                &:hover {
-                                    filter: contrast(115%);
-                                }
-                            }
-                        }
-                    }
-                }
+            .title {
+              font-weight: 600;
+              align-self: center;
             }
+          }
         }
+      }
+
+      #trending-container {
+        background-color: rgba(41, 41, 41, 0.4);
+        margin-top: 8px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+
+        #trending {
+          padding-left: 1rem;
+          padding-top: 0.5rem;
+          display: flex;
+          align-items: center;
+        }
+
+        #news-container {
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          scroll-behavior: smooth;
+
+          .left-btn,
+          .right-btn {
+            position: fixed;
+            z-index: 99;
+            top: 80%;
+            width: 18px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(41, 41, 41);
+            border-radius: 2px;
+            border: none;
+            color: rgb(201, 201, 201);
+            box-shadow: 0 3px 6px rgba(41, 41, 41, 0.9);
+
+            svg path {
+              stroke-width: 1;
+            }
+
+            &:hover {
+              background-color: rgba(48, 48, 48);
+
+              svg path {
+                stroke: white;
+              }
+            }
+          }
+
+          .right-btn {
+            right: 1.5rem;
+          }
+
+          #news {
+            display: flex;
+            padding-left: 1rem;
+
+            .header {
+              display: none;
+            }
+
+            .title {
+              width: 150px;
+              font-size: 0.8rem;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+
+            .article {
+              display: flex;
+              flex-direction: column-reverse;
+              align-items: center;
+              justify-content: center;
+              margin: 10px 1rem 10px 0;
+              gap: 2px;
+              font-weight: 100;
+              color: white !important;
+              background: none !important;
+
+              &:hover {
+                text-decoration: underline;
+              }
+
+              img {
+                height: 100px;
+                width: 160px;
+                border-radius: 8px;
+                object-fit: cover;
+
+                &:hover {
+                  filter: contrast(115%);
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }

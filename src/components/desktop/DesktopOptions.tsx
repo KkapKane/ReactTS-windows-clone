@@ -1,27 +1,19 @@
-import { useState } from "react";
 import personalize from "../../assets/personalize.png";
 import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
+import { useState } from "react";
+import { DesktopIconType } from "../../types/project_types";
 import { BsChevronRight } from "react-icons/bs";
 import { FcFolder } from "react-icons/fc";
 import { ImFileText2 } from "react-icons/im";
 
+
 interface Props {
-  setAllFiles: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-        content: never[];
-      }[]>>;
-  allFiles: any;
+  setAllFiles: React.Dispatch<React.SetStateAction<DesktopIconType[] >>;
+  allFiles: DesktopIconType[];
 }
 
 export default function DesktopOptions({ setAllFiles, allFiles }: Props) {
-
   const [showOption, setShowOption] = useState(false);
 
   // makes hovering over the 'new' option not pop out instantly
@@ -55,14 +47,18 @@ export default function DesktopOptions({ setAllFiles, allFiles }: Props) {
       ...allFiles,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
+
         icon: folder, rename: false, type: 'folder', open: false, parent: '', filePath: []
+
       },
     ]);
     setAllFiles([
       ...allFiles,
       {
         name: folderCount == 0 ? `New Folder` : `New Folder(${folderCount})`,
+
         icon: folder, rename: false, type: 'folder', open: false, parent: '', filePath: []
+
       },
     ]);
   };
@@ -105,28 +101,15 @@ export default function DesktopOptions({ setAllFiles, allFiles }: Props) {
   }
   return (
     <div id='desktop-options'>
-
       <ul>
-        <li>
-          <p>View</p>
-          <BsChevronRight size={16} />
-        </li>
-        <li>
-          <p>Sort by</p>
-          <BsChevronRight size={16} />
-        </li>
-        <li>
-          Refresh
-        </li>
+        <li><p>View</p> <BsChevronRight size={16} /></li>
+        <li><p>Sort by</p> <BsChevronRight size={16} /></li>
+        <li>Refresh</li>
       </ul>
-
       <hr />
-
       <div className='new' onMouseEnter={mouseEnter}>
-        <p>New</p> 
-        <BsChevronRight size={16} />
+        <p>New</p> <BsChevronRight size={16} />
       </div>
-
       {showOption ? (
         <div id='extra-option' onMouseLeave={mouseLeave}>
           <span onClick={() => makeFolder()}>
@@ -139,9 +122,7 @@ export default function DesktopOptions({ setAllFiles, allFiles }: Props) {
           </span>
         </div>
       ) : null}
-
       <hr />
-
       <div className='display-settings'>
         <span>
           <img src={personalize} alt='personalize' />
@@ -152,7 +133,6 @@ export default function DesktopOptions({ setAllFiles, allFiles }: Props) {
           Personalize
         </span>
       </div>
-      
     </div>
   );
 }

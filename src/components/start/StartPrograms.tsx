@@ -1,17 +1,15 @@
 import { useContext, ReactNode } from "react";
-import { taskType } from "../../types/project_types";
-import { Programs, Tasks } from "../context/Context";
+import { FcCalculator } from "react-icons/fc";
 import paint from "../../assets/paint.png";
-import minesweeper from "../../assets/minesweeper.png";
 import audition from "../../assets/audition.png";
 import maple from "../../assets/maplestory-logo.png";
 import arashiyama from "../../assets/arashiyama.png";
-import { FcCalculator } from "react-icons/fc";
+import { taskType } from "../../types/project_types";
+import { Programs, Tasks } from "../context/Context";
 import { FaYoutube, FaTwitter, FaGithub, FaGithubAlt } from "react-icons/fa";
 import { FcTodoList } from "react-icons/fc";
 
 export default function StartPrograms() {
-
   const { programs, setPrograms }: any = useContext(Programs);
   const { tasks, setTask }: any = useContext(Tasks);
 
@@ -28,6 +26,7 @@ export default function StartPrograms() {
         return { ...program, visible: false };
       }
     });
+
     setPrograms(newProgram);
     //if there is already a program open, close program down and open the new one that was just clicked.
     if (tasks.length > 3) {
@@ -56,7 +55,8 @@ export default function StartPrograms() {
         <span
           onClick={() =>
             programHandle("Calculator", <FcCalculator size={30} />, true)
-          } >
+          }
+        >
           <FcCalculator size={30} />
           Calculator
         </span>
@@ -64,10 +64,7 @@ export default function StartPrograms() {
           <img src={audition} alt='audition' />
           Dance Game
         </span>
-        <span>
-          <img id='minesweeper-png' src={minesweeper} alt='' />
-          Mine Sweeper
-        </span>
+        
         <span onClick={() => programHandle("Paint", paint, true)}>
           <img id='paint-png' src={paint} alt='paint' />
           Paint
@@ -78,7 +75,8 @@ export default function StartPrograms() {
         <span
           onClick={() =>
             programHandle("Youtube", <FaYoutube size={30} color='red' />, true)
-          } >
+          }
+        >
           <div className="image">
             <FaYoutube size={42} color='red' />
           </div>
