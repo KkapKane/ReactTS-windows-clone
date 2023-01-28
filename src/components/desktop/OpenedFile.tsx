@@ -68,6 +68,7 @@ export default function OpenedFile({
     console.log(currentPath);
   }, [currentPath]);
 
+  //pops 2 items off the stack
   const goBack = () => {
     if (icon.parent == "") return;
     let previous = allFiles.map((file: any) => {

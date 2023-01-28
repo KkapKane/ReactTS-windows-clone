@@ -3,7 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { BiFileBlank } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
-import { useEffect, useState } from 'react';
+
 
 interface Props {
   isHover: boolean;

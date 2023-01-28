@@ -2,7 +2,6 @@ import personalize from "../../assets/personalize.png";
 import folder from "../../assets/folder.png";
 import textDoc from "../../assets/textDoc.png"
 import { useState } from "react";
-
 import { DesktopIconType } from "../../types/project_types";
 import { BsChevronRight } from "react-icons/bs";
 import { FcFolder } from "react-icons/fc";
@@ -10,19 +9,8 @@ import { ImFileText2 } from "react-icons/im";
 
 
 interface Props {
-  setAllFiles: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        icon: string;
-        rename: boolean;
-        type: string;
-        open: boolean;
-        content: never[];
-      }[]
-    >
-  >;
-  allFiles: any;
+  setAllFiles: React.Dispatch<React.SetStateAction<DesktopIconType[] >>;
+  allFiles: DesktopIconType[];
 }
 
 export default function DesktopOptions({ setAllFiles, allFiles }: Props) {

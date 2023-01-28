@@ -1,5 +1,5 @@
 import { Programs, Tasks, dragInfo } from "./components/context/Context";
-import { DesktopIconType } from "./types/project_types";
+import { DesktopIconType, taskType } from "./types/project_types";
 import { FaYoutube, FaTwitter } from "react-icons/fa";
 import fileExplorer from "./assets/file-explorer.png";
 import { useState, useRef, useEffect } from "react";
@@ -64,7 +64,7 @@ function App() {
 
   //global useContext but for Tasks
 
-  const [tasks, setTask] = useState([
+  const [tasks, setTask] = useState<taskType[]>([
     { name: "Search", icon: search, hover: false, minimized: false },
     { name: "Task view", icon: taskView, hover: false, minimized: false },
     {
@@ -75,15 +75,16 @@ function App() {
     },
   ]);
 
-  const [allFiles, setAllFiles]: any = useState([
+      
+  const [allFiles, setAllFiles] = useState<DesktopIconType[]>([
     {
       name: "Recycle Bin",
       icon: recycle,
       rename: false,
       type: "bin",
       open: false,
-      content: [],
       parent: "",
+      filePath: [],
     },
   ]);
 
@@ -110,7 +111,7 @@ function App() {
   const [currentFocus, setCurrentFocus] = useState("");
   const [currentDrag, setCurrentDrag] = useState(-1);
   //id of the element the mouse is on
-  const [finalMouseDestination, setFinalMouseDestination]: any = useState();
+  const [finalMouseDestination, setFinalMouseDestination] = useState<DesktopIconType | undefined>();
   useEffect(() => {
     //closes the right click menu if clicked anywhere on the desktop
     document.body.addEventListener("click", (event: MouseEvent) => {
@@ -177,6 +178,7 @@ function App() {
     const letGoIcon = () => {
       setCurrentDrag(-1);
       if (currentDrag === -1 || allFiles[currentDrag] == finalMouseDestination )  return;
+      if(!finalMouseDestination) return;
       if (finalMouseDestination.type == "bin") {
         const index = allFiles.findIndex(
           (icon: DesktopIconType) => icon.name !== allFiles[currentDrag]?.name
@@ -191,14 +193,14 @@ function App() {
         }
       } else if (finalMouseDestination.type == "folder") {
         //makes the icon on desktop dissapear
-        let setParent = allFiles.map((file: any) => {
+        let setParent = allFiles.map((file: DesktopIconType) => {
           if (file.name === allFiles[currentDrag].name) {
             return { ...file, parent: finalMouseDestination.name };
           } else {
             return { ...file, parent: file.parent };
           }
         });
-        let setPath = setParent.map((file: any) => {
+        let setPath = setParent.map((file: DesktopIconType) => {
           if (file.name === allFiles[currentDrag].name) {
             return {
               ...file,

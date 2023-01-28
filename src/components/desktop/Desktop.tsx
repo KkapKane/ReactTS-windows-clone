@@ -13,7 +13,6 @@ import Arashiyama from "../programs/Arashiyama";
 import Todo from "../programs/Todo";
 
 interface Props {
-  
   calcRef: React.RefObject<HTMLDivElement>;
   paintRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
@@ -24,12 +23,12 @@ interface Props {
     visible: boolean;
   }[];
   setfinalMouseDestination: React.Dispatch<
-    React.SetStateAction<DesktopIconType>
+    React.SetStateAction<DesktopIconType | undefined>
   >;
   containerRef: React.RefObject<HTMLDivElement>;
   currentFocus: string;
 
-  setAllFiles: any;
+  setAllFiles: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
 }
 
 export default function Desktop({

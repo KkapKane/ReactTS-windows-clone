@@ -11,14 +11,15 @@ import { RiWifiLine } from "react-icons/ri";
 import { BsChevronUp } from "react-icons/bs";
 import Weather from "./apps/Weather";
 import Search from "./apps/Search";
+import { DesktopIconType } from "../types/project_types";
 
 interface Props {
   clock: boolean;
   handleClock: () => void;
 
  
-  allFiles: any;
-  setAllFiles: any;
+  allFiles: DesktopIconType[];
+  setAllFiles: React.Dispatch<React.SetStateAction<DesktopIconType[]>>;
 }
 
 export default function TaskBar({

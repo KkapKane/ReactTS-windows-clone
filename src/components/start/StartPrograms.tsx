@@ -65,10 +65,7 @@ export default function StartPrograms() {
           <img src={audition} alt='audition' />
           Dance Game
         </span>
-        <span>
-          <img id='minesweeper-png' src={minesweeper} alt='' />
-          Mine Sweeper
-        </span>
+        
         <span onClick={() => programHandle("Paint", paint, true)}>
           <img id='paint-png' src={paint} alt='paint' />
           Paint
