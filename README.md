@@ -33,7 +33,8 @@ Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live preview
 - A similar copy of MS Paint built in
 - Displays weather on the bottom right corner of the screen
 - Clicking the search icon displays daily historic event and all system files
-- Fetches a random quote of the day from an api 
+- Fetches a random quote of the day from an api
+- Real time clock and calender that highlights the current day 
 
 
 # Previews
