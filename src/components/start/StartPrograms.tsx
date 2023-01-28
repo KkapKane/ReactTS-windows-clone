@@ -1,7 +1,6 @@
 import { useContext, ReactNode } from "react";
 import { FcCalculator } from "react-icons/fc";
 import paint from "../../assets/paint.png";
-import minesweeper from "../../assets/minesweeper.png";
 import audition from "../../assets/audition.png";
 import maple from "../../assets/maplestory-logo.png";
 import arashiyama from "../../assets/arashiyama.png";
