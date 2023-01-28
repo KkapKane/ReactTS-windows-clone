@@ -34,15 +34,34 @@ Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live preview
 - Displays weather on the bottom right corner of the screen
 - Clicking the search icon displays daily historic event and all system files
 - Fetches a random quote of the day from an api
-- Real time clock and calender that highlights the current day 
+- Real time clock and calender that highlights the current day
+- Right Clicking works like how it would on the OS 
 
 
 # Previews
 
-## Home Page
+## Desktop
 
 
 <img src="https://s9.gifyu.com/images/windowsClone.png" alt="preview" width="900">
+
+## MS Paint
+
+<img src="https://s3.gifyu.com/images/windows-paint.png" alt="preview" width="900">
+
+## Folders and Calculator
+
+<img src="https://s3.gifyu.com/images/windowsCalcFolder.png" alt="preview" width="900">
+
+## Search and News
+
+<img src="https://s3.gifyu.com/images/searchandWeather.png" alt="preview" width="900">
+
+## Start Menu
+
+<img src="https://s3.gifyu.com/images/Start-Menu.png" alt="preview" width="900">
+
+
 
 ## Contributors
 

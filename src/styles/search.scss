@@ -22,7 +22,7 @@
         color: black;
         display: flex;
         align-items: center;
-
+        width: calc(100% - 1rem);
         svg {
             padding: 0 0.75rem;
         }
@@ -31,6 +31,7 @@
             flex: 1;
             background: none;
             height: 100%;
+            
             border: none;
             outline: none;
             font-size: 1.05rem;

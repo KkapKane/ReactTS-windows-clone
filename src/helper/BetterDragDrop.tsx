@@ -7,18 +7,19 @@ export const dragStart = (
   let target = e.target as HTMLDivElement;
   const x = e.clientX - target.getBoundingClientRect().left - 600;
   const y = e.clientY - target.getBoundingClientRect().top - 400;
+  if (target.id == handleName || target.className == handleName || target.className == 'extended-handle'){
   if (helperHandleRef.current) {
     helperHandleRef.current.style.display = "flex";
     helperHandleRef.current.style.left = `${x}px`;
     helperHandleRef.current.style.top = `${y}px`;
   }
-  if (target.id == handleName || target.className == handleName || target.className == 'extended-handle')
     setFileContainerInfo({
       ...fileContainerInfo,
       diffX: e.screenX - target.getBoundingClientRect().left,
       diffY: e.screenY - target.getBoundingClientRect().top,
       dragging: true
     })
+  }
 }
 
 export const dragging = (
