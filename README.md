@@ -1,20 +1,17 @@
-<h1 align="center"> Windows Clone  </h1>  
-
-
+<h1 align="center"> Windows Clone  </h1>
 
 <h2> <h2>
 
-Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live preview.
+Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live
+preview.
+
 # Made with
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-<br>
-<br>
-
-
+<br> <br>
 
 # Description
 
@@ -22,8 +19,8 @@ Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live preview
 
 <h2> </h2>
 
-
 # Features
+
 - Can create folders and place them inside another folder
 - All windows are draggable by their handle
 - Auto Completes when searching for all system files
@@ -35,32 +32,28 @@ Click [here](https://kkapkane.github.io/ReactTS-windows-clone/) for live preview
 - Clicking the search icon displays daily historic event and all system files
 - Fetches a random quote of the day from an api
 - Real time clock and calender that highlights the current day
-- Right Clicking works like how it would on the OS 
-
+- Right Clicking works like how it would on the OS
 
 # Previews
 
-
 ## MS Paint
 
-<img src="https://s3.gifyu.com/images/windows-paint.png" alt="preview" width="900">
+<img src="https://i.imgur.com/5pvYWE4.png" alt="preview" width="900">
 
 ## Folders and Calculator
 
-<img src="https://s3.gifyu.com/images/windowsCalcFolder.png" alt="preview" width="900">
+<img src="https://i.imgur.com/n4kiTBb.png" alt="preview" width="900">
 
 ## Search and News
 
-<img src="https://s3.gifyu.com/images/searchandWeather.png" alt="preview" width="900">
+<img src="https://i.imgur.com/7UGkmGE.png" alt="preview" width="900">
 
 ## Start Menu
 
-<img src="https://s9.gifyu.com/images/Start-Menu.png" alt="preview" width="900">
-
-
+<img src="https://i.imgur.com/sdSNsQ7.png" alt="preview" width="900">
 
 ## Contributors
 
- ### [lisa-go](https://github.com/lisa-go) 
- ### [KkapKane](https://github.com/KkapKane) 
+### [lisa-go](https://github.com/lisa-go)
 
+### [KkapKane](https://github.com/KkapKane)
