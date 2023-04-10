@@ -58,10 +58,14 @@ export default function OpenedFile({
     if (currentPath.includes(icon.name)) return;
     setCurrentPath((prev) => [...prev, icon.name]);
     // dragDrop(fileRef,containerRef,'handle',coords,isClicked)
+   
   }, []);
 
   const goBack = () => {
-    if (icon.parent == "") return;
+    
+    if (icon.parent == "") {
+      return;
+    }
     let previous = allFiles.map((file: any) => {
       if (icon.parent === file.name) {
         return { ...file, open: true };
@@ -119,6 +123,7 @@ export default function OpenedFile({
           {" "}
           <FiArrowLeft size={16} />{" "}
         </button>
+       
         <div className='file-path'>
           {currentPath.map((path: string, index: number) => {
             return (
